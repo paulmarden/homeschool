@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
-"""Generate the Year 8 Study Hub static site from data/curriculum.json.
+"""Generate the Year 8 Study Hub static site from data/curriculum/*.json.
 
 Plain HTML on the Modernist stylesheet -- no framework, no build toolchain.
 Run `python build.py` and open site/index.html.
 """
+import glob
 import html
 import json
 import os
@@ -12,7 +13,7 @@ import shutil
 import sys
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
-DATA = os.path.join(ROOT, "data", "curriculum.json")
+CURRICULUM_DIR = os.path.join(ROOT, "data", "curriculum")
 RESOURCE_DATA = os.path.join(ROOT, "data", "resources.json")
 OUT = os.path.join(ROOT, "site")
 ASSETS = os.path.join(ROOT, "assets")
@@ -25,20 +26,41 @@ LOCAL_IMAGES = {}
 # Our own resources, loaded from data/resources.json in main().
 RESOURCES = {}
 
+# {subject-slug: curriculum}, loaded from data/curriculum/ in main().
+CURRICULA = {}
+
 SITE_NAME = "Year 8 Study Hub"
 
-# The wireframe's subject grid. Only maths is built out so far; the rest are
-# shown as placeholders rather than dead links.
-SUBJECTS = [
-    {"n": "01", "title": "English", "ready": False},
-    {"n": "02", "title": "Maths", "ready": True, "href": "maths/"},
-    {"n": "03", "title": "Science", "ready": False},
-    {"n": "04", "title": "Art", "ready": False},
-    {"n": "05", "title": "Geography", "ready": False},
-    {"n": "06", "title": "History", "ready": False},
+# The wireframe's subject grid, in its order. A subject goes live as soon as
+# data/curriculum/<slug>.json exists; the rest show as placeholders rather
+# than dead links.
+SUBJECT_ORDER = [
+    ("english", "English"),
+    ("maths", "Maths"),
+    ("science", "Science"),
+    ("art", "Art"),
+    ("geography", "Geography"),
+    ("history", "History"),
 ]
 
 BLANK = re.compile(r"\{\{\s*\}\}")
+
+
+def ready_subjects():
+    """Subject slugs with curriculum data, in the wireframe's order."""
+    return [s for s, _t in SUBJECT_ORDER if s in CURRICULA]
+
+
+def subject_title(slug):
+    return CURRICULA[slug]["subject"] if slug in CURRICULA else slug.title()
+
+
+def unit_key(subject, unit_slug):
+    return "%s/%s" % (subject, unit_slug)
+
+
+def lesson_key(subject, unit_slug, lesson_slug):
+    return "%s/%s/%s" % (subject, unit_slug, lesson_slug)
 
 
 def image_src(url, depth):
@@ -92,17 +114,18 @@ def oak_button(url, label="View on Oak Academy"):
 def nav(depth, current):
     def link(href, label, key):
         cur = ' aria-current="page"' if key == current else ""
-        return '<a href="%s%s"%s>%s</a>' % (up(depth), href, cur, label)
+        return '<a href="%s%s"%s>%s</a>' % (up(depth), href, cur, esc(label))
+
+    links = [link("index.html", "Subjects", "home")]
+    for slug in ready_subjects():
+        links.append(link("%s/index.html" % slug, subject_title(slug), slug))
+    links.append(link("resources.html", "Resources", "resources"))
+    links.append(link("about.html", "About", "about"))
 
     return (
         '<nav class="nav">'
         '<div class="nav-brand"><a href="%sindex.html">%s</a></div>'
-        '%s%s%s%s</nav>'
-        % (up(depth), SITE_NAME,
-           link("index.html", "Subjects", "home"),
-           link("maths/index.html", "Maths", "maths"),
-           link("resources.html", "Resources", "resources"),
-           link("about.html", "About", "about"))
+        '%s</nav>' % (up(depth), SITE_NAME, "".join(links))
     )
 
 
@@ -284,7 +307,7 @@ def render_question(q, idx, quiz_id, depth=3):
     return "".join(parts)
 
 
-def render_quiz(title, questions, quiz_id, lesson_key):
+def render_quiz(title, questions, quiz_id, key):
     """A quiz lives in a <dialog>; the page shows only a button that opens it."""
     if not questions:
         return "", ""
@@ -306,7 +329,7 @@ def render_quiz(title, questions, quiz_id, lesson_key):
         '<button type="button" class="btn btn-secondary" data-reset>Clear</button>'
         '<button type="button" class="btn btn-secondary" data-close>Close</button>'
         '</div></dialog>'
-        % (esc(quiz_id), esc(quiz_id), esc(lesson_key), len(questions),
+        % (esc(quiz_id), esc(quiz_id), esc(key), len(questions),
            esc(title), len(questions), icon_close(), qs)
     )
     button = (
@@ -358,7 +381,8 @@ def resource_row(r, depth):
 
 
 def resource_columns(items, depth, empty_hint=""):
-    """The wireframe's two columns: references we use, and things we keep."""
+    """The wireframe's two columns, ours first: what we keep is the point of
+    the site, references are backup."""
     links = [r for r in items if resource_group(r) == "links"]
     ours = [r for r in items if resource_group(r) == "ours"]
 
@@ -369,31 +393,23 @@ def resource_columns(items, depth, empty_hint=""):
             body = '<p class="rd resempty">%s</p>' % hint
         return '<div class="col"><div class="coltitle">%s</div>%s</div>' % (title, body)
 
-    # Ours leads: what we keep is the point of the site, references are backup.
     return (
         '<div class="cols">%s%s</div>'
-        % (col("Our resources", ours,
-               empty_hint or "Nothing here yet."),
-           col("Relevant links", links,
-               empty_hint or "Nothing here yet."))
+        % (col("Our resources", ours, empty_hint or "Nothing here yet."),
+           col("Relevant links", links, empty_hint or "Nothing here yet."))
     )
 
 
-def render_pager(prev_item, next_item, noun):
-    """Previous/next strip. Units and lessons are both siblings one level up,
-    so the same relative href shape works for either."""
-    def cell(item, side, label):
-        if not item:
-            return ('<span class="%s"><span class="lbl">%s</span>'
-                    '<span class="ttl text-muted">&mdash;</span></span>'
-                    % (side, esc(label)))
-        return ('<a class="%s" href="../%s/index.html"><span class="lbl">%s</span>'
-                '<span class="ttl">%s</span></a>'
-                % (side, esc(item["slug"]), esc(label), esc(item["title"])))
+def resources_for(scope, key=None):
+    if scope == "general":
+        return RESOURCES.get("general") or []
+    return (RESOURCES.get(scope) or {}).get(key) or []
 
-    return ('<div class="pager">%s%s</div>'
-            % (cell(prev_item, "prev", "Previous %s" % noun),
-               cell(next_item, "next", "Next %s" % noun)))
+
+def add_hint(flag, key):
+    return ('Nothing here yet &mdash; add one with '
+            '<code>python tools/add_resource.py %s %s --file &lt;path&gt; '
+            '--title "…"</code>' % (flag, esc(key)))
 
 
 def unregistered_resources():
@@ -422,40 +438,71 @@ def unregistered_resources():
     return sorted(loose)
 
 
-def resources_for(res, scope, key):
-    if scope == "general":
-        return res.get("general") or []
-    return (res.get(scope) or {}).get(key) or []
+def render_pager(prev_item, next_item, noun):
+    """Previous/next strip. Units and lessons are both siblings one level up,
+    so the same relative href shape works for either."""
+    def cell(item, side, label):
+        if not item:
+            return ('<span class="%s"><span class="lbl">%s</span>'
+                    '<span class="ttl text-muted">&mdash;</span></span>'
+                    % (side, esc(label)))
+        return ('<a class="%s" href="../%s/index.html"><span class="lbl">%s</span>'
+                '<span class="ttl">%s</span></a>'
+                % (side, esc(item["slug"]), esc(label), esc(item["title"])))
+
+    return ('<div class="pager">%s%s</div>'
+            % (cell(prev_item, "prev", "Previous %s" % noun),
+               cell(next_item, "next", "Next %s" % noun)))
 
 
-def add_hint(flag, key):
-    return ('Nothing here yet &mdash; add one with '
-            '<code>python tools/add_resource.py %s %s --title "…" --url "…"</code>'
-            % (flag, esc(key)))
+def render_guidance(items):
+    """Oak's content warnings. English leans on these; maths rarely has any."""
+    if not items:
+        return ""
+    rows = []
+    for g in items:
+        # Escape each part, then join with the entity -- escaping the joined
+        # string would turn the separator into a literal "&middot;".
+        detail = " &middot; ".join(
+            esc(x) for x in (g.get("description"), g.get("area")) if x)
+        rows.append('<div class="resrow"><span><span class="rt">%s</span>'
+                    '<span class="rd">%s</span></span></div>'
+                    % (esc(g.get("label", "")), detail))
+    return (
+        '<div class="cols cols-1"><div class="col guidance">'
+        '<div class="coltitle"><span class="tag tag-outline">Content guidance</span>'
+        '</div>%s</div></div>' % "".join(rows)
+    )
 
 
 # ── pages ─────────────────────────────────────────────────────────────────────
 
-def build_home(data):
-    units = data["units"]
-    lessons = data["totals"]["lessons"]
-    questions = sum(len(l["starterQuiz"]) + len(l["exitQuiz"])
-                    for u in units for l in u["lessons"])
+def build_home():
+    totals = {"units": 0, "lessons": 0, "questions": 0}
+    for data in CURRICULA.values():
+        totals["units"] += data["totals"]["units"]
+        totals["lessons"] += data["totals"]["lessons"]
+        totals["questions"] += sum(
+            len(l["starterQuiz"]) + len(l["exitQuiz"])
+            for u in data["units"] for l in u["lessons"])
 
     cards = []
-    for s in SUBJECTS:
-        if s["ready"]:
+    for i, (slug, title) in enumerate(SUBJECT_ORDER, 1):
+        if slug in CURRICULA:
+            d = CURRICULA[slug]
             cards.append(
-                '<a class="card" href="%s"><div class="card-kicker">%s</div>'
+                '<a class="card" href="%s/index.html">'
+                '<div class="card-kicker">%02d</div>'
                 '<div class="card-title">%s</div>'
                 '<div class="card-meta">%d units &middot; %d lessons</div></a>'
-                % (esc(s["href"]), esc(s["n"]), esc(s["title"]), len(units), lessons))
+                % (esc(slug), i, esc(d["subject"]),
+                   d["totals"]["units"], d["totals"]["lessons"]))
         else:
             cards.append(
-                '<div class="card is-pending"><div class="card-kicker">%s</div>'
+                '<div class="card is-pending"><div class="card-kicker">%02d</div>'
                 '<div class="card-title">%s</div>'
                 '<div class="card-meta">Not yet added</div></div>'
-                % (esc(s["n"]), esc(s["title"])))
+                % (i, esc(title)))
 
     body = (
         '<div class="wrap">'
@@ -463,8 +510,8 @@ def build_home(data):
         '<h1 style="max-width:820px;font-size:48px;">Resources built alongside the '
         'Oak Academy Year 8 curriculum.</h1>'
         '<p class="lede" style="font-size:16px;">Every unit and lesson links back to '
-        'the matching Oak Academy lesson, with the learning points, keywords, '
-        'points, keywords and quizzes, alongside the resources we keep.</p>'
+        'the matching Oak Academy lesson, with the learning points, keywords and '
+        'quizzes, alongside the resources we keep.</p>'
         '<div class="factrow">'
         '<div class="fact"><div class="n">%d</div><div class="l">Units</div></div>'
         '<div class="fact"><div class="n">%d</div><div class="l">Lessons</div></div>'
@@ -474,7 +521,8 @@ def build_home(data):
         '<h2 class="sectiontitle">Subjects &mdash; Year 8</h2>'
         '<div class="grid6">%s</div>'
         '</div>'
-        % (len(units), lessons, "{:,}".format(questions), "".join(cards))
+        % (totals["units"], totals["lessons"], "{:,}".format(totals["questions"]),
+           "".join(cards))
     )
     write("index.html", page(
         0, "%s — Year 8 homeschool resources" % SITE_NAME, body, current="home",
@@ -483,11 +531,13 @@ def build_home(data):
 
 
 def build_subject(data):
+    slug = data["subjectSlug"]
     units = data["units"]
     cards = []
     for u in units:
-        n_res = len(resources_for(RESOURCES, "units", u["slug"])) + sum(
-            len(resources_for(RESOURCES, "lessons", "%s/%s" % (u["slug"], l["slug"])))
+        ukey = unit_key(slug, u["slug"])
+        n_res = len(resources_for("units", ukey)) + sum(
+            len(resources_for("lessons", lesson_key(slug, u["slug"], l["slug"])))
             for l in u["lessons"])
         res_meta = (' &middot; <span class="resct">%d resource%s</span>'
                     % (n_res, "" if n_res == 1 else "s")) if n_res else ""
@@ -499,101 +549,38 @@ def build_subject(data):
             '<div class="card-meta">%d lessons%s'
             '<span data-unit="%s" data-unit-prog hidden></span></div></a>'
             % (esc(u["slug"]), u["index"], esc(u["title"]),
-               esc(u["description"]), len(u["lessons"]), res_meta, esc(u["slug"])))
+               esc(u["description"]), len(u["lessons"]), res_meta, esc(ukey)))
 
     body = (
-        crumb(1, [("Home", "index.html"), ("Maths", None), ("Year 8", None)])
+        crumb(1, [("Home", "index.html"), (data["subject"], None),
+                  ("Year %s" % data["year"], None)])
         + '<div class="wrap">'
-        '<div class="pagehead"><h1>Maths &mdash; Year 8</h1>%s</div>'
-        '<p class="lede">Units run in Oak Academy\'s Year 8 sequence. '
+        '<div class="pagehead"><h1>%s &mdash; Year %s</h1>%s</div>'
+        '<p class="lede">Units run in Oak Academy\'s Year %s sequence. '
         '%d units, %d lessons.</p>'
         '<div class="unitlist">%s</div>'
         '</div>'
-        % (oak_button(data["sourceUrl"], "View on Oak Academy"),
+        % (esc(data["subject"]), esc(str(data["year"])),
+           oak_button(data["sourceUrl"]), esc(str(data["year"])),
            len(units), data["totals"]["lessons"], "".join(cards))
     )
-    write("maths/index.html", page(
-        1, "Maths — Year 8 | %s" % SITE_NAME, body, current="maths",
-        description="All 10 Year 8 maths units from the Oak National Academy "
-                    "curriculum.", scripts=("assets/progress.js",)))
+    write("%s/index.html" % slug, page(
+        1, "%s — Year %s | %s" % (data["subject"], data["year"], SITE_NAME), body,
+        current=slug,
+        description="All %d Year %s %s units from the Oak National Academy "
+                    "curriculum." % (len(units), data["year"],
+                                     data["subject"].lower()),
+        scripts=("assets/progress.js",)))
 
 
-def build_resources(data):
-    """One page listing everything we keep, so it is all reachable from one place."""
-    total = 0
-    sections = []
-
-    general = resources_for(RESOURCES, "general", None)
-    total += len(general)
-    sections.append(
-        '<h2 class="sectiontitle" style="margin:0 0 0;">General</h2>'
-        + resource_columns(general, 0, add_hint("--general", "").replace(
-            ' </code>', '</code>')))
-
-    for u in data["units"]:
-        unit_items = resources_for(RESOURCES, "units", u["slug"])
-        rows = []
-        for r in unit_items:
-            rows.append(resource_row(r, 0))
-        for l in u["lessons"]:
-            key = "%s/%s" % (u["slug"], l["slug"])
-            for r in resources_for(RESOURCES, "lessons", key):
-                rows.append(
-                    '<div class="resgroup"><a class="resfrom" href="maths/%s/%s/'
-                    'index.html">Lesson %d &mdash; %s</a>%s</div>'
-                    % (esc(u["slug"]), esc(l["slug"]), l["order"] or 0,
-                       esc(l["title"]), resource_row(r, 0)))
-        if not rows:
-            continue
-        total += len(rows)
-        sections.append(
-            '<h2 class="sectiontitle" style="margin:48px 0 0;">'
-            '<a href="maths/%s/index.html">Unit %d &mdash; %s</a></h2>'
-            '<div class="cols cols-1"><div class="col">%s</div></div>'
-            % (esc(u["slug"]), u["index"], esc(u["title"]), "".join(rows)))
-
-    body = (
-        crumb(0, [("Home", "index.html"), ("Resources", None)])
-        + '<div class="wrap">'
-        '<div class="pagehead"><h1>Resources</h1></div>'
-        '<p class="lede">Everything we keep, in one place. %d item%s. '
-        'Anything attached to a unit or a lesson also shows up on that page.</p>'
-        '%s'
-        '<div class="cols cols-1" style="margin-top:48px;"><div class="col">'
-        '<div class="coltitle">Adding a resource</div>'
-        '<p class="rd" style="font-size:14px;">Drop files in '
-        '<code>assets/resources/</code> and register them, or point at a URL:</p>'
-        '<pre class="cmd">python tools/add_resource.py --lesson UNIT/LESSON \\\n'
-        '    --title "Title" --url assets/resources/thing.pdf --kind worksheet\n\n'
-        'python tools/add_resource.py --unit UNIT --title "…" --url "https://…"\n'
-        'python tools/add_resource.py --general --title "…" --url "https://…"\n\n'
-        'python build.py</pre>'
-        '<p class="rd" style="font-size:14px;">Or edit '
-        '<code>data/resources.json</code> directly &mdash; it is the source of '
-        'truth and lives in git, so resources are shared across every machine '
-        'that clones the repo.</p>'
-        '</div></div>'
-        '</div>'
-        % (total, "" if total == 1 else "s", "".join(sections))
-    )
-    write("resources.html", page(
-        0, "Resources | %s" % SITE_NAME, body, current="resources",
-        description="Links, worksheets and notes we keep for Year 8."))
-
-
-def build_unit(data, u):
-    # Derived from our own sequence, not Oak's prevUnit/nextUnit -- theirs runs
-    # across year boundaries (unit 1's previous is a Year 7 unit), which would
-    # point at pages this site does not have.
-    units = data["units"]
-    pos = units.index(u)
-    prev_u = units[pos - 1] if pos > 0 else None
-    next_u = units[pos + 1] if pos + 1 < len(units) else None
+def build_unit(data, u, prev_u, next_u):
+    slug = data["subjectSlug"]
+    ukey = unit_key(slug, u["slug"])
 
     rows = []
     for l in u["lessons"]:
-        key = "%s/%s" % (u["slug"], l["slug"])
-        n_res = len(resources_for(RESOURCES, "lessons", key))
+        lkey = lesson_key(slug, u["slug"], l["slug"])
+        n_res = len(resources_for("lessons", lkey))
         badges = ""
         if n_res:
             badges = ('<span class="tag tag-accent">%d resource%s</span>'
@@ -604,7 +591,7 @@ def build_unit(data, u):
             '<span><span class="mt">%s</span><br><span class="mm">%s</span></span>'
             '<span class="rowtags">%s<span class="tag tag-neutral" '
             'data-lesson-score hidden></span></span></a>'
-            % (esc(l["slug"]), esc(key), l["order"] or 0, esc(l["title"]),
+            % (esc(l["slug"]), esc(lkey), l["order"] or 0, esc(l["title"]),
                esc(l["outcome"]), badges))
 
     threads = ""
@@ -613,8 +600,10 @@ def build_unit(data, u):
                            for t in u["threads"])
 
     body = (
-        crumb(2, [("Home", "index.html"), ("Maths", "maths/index.html"),
-                  ("Year 8", "maths/index.html"), (u["title"], None)])
+        crumb(2, [("Home", "index.html"),
+                  (data["subject"], "%s/index.html" % slug),
+                  ("Year %s" % data["year"], "%s/index.html" % slug),
+                  (u["title"], None)])
         + '<div class="wrap">'
         '<p class="kicker">Unit %d of %d</p>'
         '<div class="pagehead"><h1>%s</h1>%s</div>'
@@ -632,17 +621,22 @@ def build_unit(data, u):
         % (u["index"], len(data["units"]), esc(u["title"]), oak_button(u["oakUrl"]),
            esc(u["description"]),
            ('<p style="margin:-24px 0 32px;">%s</p>' % threads) if threads else "",
-           resource_columns(resources_for(RESOURCES, "units", u["slug"]), 2,
-                            add_hint("--unit", u["slug"])),
-           len(u["lessons"]), esc(u["slug"]), "".join(rows),
+           resource_columns(resources_for("units", ukey), 2,
+                            add_hint("--unit", ukey)),
+           len(u["lessons"]), esc(ukey), "".join(rows),
            render_pager(prev_u, next_u, "unit"))
     )
-    write("maths/%s/index.html" % u["slug"], page(
-        2, "%s | Maths Year 8 | %s" % (u["title"], SITE_NAME), body, current="maths",
-        description=u["description"], scripts=("assets/progress.js",)))
+    write("%s/%s/index.html" % (slug, u["slug"]), page(
+        2, "%s | %s Year %s | %s" % (u["title"], data["subject"], data["year"],
+                                     SITE_NAME),
+        body, current=slug, description=u["description"],
+        scripts=("assets/progress.js",)))
 
 
 def build_lesson(data, u, l, prev_l, next_l):
+    slug = data["subjectSlug"]
+    lkey = lesson_key(slug, u["slug"], l["slug"])
+
     cols = []
     if l["keyLearningPoints"]:
         items = "".join("<li>%s</li>" % esc(k) for k in l["keyLearningPoints"])
@@ -650,14 +644,12 @@ def build_lesson(data, u, l, prev_l, next_l):
                     '<ol class="numlist">%s</ol></div>' % items)
     if l["keywords"]:
         rows = "".join(
-            '<div class="resrow"><div><div class="rt">%s</div>'
-            '<div class="rd">%s</div></div></div>'
+            '<div class="resrow"><span><span class="rt">%s</span>'
+            '<span class="rd">%s</span></span></div>'
             % (esc(k["word"]), esc(k["definition"])) for k in l["keywords"])
         cols.append('<div class="col"><div class="coltitle">Keywords</div>%s</div>' % rows)
     block1 = ('<div class="cols%s">%s</div>'
               % ("" if len(cols) == 2 else " cols-1", "".join(cols))) if cols else ""
-
-    lesson_key = "%s/%s" % (u["slug"], l["slug"])
 
     equipment = ""
     if l.get("equipment"):
@@ -667,16 +659,15 @@ def build_lesson(data, u, l, prev_l, next_l):
                      '<div class="coltitle">Equipment</div>%s</div></div>' % rows)
 
     # The reason the site exists: what we keep for this lesson.
-    items = resources_for(RESOURCES, "lessons", lesson_key)
     resources = (
         '<h2 class="sectiontitle" style="margin:48px 0 0;">Resources</h2>'
-        + resource_columns(items, 3, add_hint("--lesson", lesson_key))
+        + resource_columns(resources_for("lessons", lkey), 3,
+                           add_hint("--lesson", lkey))
     )
 
     starter_btn, starter_dlg = render_quiz(
-        "Starter quiz", l["starterQuiz"], "starter", lesson_key)
-    exit_btn, exit_dlg = render_quiz(
-        "Exit quiz", l["exitQuiz"], "exit", lesson_key)
+        "Starter quiz", l["starterQuiz"], "starter", lkey)
+    exit_btn, exit_dlg = render_quiz("Exit quiz", l["exitQuiz"], "exit", lkey)
     quizzes = ""
     if starter_btn or exit_btn:
         quizzes = (
@@ -685,22 +676,15 @@ def build_lesson(data, u, l, prev_l, next_l):
             '<div class="quizlaunch" data-lesson="%s">%s%s</div>'
             '<p class="quizstate" data-lesson-state hidden></p>'
             '</div></div>%s%s'
-            % (esc(lesson_key), starter_btn, exit_btn, starter_dlg, exit_dlg))
+            % (esc(lkey), starter_btn, exit_btn, starter_dlg, exit_dlg))
 
     pager = render_pager(prev_l, next_l, "lesson")
 
-    guidance = ""
-    if l.get("contentGuidance"):
-        cg = l["contentGuidance"]
-        if isinstance(cg, list):
-            cg = "; ".join(str(c) for c in cg)
-        guidance = ('<p><span class="tag tag-outline">Content guidance</span> '
-                    '<span class="rd">%s</span></p>' % esc(str(cg)))
-
     body = (
-        crumb(3, [("Home", "index.html"), ("Maths", "maths/index.html"),
-                  ("Year 8", "maths/index.html"),
-                  (u["title"], "maths/%s/index.html" % u["slug"]),
+        crumb(3, [("Home", "index.html"),
+                  (data["subject"], "%s/index.html" % slug),
+                  ("Year %s" % data["year"], "%s/index.html" % slug),
+                  (u["title"], "%s/%s/index.html" % (slug, u["slug"])),
                   (l["title"], None)])
         + '<div class="wrap">'
         '<div class="pagehead"><div>'
@@ -710,16 +694,101 @@ def build_lesson(data, u, l, prev_l, next_l):
         '%s%s%s%s%s%s'
         '</div>'
         % (l["order"] or 0, len(u["lessons"]), esc(l["title"]),
-           oak_button(l["oakUrl"]), esc(l["outcome"]), guidance,
+           oak_button(l["oakUrl"]), esc(l["outcome"]),
+           render_guidance(l.get("contentGuidance")),
            block1, equipment, resources, quizzes, pager)
     )
-    write("maths/%s/%s/index.html" % (u["slug"], l["slug"]), page(
+    write("%s/%s/%s/index.html" % (slug, u["slug"], l["slug"]), page(
         3, "%s | %s | %s" % (l["title"], u["title"], SITE_NAME), body,
-        current="maths", description=l["outcome"],
+        current=slug, description=l["outcome"],
         scripts=("assets/progress.js", "assets/quiz.js")))
 
 
-def build_about(data):
+def build_resources():
+    """One page listing everything we keep, so it is all reachable from one place."""
+    total = 0
+    sections = []
+
+    general = resources_for("general")
+    total += len(general)
+    sections.append(
+        '<h2 class="sectiontitle" style="margin:0 0 0;">General</h2>'
+        + resource_columns(general, 0, add_hint("--general", "").rstrip()))
+
+    for subject in ready_subjects():
+        data = CURRICULA[subject]
+        blocks = []
+        sub_total = 0
+        for u in data["units"]:
+            ukey = unit_key(subject, u["slug"])
+            rows = [resource_row(r, 0) for r in resources_for("units", ukey)]
+            for l in u["lessons"]:
+                lkey = lesson_key(subject, u["slug"], l["slug"])
+                for r in resources_for("lessons", lkey):
+                    rows.append(
+                        '<div class="resgroup"><a class="resfrom" href="%s/%s/%s/'
+                        'index.html">Lesson %d &mdash; %s</a>%s</div>'
+                        % (esc(subject), esc(u["slug"]), esc(l["slug"]),
+                           l["order"] or 0, esc(l["title"]), resource_row(r, 0)))
+            if not rows:
+                continue
+            sub_total += len(rows)
+            blocks.append(
+                '<h3 class="sectiontitle" style="margin:32px 0 0;">'
+                '<a href="%s/%s/index.html">Unit %d &mdash; %s</a></h3>'
+                '<div class="cols cols-1"><div class="col">%s</div></div>'
+                % (esc(subject), esc(u["slug"]), u["index"], esc(u["title"]),
+                   "".join(rows)))
+        if not blocks:
+            continue
+        total += sub_total
+        sections.append(
+            '<h2 class="sectiontitle" style="margin:48px 0 0;">'
+            '<a href="%s/index.html">%s</a></h2>%s'
+            % (esc(subject), esc(data["subject"]), "".join(blocks)))
+
+    body = (
+        crumb(0, [("Home", "index.html"), ("Resources", None)])
+        + '<div class="wrap">'
+        '<div class="pagehead"><h1>Resources</h1></div>'
+        '<p class="lede">Everything we keep, in one place. %d item%s. '
+        'Anything attached to a unit or a lesson also shows up on that page.</p>'
+        '%s'
+        '<div class="cols cols-1" style="margin-top:48px;"><div class="col">'
+        '<div class="coltitle">Adding a resource</div>'
+        '<p class="rd" style="font-size:14px;">Hand it the file and it goes in the '
+        'right folder for you:</p>'
+        '<pre class="cmd">python tools/add_resource.py --lesson SUBJECT/UNIT/LESSON \\\n'
+        '    --file &lt;path&gt; --title "Title"\n\n'
+        'python tools/add_resource.py --unit SUBJECT/UNIT --title "…" --url "https://…"\n'
+        'python tools/add_resource.py --general --title "…" --url "https://…"\n\n'
+        'python build.py</pre>'
+        '<p class="rd" style="font-size:14px;">Or edit '
+        '<code>data/resources.json</code> directly &mdash; it is the source of '
+        'truth and lives in git, so resources are shared across every machine '
+        'that clones the repo.</p>'
+        '</div></div>'
+        '</div>'
+        % (total, "" if total == 1 else "s", "".join(sections))
+    )
+    write("resources.html", page(
+        0, "Resources | %s" % SITE_NAME, body, current="resources",
+        description="Links, worksheets and notes we keep for Year 8."))
+
+
+def build_about():
+    rows = []
+    for subject in ready_subjects():
+        d = CURRICULA[subject]
+        q = sum(len(l["starterQuiz"]) + len(l["exitQuiz"])
+                for u in d["units"] for l in u["lessons"])
+        rows.append(
+            '<div class="resrow"><span><span class="rt">%s &mdash; Year %s</span>'
+            '<span class="rd">%d units, %d lessons, %s quiz questions</span></span>'
+            '<span class="tag tag-neutral">%s</span></div>'
+            % (esc(d["subject"]), esc(str(d["year"])), d["totals"]["units"],
+               d["totals"]["lessons"], "{:,}".format(q), esc(d["programme"])))
+
     body = (
         crumb(0, [("Home", "index.html"), ("About", None)])
         + '<div class="wrap">'
@@ -727,19 +796,16 @@ def build_about(data):
         '<p class="lede">A homeschool study hub for Year 8, built directly on the '
         'Oak National Academy curriculum sequence.</p>'
         '<div class="cols">'
-        '<div class="col"><div class="coltitle">What is here</div>'
-        '<div class="resrow"><div><div class="rt">%d units, %d lessons</div>'
-        '<div class="rd">The complete Oak National Academy Year 8 maths programme, '
-        'in teaching order.</div></div></div>'
-        '<div class="resrow"><div><div class="rt">Learning points and keywords</div>'
-        '<div class="rd">Each lesson carries its pupil outcome, key learning points '
-        'and keyword definitions.</div></div></div>'
-        '<div class="resrow"><div><div class="rt">Our resources</div>'
-        '<div class="rd">Links, worksheets and notes we keep, attached to the unit '
-        'or lesson they belong to.</div></div></div>'
-        '<div class="resrow"><div><div class="rt">%s quiz questions</div>'
-        '<div class="rd">Every starter and exit quiz, answerable in the browser with '
-        'hints, marking and feedback.</div></div></div>'
+        '<div class="col"><div class="coltitle">What is here</div>%s'
+        '<div class="resrow"><span><span class="rt">Learning points and keywords</span>'
+        '<span class="rd">Each lesson carries its pupil outcome, key learning points '
+        'and keyword definitions.</span></span></div>'
+        '<div class="resrow"><span><span class="rt">Our resources</span>'
+        '<span class="rd">Links, worksheets and notes we keep, attached to the unit '
+        'or lesson they belong to.</span></span></div>'
+        '<div class="resrow"><span><span class="rt">Quizzes</span>'
+        '<span class="rd">Every starter and exit quiz, answerable in the browser with '
+        'hints, marking and feedback.</span></span></div>'
         '</div>'
         '<div class="col"><div class="coltitle">Source and licence</div>'
         '<p class="rd" style="font-size:14px;">Curriculum content is from '
@@ -755,7 +821,7 @@ def build_about(data):
         "published curriculum and may lag behind changes made upstream. Oak's "
         'teacher-facing notes are deliberately not copied here &mdash; follow the '
         'link on any lesson for those.</p>'
-        '%s</div>'
+        '</div>'
         '</div>'
         '<div class="cols cols-1"><div class="col">'
         '<div class="coltitle">Saved progress</div>'
@@ -767,11 +833,7 @@ def build_about(data):
         '<span class="rd" data-progress-note></span></p>'
         '</div></div>'
         '</div>'
-        % (len(data["units"]), data["totals"]["lessons"],
-           "{:,}".format(sum(len(l["starterQuiz"]) + len(l["exitQuiz"])
-                             for u in data["units"] for l in u["lessons"])),
-           '<p style="margin-top:20px;">%s</p>' % oak_button(
-               data["sourceUrl"], "Oak Year 8 maths"))
+        % "".join(rows)
     )
     write("about.html", page(
         0, "About | %s" % SITE_NAME, body, current="about",
@@ -779,11 +841,27 @@ def build_about(data):
                     "licensed.", scripts=("assets/progress.js",)))
 
 
+def load_curricula():
+    for path in sorted(glob.glob(os.path.join(CURRICULUM_DIR, "*.json"))):
+        with open(path, encoding="utf-8") as fh:
+            data = json.load(fh)
+        slug = data.get("subjectSlug") or os.path.splitext(os.path.basename(path))[0]
+        data["subjectSlug"] = slug
+        CURRICULA[slug] = data
+    unknown = [s for s in CURRICULA if s not in dict(SUBJECT_ORDER)]
+    if unknown:
+        print("note: %s not in SUBJECT_ORDER, so %s will not appear on the "
+              "homepage grid" % (", ".join(unknown),
+                                 "it" if len(unknown) == 1 else "they"))
+
+
 def main():
-    if not os.path.exists(DATA):
-        sys.exit("missing %s -- run the importer first" % DATA)
-    with open(DATA, encoding="utf-8") as fh:
-        data = json.load(fh)
+    if not os.path.isdir(CURRICULUM_DIR):
+        sys.exit("missing %s -- run the importer first" % CURRICULUM_DIR)
+    load_curricula()
+    if not CURRICULA:
+        sys.exit("no curriculum files in %s -- run tools/import_oak.py --all"
+                 % CURRICULUM_DIR)
 
     with open(RESOURCE_DATA, encoding="utf-8") as fh:
         RESOURCES.update(json.load(fh))
@@ -804,8 +882,8 @@ def main():
         print("\nsite/ is generated -- every build wipes it, so files saved there "
               "by hand are lost.\nPut resources in assets/resources/ instead, then "
               "register one with:\n"
-              "    python tools/add_resource.py --unit UNIT --title \"...\" \\\n"
-              "        --url assets/resources/FILE --kind html\n"
+              "    python tools/add_resource.py --unit SUBJECT/UNIT --title \"...\" \\\n"
+              "        --file <path>\n"
               "\nMove those files somewhere safe, then rebuild. "
               "`python build.py --force` wipes them.")
         return 1
@@ -816,24 +894,35 @@ def main():
     shutil.copytree(ASSETS, os.path.join(OUT, "assets"))
     record_assets()
 
-    build_home(data)
-    build_subject(data)
-    build_resources(data)
-    build_about(data)
-    n = 0
-    for u in data["units"]:
-        build_unit(data, u)
-        ls = u["lessons"]
-        for i, l in enumerate(ls):
-            build_lesson(data, u, l,
-                         ls[i - 1] if i > 0 else None,
-                         ls[i + 1] if i + 1 < len(ls) else None)
-            n += 1
+    build_home()
+    build_resources()
+    build_about()
+
+    n_units = n_lessons = 0
+    for subject in ready_subjects():
+        data = CURRICULA[subject]
+        build_subject(data)
+        units = data["units"]
+        for i, u in enumerate(units):
+            build_unit(data, u,
+                       units[i - 1] if i > 0 else None,
+                       units[i + 1] if i + 1 < len(units) else None)
+            ls = u["lessons"]
+            for j, l in enumerate(ls):
+                build_lesson(data, u, l,
+                             ls[j - 1] if j > 0 else None,
+                             ls[j + 1] if j + 1 < len(ls) else None)
+                n_lessons += 1
+            n_units += 1
+        print("  %-9s %2d units, %3d lessons"
+              % (data["subject"], data["totals"]["units"],
+                 data["totals"]["lessons"]))
 
     with open(os.path.join(OUT, MANIFEST), "w", encoding="utf-8") as fh:
         fh.write("\n".join(sorted(WRITTEN)) + "\n")
 
-    print("built %d units, %d lessons -> %s" % (len(data["units"]), n, OUT))
+    print("built %d subjects, %d units, %d lessons -> %s"
+          % (len(ready_subjects()), n_units, n_lessons, OUT))
 
     loose_res = unregistered_resources()
     if loose_res:
@@ -847,7 +936,7 @@ def main():
         if len(loose_res) > 10:
             print("    ... and %d more" % (len(loose_res) - 10))
         print("Register with:  python tools/add_resource.py "
-              "--general|--unit UNIT|--lesson UNIT/LESSON \\\n"
+              "--general|--unit SUBJECT/UNIT|--lesson SUBJECT/UNIT/LESSON \\\n"
               "                    --url <filename> --title \"...\"")
     return 0
 

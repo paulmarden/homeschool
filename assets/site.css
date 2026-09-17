@@ -10,7 +10,10 @@ body { background: var(--color-bg); }
 .wrap { padding: 64px; }
 
 /* — header — */
-.nav { padding: var(--space-3) 64px; }
+/* Wraps because the nav grows with every subject added: at six subjects it is
+   well past a phone's width, and the design system's .nav does not wrap. */
+.nav { padding: var(--space-3) 64px; flex-wrap: wrap; row-gap: var(--space-2); }
+.nav-brand { margin-right: auto; white-space: nowrap; }
 .nav-brand a { color: inherit; text-decoration: none; }
 
 .crumb {
@@ -82,6 +85,8 @@ a.card:hover .card-title { color: var(--color-accent-700); }
 .resrow:last-child { border-bottom: none; }
 .rt { font-family: var(--font-body); font-size: 14px; font-weight: 600; }
 .rd { font-family: var(--font-body); font-size: 13px; color: var(--color-neutral-700); }
+/* Title above detail, whether the row is a link or a plain div. */
+.resrow .rt, .resrow .rd { display: block; }
 
 .numlist { margin: 0; padding: 0; list-style: none; counter-reset: klp; }
 .numlist li {
@@ -98,7 +103,6 @@ a.card:hover .card-title { color: var(--color-accent-700); }
 /* — resources — */
 a.resrow { text-decoration: none; color: inherit; }
 a.resrow:hover .rt { color: var(--color-accent-700); }
-a.resrow .rt, a.resrow .rd { display: block; }
 .resempty { font-size: 13px; margin: 0; }
 .resempty code {
   display: inline-block; font-size: 12px; margin-top: 6px;

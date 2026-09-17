@@ -5,23 +5,25 @@ Files live under assets/resources/<subject>/year-<n>/<unit>/, one folder per
 unit holding that unit's resources and those of all its lessons. Pass --file
 and the file is moved into the right folder for you:
 
-  python tools/add_resource.py --lesson sequences/finding-the-nth-term \
+  python tools/add_resource.py --lesson maths/sequences/finding-the-nth-term \
       --file ~/Downloads/nth-term.pdf \
       --title "nth term worksheet" --note "Printable, with space for working"
 
-  python tools/add_resource.py --unit constructions \
-      --title "Compass and straight edge basics" \
-      --url https://example.org/... --kind video
+  python tools/add_resource.py --unit english/gothic-poetry \
+      --title "Gothic poetry reading list" \
+      --url https://example.org/... --kind link
 
   python tools/add_resource.py --general --title "..." --url "..."
 
   python tools/add_resource.py --list
-  python tools/add_resource.py --list --lesson sequences/finding-the-nth-term
+  python tools/add_resource.py --list --unit maths/sequences
 
+Targets are subject-qualified: --unit SUBJECT/UNIT, --lesson SUBJECT/UNIT/LESSON.
 --url still works for an external link, or for a file already sitting in the
 right folder (a bare filename is resolved against that folder).
 """
 import argparse
+import glob
 import json
 import os
 import shutil
@@ -30,7 +32,6 @@ import sys
 import init_resource_dirs as dirs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CURRICULUM = os.path.join(ROOT, "data", "curriculum.json")
 RESOURCES = os.path.join(ROOT, "data", "resources.json")
 
 KINDS = ("link", "html", "pdf", "video", "worksheet", "sheet", "notebook", "book")
@@ -47,13 +48,14 @@ def save(data):
         fh.write("\n")
 
 
-def known_keys():
-    data = load(CURRICULUM)
-    units, lessons = set(), set()
-    for u in data["units"]:
-        units.add(u["slug"])
-        for l in u["lessons"]:
-            lessons.add("%s/%s" % (u["slug"], l["slug"]))
+def known_keys(curricula):
+    """Valid --unit and --lesson targets, subject-qualified."""
+    units, lessons = {}, {}
+    for slug, data in curricula.items():
+        for u in data["units"]:
+            units["%s/%s" % (slug, u["slug"])] = (data, u["slug"])
+            for l in u["lessons"]:
+                lessons["%s/%s/%s" % (slug, u["slug"], l["slug"])] = (data, u["slug"])
     return units, lessons
 
 
@@ -69,7 +71,8 @@ def show(res, where=None):
         dump("general", res.get("general") or [])
     for scope in ("units", "lessons"):
         for key in sorted((res.get(scope) or {})):
-            if where and where not in (scope, key):
+            if where and where not in (scope, key) and not key.startswith(
+                    (where or "") + "/"):
                 continue
             dump("%s: %s" % (scope[:-1], key), res[scope][key])
 
@@ -78,9 +81,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     target = ap.add_mutually_exclusive_group()
-    target.add_argument("--lesson", metavar="UNIT/LESSON",
+    target.add_argument("--lesson", metavar="SUBJECT/UNIT/LESSON",
                         help="attach to one lesson")
-    target.add_argument("--unit", metavar="UNIT", help="attach to a whole unit")
+    target.add_argument("--unit", metavar="SUBJECT/UNIT",
+                        help="attach to a whole unit")
     target.add_argument("--general", action="store_true",
                         help="attach to the Resources page, not a unit or lesson")
     ap.add_argument("--title")
@@ -92,8 +96,8 @@ def main():
     ap.add_argument("--copy", action="store_true",
                     help="with --file, copy instead of moving")
     ap.add_argument("--kind", choices=KINDS, default=None,
-                    help="default: link for a URL, worksheet/pdf inferred from a "
-                         "local file extension")
+                    help="default: link for a URL, inferred from a local file's "
+                         "extension otherwise")
     ap.add_argument("--note", default="")
     ap.add_argument("--group", choices=("links", "ours"), default=None,
                     help="which column it appears in; inferred by default")
@@ -101,6 +105,7 @@ def main():
     args = ap.parse_args()
 
     res = load(RESOURCES)
+    curricula = dirs.load_curricula()
 
     if args.list:
         where = args.lesson or args.unit or ("general" if args.general else None)
@@ -112,21 +117,23 @@ def main():
     if args.url and args.file:
         ap.error("pass --url or --file, not both")
 
-    curriculum = load(CURRICULUM)
-    units, lessons = known_keys()
+    units, lessons = known_keys(curricula)
     if args.lesson:
         if args.lesson not in lessons:
-            sys.exit("unknown lesson %r -- expected UNIT-SLUG/LESSON-SLUG" % args.lesson)
+            sys.exit("unknown lesson %r -- expected SUBJECT/UNIT/LESSON, subject "
+                     "one of: %s" % (args.lesson, ", ".join(sorted(curricula))))
+        data, unit_slug = lessons[args.lesson]
         bucket = res.setdefault("lessons", {}).setdefault(args.lesson, [])
         where = "lesson %s" % args.lesson
-        folder = dirs.unit_dir(curriculum, args.lesson.split("/", 1)[0])
+        folder = dirs.unit_dir(data, unit_slug)
     elif args.unit:
         if args.unit not in units:
-            sys.exit("unknown unit %r -- one of: %s"
-                     % (args.unit, ", ".join(sorted(units))))
+            sys.exit("unknown unit %r -- expected SUBJECT/UNIT, subject one of: %s"
+                     % (args.unit, ", ".join(sorted(curricula))))
+        data, unit_slug = units[args.unit]
         bucket = res.setdefault("units", {}).setdefault(args.unit, [])
         where = "unit %s" % args.unit
-        folder = dirs.unit_dir(curriculum, args.unit)
+        folder = dirs.unit_dir(data, unit_slug)
     elif args.general:
         bucket = res.setdefault("general", [])
         where = "general"

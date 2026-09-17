@@ -1,3 +1,0 @@
-# Keeps this folder in git while it is empty.
-# Drop resources for this unit here, then register them:
-#   python tools/add_resource.py --lesson UNIT/LESSON --file <path>

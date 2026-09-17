@@ -1,14 +1,25 @@
-"""Import the Oak National Academy Year 8 maths curriculum into curriculum.json.
+#!/usr/bin/env python3
+"""Import an Oak National Academy curriculum into data/curriculum/<subject>.json.
+
+    python tools/import_oak.py --subject maths
+    python tools/import_oak.py --all
+    python tools/import_oak.py --subject english --year 8
 
 Deliberately narrow: this keeps the curriculum spine (units, lessons, outcomes,
 key learning points, keywords) and the quizzes, and leaves the rest of Oak's
 teacher-facing material -- rationale, prior knowledge, misconceptions, teaching
 tips -- where it belongs, on Oak's own pages, which every generated page links
 to.
+
+Units are discovered from the programme's listing page and then confirmed
+against each unit's own page, which reports the year it belongs to: the listing
+markup carries every unit in the key stage, not just the requested year.
 """
+import argparse
 import hashlib
 import json
 import os
+import re
 import sys
 import time
 import urllib.request
@@ -16,22 +27,25 @@ import urllib.request
 import flight
 
 BASE = "https://www.thenational.academy"
-PROGRAMME = "maths-secondary-ks3"
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+OUTDIR = os.path.join(ROOT, "data", "curriculum")
 CACHE = os.path.join(os.path.dirname(os.path.abspath(__file__)), "cache")
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) homeschool-curriculum-import"
 
-UNIT_SLUGS = [
-    "estimation-and-rounding",
-    "sequences",
-    "graphical-representations-of-linear-equations",
-    "solving-linear-equations",
-    "understanding-multiplicative-relationships-percentages-and-proportionality",
-    "graphical-representations-of-data",
-    "numerical-summaries-of-data",
-    "perimeter-area-and-volume",
-    "geometrical-properties-polygons",
-    "constructions",
-]
+# listing: the page that lists a year's units. programme: the slug the unit and
+# lesson pages actually live under -- Oak uses a different one for each.
+SUBJECTS = {
+    "maths": {
+        "title": "Maths",
+        "listing": "maths-secondary",
+        "programme": "maths-secondary-ks3",
+    },
+    "english": {
+        "title": "English",
+        "listing": "english-secondary",
+        "programme": "english-secondary-ks3",
+    },
+}
 
 
 def fetch(path, key):
@@ -131,13 +145,29 @@ def clean_quiz(raw):
     return [q for q in questions if q["stem"]]
 
 
-def scrape_lesson(unit_slug, lesson_slug):
+def clean_guidance(raw):
+    """Oak's content guidance: a list of {label, description, area} dicts."""
+    out = []
+    for g in raw or []:
+        if not isinstance(g, dict):
+            if g:
+                out.append({"label": str(g), "description": "", "area": ""})
+            continue
+        label = g.get("contentGuidanceLabel") or ""
+        if not label:
+            continue
+        out.append({
+            "label": label,
+            "description": g.get("contentGuidanceDescription") or "",
+            "area": g.get("contentGuidanceArea") or "",
+        })
+    return out
+
+
+def scrape_lesson(programme, unit_slug, lesson_slug):
     path = "/teachers/programmes/%s/units/%s/lessons/%s" % (
-        PROGRAMME,
-        unit_slug,
-        lesson_slug,
-    )
-    html = fetch(path, "lesson__%s__%s" % (unit_slug, lesson_slug))
+        programme, unit_slug, lesson_slug)
+    html = fetch(path, "lesson__%s__%s__%s" % (programme, unit_slug, lesson_slug))
     text = flight.flight_text(html)
     obj, _ = flight.find_object(
         text, "keyLearningPoints",
@@ -165,7 +195,7 @@ def scrape_lesson(unit_slug, lesson_slug):
             for e in obj.get("lessonEquipmentAndResources") or []
             if e.get("equipment")
         ],
-        "contentGuidance": obj.get("contentGuidance"),
+        "contentGuidance": clean_guidance(obj.get("contentGuidance")),
         "video": obj.get("videoMuxPlaybackId"),
         "videoSigned": obj.get("videoWithSignLanguageMuxPlaybackId"),
         "oakUrl": BASE + path,
@@ -174,19 +204,51 @@ def scrape_lesson(unit_slug, lesson_slug):
     }
 
 
-def scrape_unit(index, slug):
-    path = "/teachers/programmes/%s/units/%s/lessons" % (PROGRAMME, slug)
-    html = fetch(path, "unit__%s" % slug)
-    text = flight.flight_text(html)
+def unit_object(programme, slug):
+    path = "/teachers/programmes/%s/units/%s/lessons" % (programme, slug)
+    html = fetch(path, "unit__%s__%s" % (programme, slug))
     # whyThisWhyNow is only a landmark for locating the unit object in the
     # payload -- the field itself is not kept.
     obj, _ = flight.find_object(
-        text, "whyThisWhyNow", require=("unitTitle", "lessons"))
-    if obj is None:
-        raise SystemExit("no unit data for " + slug)
+        flight.flight_text(html), "whyThisWhyNow", require=("unitTitle", "lessons"))
+    return obj, path
+
+
+def discover_units(cfg, year):
+    """Unit slugs for one year, in teaching order.
+
+    The listing page's markup carries every unit in the key stage, so each
+    candidate is confirmed against its own page, which reports its year."""
+    listing_path = "/teachers/programmes/%s/units?years=%s" % (cfg["listing"], year)
+    html = fetch(listing_path, "listing__%s__%s" % (cfg["listing"], year))
+    pat = r"/teachers/programmes/%s/units/([a-z0-9-]+)/lessons" % re.escape(
+        cfg["programme"])
+    seen, candidates = set(), []
+    for slug in re.findall(pat, html):
+        if slug not in seen:
+            seen.add(slug)
+            candidates.append(slug)
+    print("  %d candidate units, confirming year..." % len(candidates), flush=True)
+
+    units = []
+    for slug in candidates:
+        obj, _path = unit_object(cfg["programme"], slug)
+        if obj is None:
+            print("    ?? no data for %s" % slug, flush=True)
+            continue
+        if str(obj.get("year")) != str(year):
+            continue
+        units.append((obj.get("unitIndex") or 0, slug, obj))
+    units.sort()
+    print("  %d units in year %s" % (len(units), year), flush=True)
+    return units
+
+
+def scrape_unit(cfg, index, slug, obj):
+    path = "/teachers/programmes/%s/units/%s/lessons" % (cfg["programme"], slug)
     lessons = []
     for stub in obj.get("lessons") or []:
-        lesson = scrape_lesson(slug, stub["lessonSlug"])
+        lesson = scrape_lesson(cfg["programme"], slug, stub["lessonSlug"])
         if lesson is None:
             lesson = {
                 "slug": stub["lessonSlug"],
@@ -196,17 +258,15 @@ def scrape_unit(index, slug):
                 "keyLearningPoints": [],
                 "keywords": [],
                 "equipment": [],
+                "contentGuidance": [],
                 "starterQuiz": [],
                 "exitQuiz": [],
             }
         lessons.append(lesson)
         print("    %2d. %s (%d KLP, %d+%d quiz)" % (
-            lesson["order"] or 0,
-            lesson["title"],
+            lesson["order"] or 0, lesson["title"],
             len(lesson["keyLearningPoints"]),
-            len(lesson["starterQuiz"]),
-            len(lesson["exitQuiz"]),
-        ), flush=True)
+            len(lesson["starterQuiz"]), len(lesson["exitQuiz"])), flush=True)
     return {
         "slug": slug,
         "index": index,
@@ -218,29 +278,62 @@ def scrape_unit(index, slug):
     }
 
 
-def main():
+def import_subject(subject, year):
+    cfg = SUBJECTS[subject]
+    print("== %s, year %s (%s) ==" % (cfg["title"], year, cfg["programme"]), flush=True)
+    found = discover_units(cfg, year)
     units = []
-    for i, slug in enumerate(UNIT_SLUGS, 1):
+    for i, (_idx, slug, obj) in enumerate(found, 1):
         print("Unit %d: %s" % (i, slug), flush=True)
-        units.append(scrape_unit(i, slug))
+        units.append(scrape_unit(cfg, i, slug, obj))
+
     data = {
-        "subject": "Maths",
-        "year": 8,
+        "subject": cfg["title"],
+        "subjectSlug": subject,
+        "year": year,
         "keyStage": "KS3",
+        "programme": cfg["programme"],
         "source": "Oak National Academy",
-        "sourceUrl": BASE + "/teachers/programmes/maths-secondary/units?years=8",
+        "sourceUrl": "%s/teachers/programmes/%s/units?years=%s"
+                     % (BASE, cfg["listing"], year),
         "licence": "Open Government Licence v3.0",
         "units": units,
         "totals": {
             "units": len(units),
             "lessons": sum(len(u["lessons"]) for u in units),
+            "questions": sum(len(l["starterQuiz"]) + len(l["exitQuiz"])
+                             for u in units for l in u["lessons"]),
         },
     }
-    out = os.path.join(os.path.dirname(os.path.abspath(__file__)), "curriculum.json")
+    os.makedirs(OUTDIR, exist_ok=True)
+    out = os.path.join(OUTDIR, "%s.json" % subject)
     with open(out, "w", encoding="utf-8") as fh:
         json.dump(data, fh, indent=1, ensure_ascii=False)
-    print("WROTE %s  units=%d lessons=%d" % (
-        out, data["totals"]["units"], data["totals"]["lessons"]), flush=True)
+        fh.write("\n")
+    print("WROTE %s  units=%d lessons=%d questions=%d"
+          % (out, data["totals"]["units"], data["totals"]["lessons"],
+             data["totals"]["questions"]), flush=True)
+    return data
+
+
+def main():
+    ap = argparse.ArgumentParser(description=__doc__,
+                                 formatter_class=argparse.RawDescriptionHelpFormatter)
+    ap.add_argument("--subject", choices=sorted(SUBJECTS))
+    ap.add_argument("--all", action="store_true", help="import every subject")
+    ap.add_argument("--year", type=int, default=8)
+    args = ap.parse_args()
+
+    if args.all:
+        targets = sorted(SUBJECTS)
+    elif args.subject:
+        targets = [args.subject]
+    else:
+        ap.error("pass --subject <%s> or --all" % "|".join(sorted(SUBJECTS)))
+
+    for s in targets:
+        import_subject(s, args.year)
+    return 0
 
 
 if __name__ == "__main__":

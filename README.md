@@ -1,8 +1,9 @@
 # Year 8 Study Hub
 
 A static homeschool study site built alongside the **Oak National Academy Year 8
-maths curriculum** — all 10 units, all 148 lessons, with every starter and exit
-quiz answerable in the browser.
+curriculum** — every unit and lesson, with every starter and exit quiz
+answerable in the browser. Maths and English so far; more subjects drop in
+without code changes.
 
 Built to the *Homeschool Resources Wireframe* on the **Modernist** design system
 from Claude Design.
@@ -18,16 +19,20 @@ framework, no build toolchain.
 
 ## What's in it
 
-| | |
-| --- | --- |
-| Units | 10 |
-| Lessons | 148 |
-| Quiz questions | 1,776 |
-| Generated pages | 162 |
+| Subject | Units | Lessons | Quiz questions |
+| --- | --- | --- | --- |
+| English | 9 | 148 | 1,776 |
+| Maths | 10 | 148 | 1,776 |
+| **Total** | **19** | **296** | **3,552** |
+
+321 generated pages.
 
 Each **unit** page carries the unit description and curriculum threads, then
 our resources for the unit, then the lesson sequence, with previous/next unit
 navigation at the foot.
+
+Lessons that carry Oak content warnings (common in English, rare in maths) show
+them above the learning points.
 
 Each **lesson** page carries the pupil outcome, key learning points, keyword
 definitions and equipment, then **our resources** for that lesson, then buttons
@@ -50,7 +55,8 @@ they are shared by every machine that clones the repo — and attach at three
 levels: **general** (the Resources page), **unit**, and **lesson**. Each one
 shows up on its own page and on the Resources index.
 
-Add one without hand-editing JSON:
+Targets are subject-qualified: `--unit SUBJECT/UNIT`,
+`--lesson SUBJECT/UNIT/LESSON`.
 
 ```bash
 python tools/add_resource.py --lesson sequences/finding-the-nth-term \
@@ -77,7 +83,8 @@ file that is missing.
 
 ## Progress
 
-Exit quiz scores are saved to `localStorage` under `y8hub.progress.v1`, and
+Exit quiz scores are saved to `localStorage` under `y8hub.progress.v2`, keyed
+`subject/unit/lesson`, and
 show up as a score tag on each lesson row, an "n of m done" count on the unit
 page, and a per-unit count on the subject page. A lesson counts as done once
 its exit quiz has been answered in full.
@@ -89,7 +96,7 @@ data clears it. The About page has a button to reset it deliberately.
 
 ```
 build.py               generates site/ from data/curriculum.json
-data/curriculum.json   the imported curriculum (1.6 MB)
+data/curriculum/       one imported curriculum per subject
 data/resources.json    our resources, attached to lessons / units / general
 assets/
   ds/styles.css        Modernist design system, vendored verbatim
@@ -98,7 +105,7 @@ assets/
   progress.js          exit quiz scores in localStorage
   resources/           our own files, by subject/year/unit
 tools/
-  import_oak.py        re-imports the curriculum from thenational.academy
+  import_oak.py        re-imports a curriculum from thenational.academy
   flight.py            parser for Next.js RSC payloads
   add_resource.py      file a resource into its unit folder and register it
   init_resource_dirs.py  create the subject/year/unit resource folders
@@ -111,16 +118,36 @@ site/                  generated output — wiped and rebuilt every run;
 `site/` is committed so the site can be served or published without running the
 build.
 
+## Adding a subject
+
+Add it to `SUBJECTS` in `tools/import_oak.py` — the listing programme slug and
+the programme slug the unit pages actually live under, which Oak makes
+different — then:
+
+```bash
+python tools/import_oak.py --subject science
+python tools/init_resource_dirs.py
+python build.py
+```
+
+A subject goes live on the homepage as soon as `data/curriculum/<slug>.json`
+exists; add the slug to `SUBJECT_ORDER` in `build.py` to place it in the
+wireframe's grid (the build says so if you forget).
+
+Units are discovered from the programme listing and then confirmed against each
+unit's own page, which reports its year — the listing markup carries every unit
+in the key stage, not just the year you asked for.
+
 ## Refreshing the curriculum
 
 ```bash
-python tools/import_oak.py    # writes curriculum.json next to itself
+python tools/import_oak.py --all
 python build.py
 python tools/check_links.py
 ```
 
-`import_oak.py` caches every fetched page, so re-runs are cheap; delete its
-`cache/` directory to force a full refetch.
+`import_oak.py` caches every fetched page, so re-runs are cheap; delete
+`tools/cache/` to force a full refetch.
 
 ## Quiz images
 

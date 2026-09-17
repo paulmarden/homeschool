@@ -1,7 +1,7 @@
 /* Quiz scores and lesson status, kept in this browser's localStorage.
 
    Shape, under the key below:
-     { "<unit-slug>/<lesson-slug>": {
+     { "<subject>/<unit-slug>/<lesson-slug>": {
          exit:    { right, total, status, at },
          starter: { right, total, status, at }
      } }
@@ -12,7 +12,23 @@
 (function (global) {
   'use strict';
 
-  var KEY = 'y8hub.progress.v1';
+  var KEY = 'y8hub.progress.v2';
+  var KEY_V1 = 'y8hub.progress.v1';
+
+  /* v1 keys were "<unit>/<lesson>" from when maths was the only subject.
+     Carry them over rather than silently losing someone's scores. */
+  function migrate() {
+    try {
+      if (localStorage.getItem(KEY) || !localStorage.getItem(KEY_V1)) return;
+      var old = JSON.parse(localStorage.getItem(KEY_V1)) || {};
+      var next = {};
+      Object.keys(old).forEach(function (k) {
+        next[k.split('/').length === 2 ? 'maths/' + k : k] = old[k];
+      });
+      localStorage.setItem(KEY, JSON.stringify(next));
+      localStorage.removeItem(KEY_V1);
+    } catch (e) { /* nothing worth breaking the page over */ }
+  }
 
   function read() {
     try {
@@ -138,6 +154,8 @@
   global.Progress = {
     read: read, record: record, forLesson: forLesson, clear: clear, paint: paint
   };
+
+  migrate();
 
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', paint);

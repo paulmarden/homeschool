@@ -1,5 +1,5 @@
 {
- "_readme": "Our resources. Edit by hand or use tools/add_resource.py. Keys: 'general' (shown on the Resources page), 'units' (keyed by unit slug) and 'lessons' (keyed by 'unit-slug/lesson-slug'). Each entry takes title, url, kind (link|html|pdf|video|worksheet|sheet|notebook|book), optional note, and optional group ('links' for a reference we use, 'ours' for something we made or keep). group defaults to 'ours' for a local path under assets/resources/ and 'links' for an external URL.",
+ "_readme": "Our resources. Edit by hand or use tools/add_resource.py. Keys: 'general' (shown on the Resources page), 'units' (keyed by 'subject/unit') and 'lessons' (keyed by 'subject/unit/lesson'). Each entry takes title, url, kind (link|html|pdf|video|worksheet|sheet|notebook|book), optional note, and optional group ('links' for a reference we use, 'ours' for something we made or keep). group defaults to 'ours' for a local path under assets/resources/ and 'links' for an external URL.",
  "general": [
   {
    "title": "BBC Bitesize — KS3 Maths",
@@ -51,7 +51,7 @@
   }
  ],
  "units": {
-  "graphical-representations-of-linear-equations": [
+  "maths/graphical-representations-of-linear-equations": [
    {
     "title": "Desmos — plot a linear equation",
     "url": "https://www.desmos.com/calculator",
@@ -59,7 +59,7 @@
     "note": "Check gradient and intercept work by plotting it"
    }
   ],
-  "estimation-and-rounding": [
+  "maths/estimation-and-rounding": [
    {
     "title": "Rounding Studio (Roblox missions)",
     "url": "assets/resources/maths/year-8/estimation-and-rounding/Rounding-Studio.html",
