@@ -25,16 +25,17 @@ framework, no build toolchain.
 | Quiz questions | 1,776 |
 | Generated pages | 162 |
 
-Each **unit** page carries Oak's unit description, "why this, why now"
-rationale, prior-knowledge requirements and curriculum threads, then the full
-lesson sequence.
+Each **unit** page carries the unit description and curriculum threads, then
+our resources for the unit, then the lesson sequence, with previous/next unit
+navigation at the foot.
 
 Each **lesson** page carries the pupil outcome, key learning points, keyword
 definitions and equipment, then **our resources** for that lesson, then buttons
 that open the starter and exit quizzes.
 
-Oak's teacher-facing material (misconceptions, teaching tips) is deliberately
-not copied here — every page links to the Oak lesson for that.
+Oak's teacher-facing material — unit rationale, prior knowledge,
+misconceptions, teaching tips — is deliberately not copied here. Every page
+links to the Oak unit or lesson for that.
 
 Quizzes open in a modal and support all four of Oak's question types (multiple
 choice including select-all, short answer, matching and ordering). They mark

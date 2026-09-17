@@ -540,18 +540,6 @@ def build_unit(data, u):
             % (esc(l["slug"]), esc(key), l["order"] or 0, esc(l["title"]),
                esc(l["outcome"]), badges))
 
-    side = []
-    if u["whyThisWhyNow"]:
-        side.append('<div class="col"><div class="coltitle">Why this, why now</div>'
-                    '<p class="rd" style="font-size:14px;">%s</p></div>'
-                    % esc(u["whyThisWhyNow"]))
-    if u["priorKnowledge"]:
-        items = "".join('<div class="resrow"><div class="rt">%s</div></div>' % esc(p)
-                        for p in u["priorKnowledge"])
-        side.append('<div class="col"><div class="coltitle">Prior knowledge</div>%s</div>'
-                    % items)
-    context = '<div class="cols">%s</div>' % "".join(side) if side else ""
-
     threads = ""
     if u["threads"]:
         threads = " ".join('<span class="tag tag-accent">%s</span>' % esc(t)
@@ -565,7 +553,6 @@ def build_unit(data, u):
         '<div class="pagehead"><h1>%s</h1>%s</div>'
         '<p class="lede">%s</p>'
         '%s'
-        '%s'
         '<h2 class="sectiontitle" style="margin:48px 0 0;">Unit resources</h2>'
         '%s'
         '<div class="lessonshead">'
@@ -578,7 +565,6 @@ def build_unit(data, u):
         % (u["index"], len(data["units"]), esc(u["title"]), oak_button(u["oakUrl"]),
            esc(u["description"]),
            ('<p style="margin:-24px 0 32px;">%s</p>' % threads) if threads else "",
-           context,
            resource_columns(resources_for(RESOURCES, "units", u["slug"]), 2,
                             add_hint("--unit", u["slug"])),
            len(u["lessons"]), esc(u["slug"]), "".join(rows),

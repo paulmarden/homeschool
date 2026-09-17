@@ -2,8 +2,9 @@
 
 Deliberately narrow: this keeps the curriculum spine (units, lessons, outcomes,
 key learning points, keywords) and the quizzes, and leaves the rest of Oak's
-teacher-facing material where it belongs -- on Oak's own lesson pages, which
-every generated page links to.
+teacher-facing material -- rationale, prior knowledge, misconceptions, teaching
+tips -- where it belongs, on Oak's own pages, which every generated page links
+to.
 """
 import hashlib
 import json
@@ -177,6 +178,8 @@ def scrape_unit(index, slug):
     path = "/teachers/programmes/%s/units/%s/lessons" % (PROGRAMME, slug)
     html = fetch(path, "unit__%s" % slug)
     text = flight.flight_text(html)
+    # whyThisWhyNow is only a landmark for locating the unit object in the
+    # payload -- the field itself is not kept.
     obj, _ = flight.find_object(
         text, "whyThisWhyNow", require=("unitTitle", "lessons"))
     if obj is None:
@@ -209,8 +212,6 @@ def scrape_unit(index, slug):
         "index": index,
         "title": obj.get("unitTitle"),
         "description": obj.get("unitDescription") or "",
-        "whyThisWhyNow": obj.get("whyThisWhyNow") or "",
-        "priorKnowledge": obj.get("priorKnowledgeRequirements") or [],
         "threads": obj.get("threads") or [],
         "oakUrl": BASE + path,
         "lessons": lessons,

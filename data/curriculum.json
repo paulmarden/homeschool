@@ -11,12 +11,6 @@
    "index": 1,
    "title": "Estimation and rounding",
    "description": "This unit helps pupils understand rounding to different decimal places, and significant figures. Pupils will also learn how to truncate numbers and understand the contexts in which these skills are useful. The unit ends will an exploration of rounding and inequality errors.",
-   "whyThisWhyNow": "Students up to this point have been working with integer values and have had few opportunities to work explicitly on estimation. We are starting the year with something that is familiar for students and extend knowledge of estimation and rounding to include more work on rounding with decimals and significant figures.",
-   "priorKnowledge": [
-    "Round numbers to nearest 10, 100, 1000",
-    "Round decimals to 1 or 2 decimal places",
-    "Estimate calculations using compatible numbers"
-   ],
    "threads": [
     "Number"
    ],
@@ -4573,12 +4567,6 @@
    "index": 2,
    "title": "Sequences",
    "description": "In this unit we develop knowledge of sequences to be able to identify, determine, and continue arithmetic sequences. We finish the unit by looking at how sequences may be reprsented graphically.",
-   "whyThisWhyNow": "In this unit pupils are developing their knowledge of plotting coordinates by exploring the idea that a set of points can satisfy a mathematical relationship. This unit sets the foundation for working with graphical representations of linear equations.",
-   "priorKnowledge": [
-    "Recognise and continue number patterns",
-    "Understand position-to-term rules",
-    "Use nth term to generate a sequence"
-   ],
    "threads": [
     "Algebra"
    ],
@@ -8660,12 +8648,6 @@
    "index": 3,
    "title": "Graphical representations of linear equations",
    "description": "In this unti we develop understanding of linear relationships and explore the key features of a linear equation such as the gradient, intercept and determining an equation from coordinate pairs.",
-   "whyThisWhyNow": "In this unit we continue to build on knowledge developed in the previous work on sequences and build confidence in how a linear sequence produces a linear relationship. We represent that graphically along with development of understanding of the equation of a line, positive, negative relationships and the idea that a linear sequence can produce an infinite set of points.",
-   "priorKnowledge": [
-    "Rearrange equations into y = mx + c form",
-    "Use tables of values to plot lines",
-    "Identify features of straight-line graphs"
-   ],
    "threads": [
     "Algebra"
    ],
@@ -13871,12 +13853,6 @@
    "index": 4,
    "title": "Solving linear equations",
    "description": "In this unit pupils will learn how to find a value that satisfies a linear relationship when one value is known both with a single step operation, and multiple step operations. A variety of cases are explored including using brackets and rearranging.",
-   "whyThisWhyNow": "Further to graphing linear sequences in the previous unit, pupils now learn to connect understanding with solving linear equations after demonstrating how for each point on a linear graph there is a unique solution to the equation of the line.",
-   "priorKnowledge": [
-    "Understand and apply inverse operations",
-    "Simplify algebraic expressions",
-    "Solve one-step and two-step equations"
-   ],
    "threads": [
     "Algebra"
    ],
@@ -19536,12 +19512,6 @@
    "index": 5,
    "title": "Understanding multiplicative relationships: percentages and proportionality",
    "description": "In this unit pupils explore multiplicative relationships with percentages, direct and inverse proportion.",
-   "whyThisWhyNow": "Pupils build upon key stage 2 work with finding percentages of amounts, then extending their knowledge to percentage change, connecting to previous learning around decimals and fractions. Pupils then explore a more general exploration of multiplicative relationships.",
-   "priorKnowledge": [
-    "Convert between fractions, decimals, and percentages",
-    "Understand ratio and scaling",
-    "Solve problems involving direct proportion"
-   ],
    "threads": [
     "Ratio and Proportion",
     "Number"
@@ -23980,12 +23950,6 @@
    "index": 6,
    "title": "Graphical representations of data",
    "description": "In this unit pupils will interpret and construct a range of representations of data including bar charts, pie charts and scatter graphs.",
-   "whyThisWhyNow": "Pupils have prepared for this unit earlier in the year by looking at graphical representations of sequences. We build upon that knowledge to show that data can be represented in further ways as well as how to construct and interpret those representations.",
-   "priorKnowledge": [
-    "Draw and interpret bar charts, line graphs and pie charts",
-    "Choose appropriate graphs for different types of data",
-    "Understand and use frequency and grouped data"
-   ],
    "threads": [
     "Statistics"
    ],
@@ -27142,12 +27106,6 @@
    "index": 7,
    "title": "Numerical summaries of data",
    "description": "In this unit pupils explore the concept of measures of central tendancy, developing understanding of different types of average and their relative benefits and drawbacks. We then investigate other summaries of data such as the range and data comparison techniques.",
-   "whyThisWhyNow": "Building on work pupils have undertaken on averages in key stage 2, and linking to the previous unit where we summarised data graphically, pupils now explore representing data numerically. Pupils focus on the concept of measures of central tendency and range. We also begin to look at correlation as a relationship between data.",
-   "priorKnowledge": [
-    "Calculate mean, median, mode and range",
-    "Organise data in frequency tables",
-    "Interpret results in context"
-   ],
    "threads": [
     "Statistics"
    ],
@@ -32745,12 +32703,6 @@
    "index": 8,
    "title": "Perimeter, area and volume",
    "description": "In this unit pupils extend their knowledge of shapes by exploring the properties of circles and composite shapes before developing understanding of 3-D shapes including surface area and volume.",
-   "whyThisWhyNow": "This unit is an extension of the perimeter and area unit in year 7 (which focused on polygons), and extends this knowledge to focus on circles and circle based composite shapes then extending to look at the concept of prisms and volume.",
-   "priorKnowledge": [
-    "Use standard formulas for rectangles and cuboids",
-    "Convert between units of measure",
-    "Calculate dimensions of composite shapes"
-   ],
    "threads": [
     "Geometry and Measure",
     "Number"
@@ -37340,12 +37292,6 @@
    "index": 9,
    "title": "Geometrical properties: polygons",
    "description": "In this unit pupils will investigate internal and external angles of polygons and angles made with a transveral and parallel lines. Pupils will develop their ability to formally prove properties of polygons to generalise.",
-   "whyThisWhyNow": "This unit builds on knowledge developed investigating angles and continues work done in the previous unit investigating polygons. Here pupils will develop understanding of external and internal angles of polygons and traversals through parallel lines",
-   "priorKnowledge": [
-    "Identify and classify polygons by sides and angles",
-    "Use angle rules (interior, exterior)",
-    "Calculate sum of angles and solve problems using reasoning"
-   ],
    "threads": [
     "Geometry and Measure"
    ],
@@ -42301,12 +42247,6 @@
    "index": 10,
    "title": "Constructions",
    "description": "In this unit we develop skills in using a pair of compasses and ruler to construct various accurate shapes and angles including triangles, rhombi, perpendicular lines and angle bisectors.",
-   "whyThisWhyNow": "After studying polygons and circles in depth in previous units, this year culminates in learning to mathematically construct these shapes using knowledge of the properties of triangles, quadrilaterals and circles in order to draw them accurately.",
-   "priorKnowledge": [
-    "Use ruler and compass for straight-edge and arcs",
-    "Construct perpendiculars and bisectors",
-    "Interpret geometric conditions in drawings"
-   ],
    "threads": [
     "Geometry and Measure"
    ],
