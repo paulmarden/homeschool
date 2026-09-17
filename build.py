@@ -338,6 +338,23 @@ def resource_columns(items, depth, empty_hint=""):
     )
 
 
+def render_pager(prev_item, next_item, noun):
+    """Previous/next strip. Units and lessons are both siblings one level up,
+    so the same relative href shape works for either."""
+    def cell(item, side, label):
+        if not item:
+            return ('<span class="%s"><span class="lbl">%s</span>'
+                    '<span class="ttl text-muted">&mdash;</span></span>'
+                    % (side, esc(label)))
+        return ('<a class="%s" href="../%s/index.html"><span class="lbl">%s</span>'
+                '<span class="ttl">%s</span></a>'
+                % (side, esc(item["slug"]), esc(label), esc(item["title"])))
+
+    return ('<div class="pager">%s%s</div>'
+            % (cell(prev_item, "prev", "Previous %s" % noun),
+               cell(next_item, "next", "Next %s" % noun)))
+
+
 def resources_for(res, scope, key):
     if scope == "general":
         return res.get("general") or []
@@ -498,6 +515,14 @@ def build_resources(data):
 
 
 def build_unit(data, u):
+    # Derived from our own sequence, not Oak's prevUnit/nextUnit -- theirs runs
+    # across year boundaries (unit 1's previous is a Year 7 unit), which would
+    # point at pages this site does not have.
+    units = data["units"]
+    pos = units.index(u)
+    prev_u = units[pos - 1] if pos > 0 else None
+    next_u = units[pos + 1] if pos + 1 < len(units) else None
+
     rows = []
     for l in u["lessons"]:
         key = "%s/%s" % (u["slug"], l["slug"])
@@ -548,6 +573,7 @@ def build_unit(data, u):
         '<span class="unitprog" data-unit="%s" hidden></span></div>'
         '<div class="hr" style="margin:12px 0 8px;"></div>'
         '%s'
+        '%s'
         '</div>'
         % (u["index"], len(data["units"]), esc(u["title"]), oak_button(u["oakUrl"]),
            esc(u["description"]),
@@ -555,7 +581,8 @@ def build_unit(data, u):
            context,
            resource_columns(resources_for(RESOURCES, "units", u["slug"]), 2,
                             add_hint("--unit", u["slug"])),
-           len(u["lessons"]), esc(u["slug"]), "".join(rows))
+           len(u["lessons"]), esc(u["slug"]), "".join(rows),
+           render_pager(prev_u, next_u, "unit"))
     )
     write("maths/%s/index.html" % u["slug"], page(
         2, "%s | Maths Year 8 | %s" % (u["title"], SITE_NAME), body, current="maths",
@@ -607,17 +634,7 @@ def build_lesson(data, u, l, prev_l, next_l):
             '</div></div>%s%s'
             % (esc(lesson_key), starter_btn, exit_btn, starter_dlg, exit_dlg))
 
-    def pager_cell(lesson, side, label):
-        if not lesson:
-            return ('<span class="%s"><span class="lbl">%s</span>'
-                    '<span class="ttl text-muted">&mdash;</span></span>' % (side, label))
-        return ('<a class="%s" href="../%s/index.html"><span class="lbl">%s</span>'
-                '<span class="ttl">%s</span></a>'
-                % (side, esc(lesson["slug"]), label, esc(lesson["title"])))
-
-    pager = ('<div class="pager">%s%s</div>'
-             % (pager_cell(prev_l, "prev", "Previous lesson"),
-                pager_cell(next_l, "next", "Next lesson")))
+    pager = render_pager(prev_l, next_l, "lesson")
 
     guidance = ""
     if l.get("contentGuidance"):
