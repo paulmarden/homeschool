@@ -395,6 +395,32 @@ def render_pager(prev_item, next_item, noun):
                cell(next_item, "next", "Next %s" % noun)))
 
 
+def unregistered_resources():
+    """Files in assets/resources/ that nothing in resources.json points at.
+
+    Dropping a file in the folder is not enough -- the pages only render what
+    is registered -- and the failure is silent, so say so at build time."""
+    registered = set()
+    for r in RESOURCES.get("general") or []:
+        registered.add(r.get("url", ""))
+    for scope in ("units", "lessons"):
+        for items in (RESOURCES.get(scope) or {}).values():
+            for r in items:
+                registered.add(r.get("url", ""))
+
+    base = os.path.join(ASSETS, "resources")
+    loose = []
+    for root, _dirs, files in os.walk(base):
+        for f in files:
+            if f in (".gitkeep", "README.md"):
+                continue
+            rel = os.path.relpath(os.path.join(root, f), ROOT)
+            rel = rel.replace(os.sep, "/")
+            if rel not in registered:
+                loose.append(rel)
+    return sorted(loose)
+
+
 def resources_for(res, scope, key):
     if scope == "general":
         return res.get("general") or []
@@ -807,6 +833,21 @@ def main():
         fh.write("\n".join(sorted(WRITTEN)) + "\n")
 
     print("built %d units, %d lessons -> %s" % (len(data["units"]), n, OUT))
+
+    loose_res = unregistered_resources()
+    if loose_res:
+        print("\n%d file%s in assets/resources/ %s not registered, so %s not "
+              "linked from any page:"
+              % (len(loose_res), "" if len(loose_res) == 1 else "s",
+                 "is" if len(loose_res) == 1 else "are",
+                 "it is" if len(loose_res) == 1 else "they are"))
+        for rel in loose_res[:10]:
+            print("    %s" % rel)
+        if len(loose_res) > 10:
+            print("    ... and %d more" % (len(loose_res) - 10))
+        print("Register with:  python tools/add_resource.py "
+              "--general|--unit UNIT|--lesson UNIT/LESSON \\\n"
+              "                    --url <filename> --title \"...\"")
     return 0
 
 

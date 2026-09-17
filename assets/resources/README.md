@@ -19,6 +19,10 @@ lesson folders:
 `python tools/init_resource_dirs.py` creates the tree and is safe to re-run
 after adding units or a new subject.
 
+**Dropping a file in here is not enough on its own** — the pages only render
+what is registered in `data/resources.json`, so an unregistered file is copied
+into the build but nothing links to it. `build.py` lists any it finds.
+
 ## Adding a resource
 
 Easiest — hand it the file and it goes in the right folder for you:
