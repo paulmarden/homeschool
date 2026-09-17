@@ -1,6 +1,11 @@
-/* Live marking for the starter and exit quizzes.
-   Progressive enhancement: every question is already answerable and has a
-   "Show answer" disclosure without this file. */
+/* Quiz modals and live marking.
+
+   Each quiz lives in a <dialog>; the page shows a button that opens it.
+   Progressive enhancement: with JavaScript off the <dialog> stays closed but
+   every question is still answerable on paper via its "Show answer"
+   disclosure, and the buttons are inert rather than misleading.
+
+   Scores go to localStorage through progress.js, which must load first. */
 (function () {
   'use strict';
 
@@ -30,6 +35,22 @@
   function setState(el, state) {
     el.classList.remove('is-right', 'is-wrong', 'is-missed');
     if (state) el.classList.add(state);
+  }
+
+  /* Keep the page from scrolling behind an open modal. Derived from whether any
+     dialog is actually open, and called at every close site: the dialog `close`
+     event is not reliably delivered everywhere this runs, and a missed remove
+     would leave the page permanently unscrollable. */
+  function syncScrollLock() {
+    var anyOpen = Array.prototype.some.call(
+      document.querySelectorAll('dialog[data-quiz]'),
+      function (d) { return d.open; });
+    document.body.classList.toggle('modal-open', anyOpen);
+  }
+
+  function closeDialog(dlg) {
+    dlg.close();
+    syncScrollLock();
   }
 
   function clearQuestion(q) {
@@ -98,6 +119,8 @@
     var questions = Array.prototype.slice.call(quiz.querySelectorAll('.q'));
     var score = quiz.querySelector('[data-score]');
     var total = questions.length;
+    var quizId = quiz.getAttribute('data-quiz');
+    var lessonKey = quiz.getAttribute('data-lesson');
 
     function report(marked, right) {
       if (!score) return;
@@ -116,7 +139,11 @@
         if (r) right++;
       });
       report(marked, right);
-      if (!marked && score) score.textContent = 'Answer a question first';
+      if (!marked) {
+        if (score) score.textContent = 'Answer a question first';
+        return;
+      }
+      if (window.Progress) window.Progress.record(lessonKey, quizId, right, marked, total);
     });
 
     quiz.querySelector('[data-reveal]').addEventListener('click', function () {
@@ -140,7 +167,31 @@
         setState(el, null);
       });
     });
+
+    quiz.querySelectorAll('[data-close]').forEach(function (btn) {
+      btn.addEventListener('click', function () { closeDialog(quiz); });
+    });
+
+    /* Click outside the panel closes it, the way a backdrop should. */
+    quiz.addEventListener('click', function (ev) {
+      if (ev.target === quiz) closeDialog(quiz);
+    });
+
+    /* Escape closes a native dialog without going through our handlers. */
+    quiz.addEventListener('cancel', function () { setTimeout(syncScrollLock, 0); });
+    quiz.addEventListener('close', syncScrollLock);
   }
 
-  document.querySelectorAll('[data-quiz]').forEach(wire);
+  document.querySelectorAll('dialog[data-quiz]').forEach(wire);
+
+  document.querySelectorAll('[data-open]').forEach(function (btn) {
+    var dlg = document.getElementById(btn.getAttribute('data-open'));
+    if (!dlg || typeof dlg.showModal !== 'function') return;
+    btn.addEventListener('click', function () {
+      dlg.showModal();
+      syncScrollLock();
+      var first = dlg.querySelector('input, select, button');
+      if (first) first.focus();
+    });
+  });
 })();

@@ -23,33 +23,80 @@ framework, no build toolchain.
 | Units | 10 |
 | Lessons | 148 |
 | Quiz questions | 1,776 |
-| Generated pages | 161 |
+| Generated pages | 162 |
 
 Each **unit** page carries Oak's unit description, "why this, why now"
 rationale, prior-knowledge requirements and curriculum threads, then the full
 lesson sequence.
 
 Each **lesson** page carries the pupil outcome, key learning points, keyword
-definitions, common misconceptions with the suggested teacher response,
-teaching tips and equipment — followed by the starter and exit quizzes.
+definitions and equipment, then **our resources** for that lesson, then buttons
+that open the starter and exit quizzes.
 
-Quizzes support all four of Oak's question types (multiple choice including
-select-all, short answer, matching and ordering). They mark themselves, show
-per-question hints and feedback, and report a score. Every question also has a
-"Show answer" disclosure, so the page is fully usable with JavaScript off.
+Oak's teacher-facing material (misconceptions, teaching tips) is deliberately
+not copied here — every page links to the Oak lesson for that.
+
+Quizzes open in a modal and support all four of Oak's question types (multiple
+choice including select-all, short answer, matching and ordering). They mark
+themselves, show per-question hints and feedback, and report a score. Every
+question also has a "Show answer" disclosure, so a quiz stays answerable with
+JavaScript off.
+
+## Resources
+
+The point of the site. Resources live in `data/resources.json` — in git, so
+they are shared by every machine that clones the repo — and attach at three
+levels: **general** (the Resources page), **unit**, and **lesson**. Each one
+shows up on its own page and on the Resources index.
+
+Add one without hand-editing JSON:
+
+```bash
+python tools/add_resource.py --lesson sequences/finding-the-nth-term \
+    --title "nth term worksheet" --url assets/resources/nth-term.pdf \
+    --kind worksheet --note "Printable, with space for working"
+
+python tools/add_resource.py --unit constructions --title "…" --url "https://…"
+python tools/add_resource.py --general --title "…" --url "https://…"
+python tools/add_resource.py --list
+```
+
+Then `python build.py`. Files go in `assets/resources/`; `--url` can also be an
+external link. `kind` is one of `link, html, pdf, video, worksheet, sheet,
+notebook, book` and drives the tag; entries split into **Relevant links**
+(references we use) and **Our resources** (things we made or keep), which you
+can force with `--group`.
+
+The seven links seeded in `general` are starting points — replace them with
+whatever you actually use. `python tools/check_links.py` flags any registered
+file that is missing.
+
+## Progress
+
+Exit quiz scores are saved to `localStorage` under `y8hub.progress.v1`, and
+show up as a score tag on each lesson row, an "n of m done" count on the unit
+page, and a per-unit count on the subject page. A lesson counts as done once
+its exit quiz has been answered in full.
+
+This is per-browser and per-device — nothing is uploaded, and clearing site
+data clears it. The About page has a button to reset it deliberately.
 
 ## Layout
 
 ```
 build.py               generates site/ from data/curriculum.json
-data/curriculum.json   the scraped curriculum (1.7 MB)
+data/curriculum.json   the imported curriculum (1.6 MB)
+data/resources.json    our resources, attached to lessons / units / general
 assets/
   ds/styles.css        Modernist design system, vendored verbatim
   site.css             site layer, built only on Modernist tokens
-  quiz.js              live quiz marking (progressive enhancement)
+  quiz.js              quiz modals + live marking (progressive enhancement)
+  progress.js          exit quiz scores in localStorage
+  resources/           our own files, copied into the built site
 tools/
-  import_oak.py        re-scrapes the curriculum from thenational.academy
+  import_oak.py        re-imports the curriculum from thenational.academy
   flight.py            parser for Next.js RSC payloads
+  add_resource.py      register a resource without hand-editing JSON
   fetch_images.py      optional: vendor quiz images for offline use
   check_links.py       verifies every internal link resolves
 site/                  generated output — safe to delete and rebuild
@@ -99,10 +146,14 @@ Two deliberate departures from the system's written guidance, both narrow:
   throughout, but its own `.radio .dot` is a circle — the shape is what
   distinguishes "pick one" from "select all".
 
+The quiz modal is the system's `.dialog` pattern widened for a quiz: surface
+chrome top and bottom, ground behind the questions, zero radius, `--shadow-lg`.
+
 ## Content and licence
 
-Curriculum content is from [Oak National Academy](https://www.thenational.academy/)
-and is used under the
+Curriculum content kept here — unit and lesson titles, outcomes, key learning
+points, keywords and the quizzes — is from
+[Oak National Academy](https://www.thenational.academy/) and is used under the
 [Open Government Licence v3.0](https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/).
 This site is not affiliated with or endorsed by Oak National Academy.
 

@@ -39,15 +39,6 @@
        "definition": "To change a number into another number that is approximately the same value but is easier to work with. E.g. round 561 to the nearest 10 is 560."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When rounding a number, pupils write the first significant digit(s) only.  E.g 36 789 is 4.",
-       "response": "The use of the place value table shows the magnitude of the number, thus preserving their place value."
-      }
-     ],
-     "teacherTips": [
-      "When beginning discussions about rounding ask the class if they can think of situations, headlines. etc that they believe have used/or would use rounded figures instead of the exact figures.  Or, times they have used rounded figures in their everyday lives."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "apXWlq3EKogJjlUjh02MovhyxXdgprxW7RlKes7x00iKY",
@@ -260,15 +251,6 @@
        "word": "Degree of accuracy",
        "definition": "A degree of accuracy shows how precise a number or measurement is.  E.g. to the nearest cm, nearest 10, 1 d.p., etc."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The assumption that if a number ends in 2 zeros it must have been rounded to the nearest hundred.",
-       "response": "Choose examples that round to the same value when rounded to the nearest ten and hundred in this case.  E.g. 398, rounds to 400 to the nearest ten and 400 to the nearest hundred."
-      }
-     ],
-     "teacherTips": [
-      "Get pupils to come up with their own 'what number am I?' problems.  Emphasising that their clues must lead to a unique number.  Pupils can then challenge each other to solve their problems or a pupil can present theirs to the whole class."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -488,15 +470,6 @@
        "word": "Round",
        "definition": "To change a number into another number that is approximately the same value but is easier to work with. E.g. round 561 to the nearest 10 is 560."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Errors when a zero is required when rounding. E.g 5.99 rounds to 6 to 1 d.p.",
-       "response": "Embedding that 6 and 6.0 may be written like that to convey the accuracy they've been rounded to. To show that 5.99 has been rounded to 1 d.p. we write it as 6.0 not 6."
-      }
-     ],
-     "teacherTips": [
-      "As a challenge, encourage pupils to create their own 'what number am I?' problems. They should consider the minimum number of clues needed to ensure there is a unique answer. Use pupils' responses to this as a class task using MWBs to write down an answer as clues are revealed one by one."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -731,15 +704,6 @@
        "definition": "To change a number into another number that is approximately the same value but is easier to work with. E.g. round 561 to the nearest 10 is 560."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils think that repeated rounding gives the correct answer.",
-       "response": "Use a number line to support pupils’ understanding. Locate the number to be rounded on the line and identify the critical values."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could measure the classroom and other areas and work out the cost of carpeting them.  They could research the cost of different floor coverings and look that how much the price per metre affects the overall cost."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "RNQgQz53j00nBk2TUhrVK2tk00VMi7wmlwgThQosmR5W4",
@@ -909,15 +873,6 @@
        "word": "Round",
        "definition": "To change a number into another number that is approximately the same value but is easier to work with. E.g. round 561 to the nearest 10 is 560."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Assuming all zero digits are not significant.",
-       "response": "Within the lesson there are many examples where some zeros are significant. Relate significance back to the communication of accuracy and that some digits are significant as they preserve the place value of other digits."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could come up with their own coded words or messages using the grid in the 3rd learning cycle.  This will give pupils the opportunity to embed their understanding of significant figures.  They can then swap and decode each others words or messages."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -1162,15 +1117,6 @@
        "word": "Round",
        "definition": "To change a number into another number that is approximately the same value but is easier to work with. E.g. round 561 to the nearest 10 is 560."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Assuming all zero digits are not significant.",
-       "response": "Designing questions that contain zero digits in a variety of positions."
-      }
-     ],
-     "teacherTips": [
-      "Using the same cross-number grid or a simplified version, challenge pupils to come up with their own questions and answers.  Ensuring that all numbers fit and coming up with appropriate questions with the correct number of significant figures will ensure a deep understanding of significant figures."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -1469,15 +1415,6 @@
        "definition": "To change a number into another number that is approximately the same value but is easier to work with. E.g. round 561 to the nearest 10 is 560."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Assuming all zero digits are not significant.",
-       "response": "Designing questions that contain zero digits in a variety of positions."
-      }
-     ],
-     "teacherTips": [
-      "Using MWB ask pupils to down decimals with a given number of decimal places and a particular digit in given significant figure position.  E.g.  Write down a decimal with 5 digits after the decimal point and 3 as the second significant figure."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "6OagkmhtyDAhynGwvEmRkcF02MVwPZM3CNV7SjlLcytc",
@@ -1712,15 +1649,6 @@
        "word": "Degree of accuracy",
        "definition": "A degree of accuracy shows how precise a number or measurement is.  E.g. to the nearest cm, nearest 10, 1 s.f., etc"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Rounding prematurely during multi-step calculations.",
-       "response": "Encourage the use of fractions (where possible) or the use of the 'ANS' button."
-      }
-     ],
-     "teacherTips": [
-      "Pupils measure the walls of the classroom and calculate the cost of repainting it.  Pupils needing a challenge could calculate skirting boards, doors, door frames, window frames etc.  The cost of painting these items could include paint sold in different sized tins for a different cost."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -1977,15 +1905,6 @@
        "word": "Significant figures",
        "definition": "Significant figures are the digits in a number that contribute to the accuracy of the number."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Division by 0.5 is the same as doubling.",
-       "response": "Reiterate the division of a number is the same as the multiplication of the reciprocal e.g  The division of 0.5 is the same as multiplying by 2. e.g The division of 0.1 is the same as multiplying by 10."
-      }
-     ],
-     "teacherTips": [
-      "It is important pupils have a real life reference of length. E.g Measure how wide their hand is. Use this to estimate how wide the table is. E.g Measure how wide their fingernail is. Use this to estimate how long a pencil sharpener is."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -2293,15 +2212,6 @@
        "word": "Estimate",
        "definition": "A quick estimate for a calculation is obtained from using approximate values, often rounded to 1 significant figure."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When rounding a number, pupils write the first significant digit(s). e.g 36 789 is 4.",
-       "response": "The use of the place value table shows the magnitude of the number, thus preserving their place value."
-      }
-     ],
-     "teacherTips": [
-      "Give the class an answer of 300 and ask what could the unrounded calculations be. Draw out their use of rounding to significant figures or other degrees of accuracy. E.g 300 could be 148.32 x 2.16 because 148.32 rounded to 2 s.f and 2.16 is rounded to 1 s.f."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -2665,15 +2575,6 @@
        "definition": "A degree of accuracy shows how precise a number or measurement is."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When truncating, pupils are tempted to round. Also, when truncating, they cut off the number without thinking about the magnitude.",
-       "response": "The use of the place value table shows the magnitude of the number, thus preserving their place value when truncating."
-      }
-     ],
-     "teacherTips": [
-      "We use truncating a lot in real life, ask the pupils in class to write down the real life examples of when they have truncated, when they have rounded and when have they needed to use the exact values. This activity allows pupils to appreciate the importance or each and their differences."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "RDQPzt4lZ00ZAZgb6pVW00z6rT3hyBYNx1bTxtstI2iYc",
@@ -3013,15 +2914,6 @@
        "word": "Underestimate",
        "definition": "An underestimate is an estimate for a calculation which is less than the exact answer."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When subtracting or dividing, the largest value is found by subtracting or dividing the largest rounded number by the largest rounded divisor or additive inverse.",
-       "response": "Drawing a number line to show the subtraction of the smallest number will help students see how to achieve an overestimate or underestimate. When using division, reiterating the division of number is the same as multiplying by its reciprocal."
-      }
-     ],
-     "teacherTips": [
-      "Give the answer to a calculation, e.g 40, and ask them create calculations where the answer of 40 is an overestimate or underestimate using addition, multiplication, subtraction and division.  A spider diagram can be used to collate the answers. For more challenging work, give the answer of 0.8."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -3367,15 +3259,6 @@
        "definition": "Significant figures are the digits in a number that contribute to the accuracy of the number"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Rounding prematurely during multi-step calculations.",
-       "response": "Encourage to use of fractions (where possible) or the use of the ANS button."
-      }
-     ],
-     "teacherTips": [
-      "A quire fire of questions where pupils need to draw number lines to show the range of integers on MWB will aid pupils when finding unrounded numbers when given a degree of accuracy.  This helps the visualization of finding unrounded intervals. eg. Show 90 rounded to the nearest 10."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "IKnO2SEMK02TY9TiTwrRsWAe8TWDXYaO6uXW5DgYRIio",
@@ -3658,15 +3541,6 @@
        "word": "Error interval",
        "definition": "An error interval for a number $$x$$ shows the range of possible values of $$x$$.  It is written as an inequality $$a ≤ x < b$$"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Incorrect use of the error interval i.e $$a ≤ x ≤ b$$ or writing the error interval as $$a ≤ x > b$$",
-       "response": "As a check, encourage students to round the upper limit interval by the degree of accuracy to see if it evaluates to the rounded number.  Also,  draw a number line to show the meaning of  $$a ≤ x > b$$ and allow students to see the error."
-      }
-     ],
-     "teacherTips": [
-      "The use of error intervals is used a lot in different industries around the world. Discuss why error intervals are so important. E.g If 5 m has been rounded to the nearest integer, why is it important to know that the actual measurement could have been 4.5 m? Why is it such a big deal?"
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -4021,15 +3895,6 @@
        "definition": "An error interval for a number $$x$$ shows the range of possible values of $$x$$. It is written as an inequality $$a ≤ x < b$$"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When subtracting or dividing, the largest value is found by subtracting or dividing the upper limit of a number by the upper limit of the divisor or additive inverse.",
-       "response": "Drawing a number line to show  with subtraction will help students see how to achieve an upper or lower limits of an error interval calculation. When using division, reiterating the division of number is the same as multiplying by its reciprocal."
-      }
-     ],
-     "teacherTips": [
-      "Discuss - When 5 m^2 is rounded to 1 s.f, is 4.5 m^2 as the lower limit a big deal? Show the class what 0.5m^2 looks like. Civil engineers claim that bridge collapse is due to miscalculations. How do they minimise error intervals? By using instruments that give answers to a high degree of accuracy."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "Cxqb5uA026B2BXtVOoZ4Jy46DEi0201yWcQ6OLtLZ2Up00M",
@@ -4360,15 +4225,6 @@
        "word": "Estimate",
        "definition": "A quick estimate for a calculation is obtained from using approximate values, often rounded to 1 significant figure."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Using the wrong limits when dividing or subtracting in order to find the upper limit of a calculation or lower limit of a calculation.",
-       "response": "Drawing a number line to show with subtraction will help students see how to achieve an upper or lower limits of an error interval calculation. When using division, reiterating the division of number is the same as multiplying by its reciprocal."
-      }
-     ],
-     "teacherTips": [
-      "Fermi problems allow pupils to be explorative and creative when getting initial data. Some nice in class examples:  How many oranges would it take to fill the classroom? How many hours would it take a teacher to mark every full maths exercise book of every pupil in the school?"
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -4745,15 +4601,6 @@
        "definition": "A sequence is a succession of objects, diagrams or values usually formed according to a rule."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may struggle to divide values correctly to find a multiplier, especially when fractional.",
-       "response": "Pupils should write their sequence out with arrows to show which direction their multiplier is operating."
-      }
-     ],
-     "teacherTips": [
-      "Get students to make up their own additive and multiplicative sequences and challenge each other to find the next term."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "K00Bd6WH7Ve4Y01BL4C2o2Q7RPy02eIcNBhg9ME5ToTrKs",
@@ -5055,15 +4902,6 @@
        "word": "Sequence",
        "definition": "A sequence is a succession of objects, diagrams or values usually formed according to a rule."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "That sequences can only have constant additive or multiplicative patterns.",
-       "response": "Give students two numbers and get them to carry the sequence on in different ways. Anything they come up with can be a sequence."
-      }
-     ],
-     "teacherTips": [
-      "Students can build their own patterns with manipulatives. Challenge them to build patterns with the same rule or with different rules and same start value."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -5382,15 +5220,6 @@
        "definition": "Each value or pattern in a sequence is called a term."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils can mix up describing how patterns grow or the relationships between objects in the pattern.",
-       "response": "Pupils should verbalise their description, using the keyword 'term' , making it clear which way they are describing their pattern."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could draw the patterns on square paper to predict how they might develop. This is a chance to explore the different structures of sequences."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "Lyax8FKpv6CyJ202H00nMhVK7CVEwNSyPJZi32GLixw01I",
@@ -5670,15 +5499,6 @@
        "word": "Term-to-term",
        "definition": "A term-to-term rule describes how to calculate the next term in the sequence from the previous term."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The difference in the given terms divided by the number of missing terms gives the common difference",
-       "response": "Write the sequence out with gaps for the missing terms. Model how many additions (jumps) to get from one known term to the next."
-      }
-     ],
-     "teacherTips": [
-      "This is a good opportunity to practise arithmetic with fractions and negatives. This reinforces concepts like 'subtracting a negative is the same as adding the absolute value' and 'dividing by a fraction is the same as multiplying by its reciprocal.'"
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -5991,15 +5811,6 @@
        "word": "Position-to-term",
        "definition": "A position-to-term rule describes how to generate the term from the term number."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The position-to-term rule is the initial term add the common difference.",
-       "response": "Once pupils have found the additive pattern get them to write each term as a value add the difference."
-      }
-     ],
-     "teacherTips": [
-      "To introduce this lesson, you could give pupils some numbers that form an additive sequence eg 10, 15, 20, 25 and challenge them to write the numbers as repeated addition of 5. They could do this using cuisenaire rods."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -6322,15 +6133,6 @@
        "word": "Arithmetic sequence",
        "definition": "An arithmetic (or linear) sequence is a sequence where the difference between successive terms is a constant."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Sequences such as triangular numbers which have a linear sequence in their differences are linear.",
-       "response": "Terms in an arithmetic sequence have to have a common first difference."
-      }
-     ],
-     "teacherTips": [
-      "Pupils will come across arithmetic and linear in different topics, use both words so links can be drawn to linear equations and linear graphs."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -6677,15 +6479,6 @@
        "definition": "The n^th term of a sequence is the position of a term in a sequence where n stands for the term number."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "That $$n$$ is a term in the sequence. That $$n=10$$ means 10 is in the sequence.",
-       "response": "Reiterate that $$n$$ is the term number. \"$$n=10$$ means the 10th term. What is the 10th term number?\""
-      }
-     ],
-     "teacherTips": [
-      "Ask questions like \"In this sequence, 7, 14, 21, 28, 35 what term number is 28? What is the $$n$$ value for the term 28?\""
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "jfuS9BIfegN3Y00UJWUUo1HaW8PgvMJeVEHAXAADU4V4",
@@ -7029,15 +6822,6 @@
        "word": "Arithmetic sequence",
        "definition": "An arithmetic (or linear) sequence is a sequence where the difference between successive terms is a constant."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "That the sequence $$3n+2$$ starts with 3 and adds 2, or starts with 2 and adds 3.",
-       "response": "Calculate the first few terms. Ask, \"When $$n = 1$$ what is the term value?\" This is the first value for our sequence."
-      }
-     ],
-     "teacherTips": [
-      "Discuss the misconceptions very openly. Ask questions like, \"What does the sequence $$8n+23$$ begin with? Is it 8? 23? 31?\". Address why it is 31. This will also help future learning on finding $$n$$^th terms."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -7399,15 +7183,6 @@
        "word": "n^th term",
        "definition": "The nth term of a sequence is the position of a term in a sequence where n stands for the term number."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "That the sequence 6,11,16,21, ... is 5n+6 because it goes up by 5 and starts at 6.",
-       "response": "Compare 6,11,16,21, ... to 5,10,15,20, ... \"What is the shift? The translation? If that is 5n then this is 5n with how much more?\""
-      }
-     ],
-     "teacherTips": [
-      "Get students to explain back to you why 6,11,16,21, ... is 5n+1 and NOT 5n+6. If they can counter-argue the misconception then they truly understand what is going on here."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -7785,15 +7560,6 @@
        "word": "Arithmetic sequence",
        "definition": "An arithmetic (or linear) sequence is a sequence where the difference between successive terms is a constant."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When plotting sequences, a line must be drawn through the points.",
-       "response": "Plot (1,5), (2,10), (3,15), draw a line and find other coordinates. When n = 1.5 the term value is 7.5. Is 7.5 in the sequence 5n??"
-      }
-     ],
-     "teacherTips": [
-      "Learning cycle 2 sees students looking at the structure of an arithmetic sequence using bricks made up of dots. At this stage ask them to make up a picture of their own sequence and see if they can identify each others' sequences."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -8179,15 +7945,6 @@
        "definition": "An arithmetic (or linear) sequence is a sequence where the difference between successive terms is a constant."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "It is impossible to tell if 174 368 is in the sequence -8,-3,2,7, ...",
-       "response": "Generalising the rule for forming a given sequence can help us see if a value is in the sequence."
-      }
-     ],
-     "teacherTips": [
-      "Graphical software can be used effective here to explore whether a given value is a term in a sequence."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "jzb013Opacy3O2pVMmvUcj9farxLapjNEv1koPjfjaPs",
@@ -8545,15 +8302,6 @@
        "word": "nth term",
        "definition": "The nth term of a sequence is the position of a term in a sequence where n stands for the term number."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The answer to the 'handshake' problem is 15, or 15x15",
-       "response": "Group pupils into 3s and ask them to record how many handshakes are made. Then group as 4s and repeat. What do they notice?"
-      }
-     ],
-     "teacherTips": [
-      "Encourage pupils to play with the problems and test their hypotheses rather than answering yes/no when asked if an hypothesis is correct. This encourages pupils to be resilient learners and test their ideas."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -8939,15 +8687,6 @@
        "definition": "Any one of the four areas into which a space is divided by the <i>x</i>- and <i>y</i>-axes in the Cartesian coordinate system."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Where is coordinate (−2,5)? 2 down, 5 right from the origin? 5 right, 2 down from the origin?",
-       "response": "Coordinates in (<i>x,y</i>) form. −2 is <i>x</i>-instruction. From (0,0) will we travel in a positive or negative <i>x</i>-direction?"
-      }
-     ],
-     "teacherTips": [
-      "Ask students to repeat the precise language aloud. \"Where is the coordinate (8,−7)?\" to which their response should be, \"From the origin it is 8 in the positive <i>x</i>-direction and 7 in the negative <i>y</i>-direction\"."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "qNAvp02AosaXdNx9Kw00k46ncBd011M846fgKv004m3P02ts",
@@ -9317,15 +9056,6 @@
        "word": "Arithmetic (linear) sequence",
        "definition": "A sequence where the difference between successive terms is a constant."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The plotted points of an arithmetic sequence form a line so we draw a line connecting them.",
-       "response": "Sequences are an ordered list and do not always need to follow a rule, so we often only find and use the positive integer term numbers."
-      }
-     ],
-     "teacherTips": [
-      "Get pupils to notice features of the points they plot and how they relate to the n^th term or the algebraic rule. Ask things like, \"what do increasing sequences look like?\", \"what is the same/different about plotting sequences and algebraic rules?\""
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -9708,15 +9438,6 @@
        "definition": "A sequence where the difference between successive terms is a constant."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When plotting the sequence $$3n-1$$ using technology you need to type each coordinate individually.",
-       "response": "\"We use technology to make things easier. There must be a quicker way!\" Look for the 'table' function."
-      }
-     ],
-     "teacherTips": [
-      "Get pupils to plot the first ten terms of $$3n-1$$ then say, \"Do it for 100 terms\". Allow a minute before interrupting with, \"There is a quicker way! A table function which plots multiple points in seconds. Can you find it?\". Allow pupils to explore."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "dWyZx7G019aeKnt98ZOm602QTXY1PR9M8QxBdI1LE02F98",
@@ -10085,15 +9806,6 @@
        "definition": "Substitute means to put in place of another.  In Algebra, substitution can be used to replace variables with values."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "All graphs are linear and if graphs are not linear you join points with straight line segments.",
-       "response": "Explore $$n+2, 2n$$ and $$x^2$$. \"I see $$n$$ and 2; they must be similar\" pupils think. Get them to compare numerically, then graphically."
-      }
-     ],
-     "teacherTips": [
-      "Do a sorting activity for 'Linear' and 'Non-linear'. You could give them $$n^{th}$$ term expressions, ask them to generate the first five terms and sort. For a less confident class give the pupils the first five terms and ask them to sort."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "PoKvkLyUWWcme01dtUI43fGQltmWJ0283sGOAnSkbiWaE",
@@ -10432,15 +10144,6 @@
        "word": "Linear",
        "definition": "The relationship between two variables is linear when they change together at a constant rate and form a straight line when plotted."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Only equations in the form $$y=mx+c$$ are linear. All equations are linear.",
-       "response": "There are many forms that linear equations can take, however they always share a common feature. The variables have exponents of $$1$$."
-      }
-     ],
-     "teacherTips": [
-      "We know $$y=4x$$ to be linear; explore $$4y=x$$. Finish and plot the coordinates: $$(x,0), (x,1), (x,2)$$ and so on. $$y=x+4$$ is linear, what about $$x+y=4$$? Finish and plot $$(0,y), (1,y), (2,y)$$ and so on. Draw attention to the $$1$$ exponents."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -10816,15 +10519,6 @@
        "definition": "An intercept is the coordinate where a line or curve meets a given axis."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "The arithmetic sequence 5n+2 starts at 7 so the linear equation y=5x+2 'starts' somewhere.",
-       "response": "y=5x+2 has no start and no end; it goes on infinitely. However, all linear equations have a y-intercept and this helps define them."
-      }
-     ],
-     "teacherTips": [
-      "Open up a discussion about this misconception. \"5n+2, 2n+5, 5-2n; where do they start?\" Plot y = 5x+2, y = 2x+5, y = 5 -2x and ask, \"Where do you see them starting?\". Bring out the infinite nature of these relationships."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "Rf8XSizi01801SawjARXCzwH6bGBS8mHzO6NIqadtebLM",
@@ -11185,15 +10879,6 @@
        "definition": "The gradient is a measure of how steep a line is."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils count squares to calculate gradient instead of looking at scales.",
-       "response": "Encourage pupils to pick points on the graph to use to find the gradient and write down the coordinates rather than count squares."
-      }
-     ],
-     "teacherTips": [
-      "Challenge pupils to draw their own lines with different gradients, mini whiteboards with squares or printed axis in plastic wallets can be helpful for this. Make it clear that the axis have a  step of 1 for this."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "CdFNASr00MNLHiI02100G4RSlZEErlfzlL7G9qIUsFzop4",
@@ -11503,15 +11188,6 @@
        "word": "Parallel",
        "definition": "Two lines are parallel if they are straight lines that are always the same (non-zero) distance apart."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may think lines with gradients 2 and -2 are parallel.",
-       "response": "Lines have to have the exact same gradient to be parallel. A line with a negative gradient will intersect a line with a positive gradient ."
-      }
-     ],
-     "teacherTips": [
-      "Use of ratio tables is key to overcoming most common mistakes. Pupils who are confident using ratio tables here, will find it easier to calculate gradient from coordinate pairs later on."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -11860,15 +11536,6 @@
        "definition": "The gradient is a measure of how steep a line is."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When calculating gradient from coordinates, pupils get positive and negative gradients mixed up.",
-       "response": "Encourage pupils to sketch the coordinates first and then always look at a positive increase in x."
-      }
-     ],
-     "teacherTips": [
-      "In the first learning cycle, pupils can investigate how changing the scale can change the gradient of a line which moves right 1 square up one square. They could think of other scales for the axes and see what the gradient would become."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "qKQyXVVtGs2KAaImqist00RC5W3taXFMMeqyfEgkMkQM",
@@ -12205,15 +11872,6 @@
        "word": "Linear",
        "definition": "The relationship between two variables is linear if, when plotted on a pair of axes, a straight line is formed."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Writing the y intercept as a single value or getting the x and y coordinates the wrong way around.",
-       "response": "Encourage writing the y intercept as a coordinate. Stating 'lines cross the y axis when x=0' can help pupils write the coordinate correctly."
-      }
-     ],
-     "teacherTips": [
-      "A good opportunity here to link to work on linear sequences. Finding the y intercept from 2 coordinates is the same skill as finding the initial term in a linear sequence. Make it clear that the first term is when n=1 but the y intercept is when x=0"
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -12578,15 +12236,6 @@
        "definition": "A term that does not change; it contains no variables."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may think graphs are only linear if written in the form y=mx+c",
-       "response": "Use the first learning cycle as an opportunity to show graphs in many formats. y=mx+c  makes the gradient and y intercept clear."
-      }
-     ],
-     "teacherTips": [
-      "The first learning cycle is a good chance to recap generating coordinates that fit a rule. For task A, pupils could write down as many coordinates as they can that satisfy the relationship before plotting."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "fMvjHYVuVgep02z5ltY9NB6wIjcR6M4npnK5WaDIMGt00",
@@ -12950,15 +12599,6 @@
        "definition": "An intercept is the coordinate where a line or curve meets a given axis."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Writing the gradient as the constant and the y intercept as the coefficient of x.",
-       "response": "Link to linear sequences where the coefficient of n is the common difference in the sequence to help pupils see why (m) is the gradient."
-      }
-     ],
-     "teacherTips": [
-      "This is a good opportunity to practise substitution skills. Pupils should be checking their equations by seeing if the coordinates satisfy the equation. A recap of substituting using a calculator may also be useful."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "zp5bIlAEJ4QTLAxFuXptZsHSYqSTa2i01LBnJ00ng4bIw",
@@ -13252,15 +12892,6 @@
        "word": "Equation of a line",
        "definition": "An equation of a line is any equation whose graph forms a straight line."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "To draw the graph using the gradient and intercept you can just count the squares.",
-       "response": "Encourage pupils to look at the scales on the axes carefully when drawing a line given the gradient and y-intercept."
-      }
-     ],
-     "teacherTips": [
-      "Spotting the x- and y-intercept from ax+by+c=0 can lead to mistakes. Pupils should be substituting y=0 or x=0 and calculating rather than guessing. This is a tricky lesson, a recap on bar models may be useful prior to starting this lesson."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -13613,15 +13244,6 @@
        "definition": "An intercept is the coordinate where a line or curve meets a given axis."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "From the line $$y=x$$ to $$y=x+1$$ to $$y=x-1$$ the lines are moving left/right rather than up/down.",
-       "response": "It can be shown by using a $$(x,c)$$ coordinate in desmos. That coordinate moves up and down with the change in '$$c$$'."
-      }
-     ],
-     "teacherTips": [
-      "Get the pupils to all make a 'slider' for '$$c$$' in $$y=x+c$$ and hit play. Get pupils to pick a specific point and look at how that point on the line moves as 'c' changes."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "pPM4i6MDQ901gvrYwnsPvBB900BUyWbq1IVTqE4Opqc2g",
@@ -13949,15 +13571,6 @@
        "word": "Gradient",
        "definition": "The gradient is a measure of how steep a line is."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "There is one answer to everything in maths.",
-       "response": "We often see arithmetic and equations with one answer but, maths can be used to compare and justify multiple answers to a single problem."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils, \"If Plumber A charges a $$£50$$ call-out fee and $$£20$$ an hour and Plumber B charges $$£100$$ then $$£10$$ an hour who is cheapest?\". Don't interrupt. Let them explore, let them debate. Wait to see who spots the moment they are equal."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -14293,15 +13906,6 @@
        "word": "Equation",
        "definition": "An equation is used to show 2 expressions that are equal to each other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When converting English to algebra, pupils can mix up 4x + 2 and 4(x + 2)",
-       "response": "Reviewing priority of operations and expanding brackets may be helpful. The multiplier operates on all terms in the bracket."
-      }
-     ],
-     "teacherTips": [
-      "In learning cycle 1, the problems are worked through in steps. You may wish to adapt the amount of information you give pupils before allowing them chance to try the problems. Pupils could make up their own problems to consolidate understanding."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -14676,15 +14280,6 @@
        "word": "Like terms",
        "definition": "Like terms are terms that have the same set of variables and corresponding exponents."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Trying to double an expression and only doubling one term.",
-       "response": "Use the numerical examples to show why this does not work. Use of brackets in working out is also helpful."
-      }
-     ],
-     "teacherTips": [
-      "Use the numerical examples to show how the processes that work with constants also work exactly the same with algebra. Showing that the process with numbers/ pictures and letters is the same can be really powerful to link the new with the familiar."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -15099,15 +14694,6 @@
        "definition": "The relationship between two variables is linear if, when plotted on a pair of axes, a straight line is formed."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may think all equations are for straight lines so can be plotted from 2 points.",
-       "response": "Explore different relationships, most relationships are not linear but we focus a lot on linear relationships and their unique structure."
-      }
-     ],
-     "teacherTips": [
-      "The use of graphing software will help pupils plot more complicated equations. This will then be useful when finding solutions to equations from graphs."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "g102n915SCNTpAzOkrXa7UCtyxHp6vucxE1WgyVJvIN00",
@@ -15382,15 +14968,6 @@
        "word": "Equation",
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "10 - x = 2 means that 2 - x = 10",
-       "response": "Using bar models can help pupils understand rearranging additive relationships at an early stage."
-      }
-     ],
-     "teacherTips": [
-      "Manipulable algebra tiles would allow pupils to make their own equations and think about how they can maintain equality. This can be a nice step between using the balances and moving to the abstract as negative algebra tiles can be used too."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -15785,15 +15362,6 @@
        "definition": "A solution to an equality with one variable is a value which, when substituted, maintains the equality between the expressions."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When reading solutions from a graph pupils may read the solution as the y-coordinate.",
-       "response": "The solution to the equation is the value of the variable that makes both sides balance."
-      }
-     ],
-     "teacherTips": [
-      "Using graphing software will allow pupils to explore solutions without the restrictions of drawing the lines themselves. They can write tricky equations for each other to solve and explore when there are no, one or infinite solutions."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "RfXLZR4N5Wv3jFXj00mlD3mRLNAxIDUJ02tJJelhLYXk4",
@@ -16114,15 +15682,6 @@
        "word": "Equation",
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may think a value has to be added to each term in an expression.",
-       "response": "When adding a term to an expression we can write it as a single addition and then collect like terms if necessary. Show with numbers first"
-      }
-     ],
-     "teacherTips": [
-      "Give pupils a simple equation e.g. x = 9 and see how many equivalent equations they can generate in a set time. For challenge you could ask them to generate ones with 2 steps, 3 steps, a division, a fraction etc."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -16515,15 +16074,6 @@
        "definition": "The additive inverse of a number is a number that, when added to the original number, gives the sum of 0"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When solving x - 5 = 10 pupils may see the -5 and calculate 10 - 5 = 5",
-       "response": "Focus on understanding zero pairs and why adding the additive inverse gives the solution. Bar models are a helpful representation here."
-      }
-     ],
-     "teacherTips": [
-      "Pupils with good numeracy often want to spot the answer. Use this as an opportunity to focus on presentation and stressing the importance of writing mathematically. It's not just about finding the solution but constructing an argument to show why."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "yjBEgRGdx01q4HwJlLT8zIQ7Qa1I9BV419EuXFMJkUxA",
@@ -16846,15 +16396,6 @@
        "definition": "The reciprocal is the multiplicative inverse of any non-zero number."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When solving equations pupils may not use the inverse operation.",
-       "response": "Working out should include each step then pupils can check each step using substitution."
-      }
-     ],
-     "teacherTips": [
-      "This is a great chance to consolidate fraction skills, including the use of reciprocals. Pupils should understand the equivalence of multiplication and division by the reciprocal and use these interchangeably to suit the question."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "X3MH01vE1Vfv91p8mxygafIxWYir7lSFXw7WxxtdVa02E",
@@ -17124,15 +16665,6 @@
        "word": "Like terms",
        "definition": "Like terms are terms that have the same set of variables and corresponding exponents"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils can be unsure which values to add and which to subtract when collecting like terms.",
-       "response": "Rewrite the equation with like terms grouped together before combining like terms."
-      }
-     ],
-     "teacherTips": [
-      "This is a chance to consolidate the skills of collecting like terms, expanding brackets and forming expressions for perimeter. Challenge pupils to write the most complicated equation they can which can still be written as ax + b = c"
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -17465,15 +16997,6 @@
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "That there is only one way to solve any given equation.",
-       "response": "In maths we will often see multiple ways to solve the same one problem. To be able to use multiple methods is a demonstration of fluency."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils to solve the same equation twice using two different methods. Get them to compare the methods and their efficiency. This will better prepare pupils for more complex equations."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "30002iGf302vTKQtlnWa02JWZJ02wsSDZVlp8weUQ202i7c6M",
@@ -17790,15 +17313,6 @@
        "word": "Equation",
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "To subtract from both the variable and numerical terms when subtracting from both sides.",
-       "response": "To subtract $$2$$ from $$5x+3$$ leaves $$5x+1$$, not $$3x+1$$. Use visual representations like balance scales and bar models to show this."
-      }
-     ],
-     "teacherTips": [
-      "If you have algebra tiles in your classroom use them to set up simple equations which you can then use to get pupils to \"Take two ones from both groups\" or \"Take two $$x$$ from both groups\". Get them to physically see that they are different."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -18139,15 +17653,6 @@
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils often \"multiply through by $$5$$\" and turn $${{2x+1}\\over5}={10}$$ into $${{10x+5}}={50}$$",
-       "response": "Use equivalent fractions as opposed to multiplying through. In one simple step $${{2x+1}\\over5}={10}$$ becomes $${{2x+1}\\over5}={50\\over5}$$"
-      }
-     ],
-     "teacherTips": [
-      "The key is for pupils to be able to fluently use their fractions skills and knowledge when manipulating algebra. Use a numerical fractions starter to ensure they recall key skills like multiplying a fraction by an integer, and by another fraction."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "gcdtgL014S9ZEwcHggB8IwuzKiK13xhKw8SMoujxxuW4",
@@ -18478,15 +17983,6 @@
        "word": "Equation",
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "That \"$$x$$ times five, plus three\" is the same as \"$$x$$ plus three, times five\".",
-       "response": "Use visual representations to demonstrate why and how they are different. Use algebra tiles if you have them, or get pupils to draw them."
-      }
-     ],
-     "teacherTips": [
-      "In addition to using visual representations to show the difference between $${5x+3}=10$$ and $$5(x+3)=10$$ you can also work backwards. Give them visual representations and ask them to write the equation."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -18840,15 +18336,6 @@
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "That all brackets have to be expanded before we solve an equation with brackets it in.",
-       "response": "How would you solve $$2y=50$$? You would divide both sides by $$2$$. So why not start with 'divide $$2$$' when solving $$2(y-7)=50$$?"
-      }
-     ],
-     "teacherTips": [
-      "Use examples like $$2(y-7)=50$$ and get pupils to solve them first by expanding and then again by multiplying by the reciprocal. Get pupils to compare the efficiency of both methods."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "aBwBNQGD7bKglrdMPd01vj00IJhOuXwDxxltW3isNLs8M",
@@ -19164,15 +18651,6 @@
        "word": "Equation",
        "definition": "An equation is used to show two expressions that are equal to each other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "That there is only one way to solve any given equation.",
-       "response": "In maths we will often see multiple ways to solve the same one problem. To be able to use multiple methods is a demonstration of fluency."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils to solve $$3(y-7)+12(y-7)=30$$ three different ways. Firstly by expanding the brackets, secondly by simplifying the identical expressions, and thirdly by dividing through by the common factor $$3$$."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -19500,15 +18978,6 @@
        "word": "Solution",
        "definition": "The solution to an equality is the value which, when substituted, maintains the equality between expressions."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "That we always have to use written methods to solve equations.",
-       "response": "Use Desmos to show that equations like $$3x-1=17$$ and $$3x-1=x+9$$ can be solved by drawing both lines and finding the intersection."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils as a starter to solve $$3x-1=17$$ and $$3x-1=x+9$$ using pen and paper then later ask them to solve using graphing in Desmos. Ask them to explain why their solutions work both graphically, and algebraically."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -19853,15 +19322,6 @@
        "definition": "The solution to an equality is the value which, when substituted, maintains the equality between the expressions."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "That algebra, in particular solving equations, is abstract and not related to the world around us.",
-       "response": "Ask pupils to solve $$4(x+3)=20$$. Then show a square with length $$x+3$$, tell them the perimeter is $$20$$ and ask them to find $$x$$."
-      }
-     ],
-     "teacherTips": [
-      "Give pupils some equations as a starter. For example, $$2m+5=17$$. Then later give them the matching contextual example; \"A taxi firm charge a $$£5$$ flat rate plus $$£2$$ per mile. How many miles is a ride costing $$£17$$?\"."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "Ll55OPivdWZ00hPKbqXvDq132rbyIGQ3UP00OQFYe01DtQ",
@@ -20104,15 +19564,6 @@
        "word": "Equivalent fractions",
        "definition": "Two fractions are equivalent if they have the same value."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When finding 10% we divide by 10, so when finding 5% we divide by 5.",
-       "response": "Use a bar model to show the division of 10 means  one tenth of the amount. When dividing by 5 it means one fifth has been found."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils to use MWB and draw a spider diagram showing as many percentages of ANY amount they choose e.g 240 and they show 10% = 24, 5%=12, etc. Asking them to remove the central number (100%) and their peers must work out the original amount."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -20402,15 +19853,6 @@
        "word": "Equivalent fractions",
        "definition": "Two fractions are equivalent if they have the same value."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When finding 10% we divide by 10, so when finding 5% we divide by 5.",
-       "response": "Use a bar model to show the division of 10 means  one tenth of the amount. When dividing by 5 it means one fifth has been found."
-      }
-     ],
-     "teacherTips": [
-      "Using MWB pupils must draw the same question but illustrated in different ways; ratio table, double number line or bar model. E.g show 48% of 800. They can then decide which representation they prefer. Look out for efficient approaches using subtraction where appropriate."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -20726,15 +20168,6 @@
        "definition": "Two fractions are equivalent if they have the same value"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Incorrectly drawing a scaled axis is common.",
-       "response": "Use the approach where pupils count the number of intervals of the scale and divide the difference bewteen the intervals. For example, if there are 5 intervals and the difference is between 20 and 30, they divide 10 by 2, so each interval is 2"
-      }
-     ],
-     "teacherTips": [
-      "A chanting approach when plotting the numbers on the axis allows pupils to see equal intervals and the final plotted value works correctly. This approach works equally well when an incorrect scale is chosen so pupils can see the final plotted value does not work with the incorrect interval."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "Tnt8ytxgpSwQNByFK9yvuMcxJW1vXq00LX5ptNhxCsmA",
@@ -21025,15 +20458,6 @@
        "word": "Proportionality",
        "definition": "If two things are proportional then the ratio of part to whole is maintained and the multiplicative relationship between parts is also maintained."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Incorrectly drawing a scaled axis is common.",
-       "response": "Use the approach where pupils count the number of intervals of the scale and divide the difference bewteen the intervals. For example, if there are 5 intervals and the difference is between 20 and 30, they divide 10 by 2, so each interval is 2."
-      }
-     ],
-     "teacherTips": [
-      "Using a scaled diagram illustrates that multiplication is scaling. Using a scaled diagram where the scaling is > 1 shows how the number line is > the original and using a scaling  <1 shows the number line is < the original. This can be emphsised by pupils drawing their own scaling diagrams on MWB."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -21375,15 +20799,6 @@
        "definition": "Two fractions are equivalent if they have the same value."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "A single digit percentage is incorrectly worked out by dividing by 10 and not 100 e.g 3% = 0.3",
-       "response": "Two responses can be used to remind students that to covert a percentage into a decimal;  we divide by 100; using 3%, ask what 30% is as a decimal and 3% as a decimal. Pupils realise they cannot be the same. A place value chart also helps."
-      }
-     ],
-     "teacherTips": [
-      "Using equivalent fractions, there are an infinite number of amounts which can be represented as 75%. Pupils can draw a spider diagram to illustrate this e.g 75 out of 100, 3 out of 4, 6 out of 8, 36 out of 48 etc."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "ITNOkSX1StFs8kmo7hHsUJVRdn5fZ01u011ZU902K1KoVA",
@@ -21699,15 +21114,6 @@
        "definition": "The associative law states that a repeated application of the operation produces the same result regardless of how pairs of values are grouped. We can group using brackets."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "A single digit percentage is incorrectly worked out by dividing by 10 and not 100 e.g 3% = 0.3",
-       "response": "Two responses can be used to remind students that to covert a percentage into a decimal;  we divide by 100; using 3%, ask what 30% is as a decimal and 3% as a decimal. Pupils realise they cannot be the same. A place value chart also helps."
-      }
-     ],
-     "teacherTips": [
-      "Using a multiplier is a more effective way to calculate a percentage of an amount. Can they write the calculation to work out 35% of 23% of 11% of 140? Alternatively, can they write a question for the calculation 0.62 x 0.78 x 0.56 x 950?"
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "ybKJ5gIehw8eRzMCPyKuCt9bqzsfdQDERt02sUirs3X00",
@@ -21976,15 +21382,6 @@
        "definition": "If two things are proportional then the ratio of part to whole is maintained and the multiplicative relationship between parts is also maintained."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "A single digit percentage is incorrectly worked out by dividing by 10 and not 100 e.g 3% = 0.3. This error continues when increasing amounts e.g increase 40 by 3% has a multiplier of 1.3",
-       "response": "Remind pupils that to covert a percentage into a decimal we divide by 100. This applies with increase too e.g 120% has a multiplier of 1.2"
-      }
-     ],
-     "teacherTips": [
-      "Using mini-whiteboards, for example, students must draw the same question but illustrated in different ways; ratio table, double number line or bar model. E.g Increase 800 by 55%. They can then decide which representation they prefer. Look out for efficient approaches  e.g 50% + 5%"
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "bJj18FTB3TXAPgxnn72kY8bhKSRMX71hEvqiwnQEEyc",
@@ -22233,15 +21630,6 @@
        "definition": "If two things are proportional then the ratio of part to whole is maintained and the multiplicative relationship between parts is also maintained."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupil can often get confused with increasing and decreasing an amount e.g Increase 45 by 23% and decreasing 45 by 23% have the same multiplier.",
-       "response": "Encourage students to draw double number lines or ratio tables so they can see the increase and multiplier or decrease and multiplier."
-      }
-     ],
-     "teacherTips": [
-      "To embed the understanding that many questions can be the same but written indifferent ways, get pupils to write as many different questions to a calculation on MWB e.g 0.65 x 500 = 65% of 500 = 500 decreased by 500 =  50% of 650  e.g 1.23 x 400 = increase 400 by 23% = find 123% of 400."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "ZZ1ratC1WL3h6FQEqQCT5DhOUu9MXRVOHqOhotp02JGA",
@@ -22477,15 +21865,6 @@
        "word": "Reciprocal",
        "definition": "The reciprocal is the multiplicative inverse of any non-zero number.  Any non-zero number multiplied by its reciprocal is equal to 1."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "A single digit percentage is incorrectly worked out by dividing by 10 and not 100 e.g 3% = 0.3. This error continues when increasing amounts e.g increase 40 by 3% has a multiplier of 1.3",
-       "response": "Remind pupils that to covert a percentage into a decimal we divide by 100. This applies with increase too e.g 120% has a multiplier of 1.2"
-      }
-     ],
-     "teacherTips": [
-      "After the slides on the traffic lights, use MWBs and change various times for the different parts or get the pupils to choose their own and fill in the other parts based on this.  By asking them to choose their own you give them the opportunity consider appropriate values that work with time."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -22755,15 +22134,6 @@
        "word": "Reciprocal",
        "definition": "The reciprocal is the multiplicative inverse of any non-zero number. Any non-zero number multiplied by its reciprocal is equal to 1."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "A single digit percentage is incorrectly worked out by dividing by 10 and not 100 e.g 3% = 0.3. This error continues when increasing amounts e.g increase 40 by 3% has a multiplier of 1.3",
-       "response": "Remind pupils that to covert a percentage into a decimal we divide by 100. This applies with increase too e.g 120% has a multiplier of 1.2"
-      }
-     ],
-     "teacherTips": [
-      "Before starting on the second learning cycle assess their understanding of multipliers using MWBs. Ask them questions such as,  '0.7 is my multiplier what percentages could I be finding?'. Here you could be finding 70% or a decrease of 30%."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -23052,15 +22422,6 @@
        "definition": "Variables are in proportion if they have a constant multiplicative relationship."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Forgetting to find the percentage change.",
-       "response": "Emphasise the word change. Encourage pupils to write down the 2 percentages with their relevant values.  Go back to the question and calculate the actual change they should notice that this is neither of the 2 values but the difference between them."
-      }
-     ],
-     "teacherTips": [
-      "Use mini-whiteboards, for example, to highlight finding the change.  Ask questions e.g. 'a bank account had a balance of £100, it now has a balance of £120.  By how much has the amount changed?' and then move onto percentages. By what percentage has the value changed?'."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "LKcXVYQMLmNCXgcPGl1Qa01np00khP6MBJnglKNePuo3M",
@@ -23322,15 +22683,6 @@
        "definition": "Two variables are in direct proportion if they have a constant multiplicative relationship."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Incorrectly drawing or interpreting the scales on axes.",
-       "response": "Use the approach where pupils count the number of intervals of the scale and divide the difference between the intervals. For example, if there are 5 intervals and the difference is between 20 and 30, they divide 10 by 2, so each interval is 2"
-      }
-     ],
-     "teacherTips": [
-      "Pupils can come up with their own examples of variables that are directly proportional.  They can they create their own double number lines, ratio tables and graphs based on their situations."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "rfozCaFqjUZd3g02M02pZS02OQY7pNQACaOBpKJ2mXzIcA",
@@ -23555,15 +22907,6 @@
        "word": "Direct proportion",
        "definition": "Two variables are in direct proportion if they have a constant multiplicative relationship."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Assuming that any graph with a constant positive gradient represents variables that are in direct proportion.",
-       "response": "Encourage the useful check of reading a pairs of values from the graph, doubling one of them and checking the graph to see if the other variable has doubled.  If it has it shows a directly proportional relationship if not it doesn't."
-      }
-     ],
-     "teacherTips": [
-      "Using mini-whiteboards, for example, ask students to sketch their own examples and non-examples of graphs showing direct proportion."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -23826,15 +23169,6 @@
        "word": "Proportion",
        "definition": "Two variables are in direct proportion if they have a constant multiplicative relationship."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Assuming that to convert 1 metre squared to cm squared you multiply by 100 and not 10 000",
-       "response": "Encourage any pupil who initially finds this challenging to ensure that the values are in the required unit for the answer before doing the calculation."
-      }
-     ],
-     "teacherTips": [
-      "Pupils can be provided with or research recipes they are interested in and scale the recipes to have the amounts needed to feed the class."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -24111,15 +23445,6 @@
        "word": "Inverse proportion",
        "definition": "Two variables are inversely proportional if there is a constant multiplicative relationship between one variable and the reciprocal of the other."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The graph representing a inversely proportional relationship is of the form x + y = a and will eventually meet the axes.",
-       "response": "The dimensions of the rectangle are ideal for highlighting this, particularly the latter part as a you cannot have a rectangle with a length of 0 cm."
-      }
-     ],
-     "teacherTips": [
-      "Use a dynamic graphing package to show the area of the rectangle problem.  Question:  'Can I have a rectangle with a width 0f 0.005cm?' you can use the graph to show that you can."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -24400,15 +23725,6 @@
        "word": "Proportion",
        "definition": "If two things are proportional then the ratio of part to whole is maintained and the multiplicative relationship between parts is also maintained."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Forgetting to find the percentage change.",
-       "response": "Emphasise the word change. Encourage pupils to write down the 2 percentages with their relevant values.  Go back to the question and calculate the actual change they should notice that this is neither of the 2 values but the difference between them."
-      }
-     ],
-     "teacherTips": [
-      "When completing task A in the first learning cycle the shapes could be printed out and pupils could make various correct original shapes."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -24691,15 +24007,6 @@
        "definition": "The number of times an event occurs; or the number of individuals (people, animals etc.) with some specific property."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may forget the key with a pictogram or mislabel the vertical scale for bar charts.",
-       "response": "By asking the pupils how they know there are 'x things', to highlight the need for the key."
-      }
-     ],
-     "teacherTips": [
-      "If your pupils have shown any need for further work on pictograms and/or bar charts then you may wish to use lesson 2 and 3 of this unit. Real data collected within class is always nice to use when creating their own pictograms and bar charts."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "bBxTPoePATmD6Z5ZMdl1003sBEQl0299ntWH02ltYzg3UQ",
@@ -24968,15 +24275,6 @@
        "definition": "Data are a collection of information."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "The icon that the pupils choose is too complicated to duplicate and cannot be divided well.",
-       "response": "Have the pupils try and find an icon with reflective symmetry and simple shapes."
-      }
-     ],
-     "teacherTips": [
-      "If your pupils have shown good understanding on pictograms in lesson 1 of this unit, then this lesson may be unnecessary."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "kPrL029PrzBKZ5UMRTbH02RN01Nj25tNqcmaLNYjrZymwY",
@@ -25195,15 +24493,6 @@
        "word": "Data",
        "definition": "Data are a collection of information."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may label the vertical axis with the frequency values rather than a scale.",
-       "response": "Remind the pupils that the scale should go up in the same jumps. i.e. 0, 5, 10, 15 etc and have them check theirs."
-      }
-     ],
-     "teacherTips": [
-      "If your pupils showed good understanding of bar charts from lesson 1 of this unit, then you may wish to skip this lesson."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -25472,15 +24761,6 @@
        "definition": "Data are a collection of information."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may select additional cells which will cause their chart to look strange.",
-       "response": "They can edit the data selected or delete the chart and start again."
-      }
-     ],
-     "teacherTips": [
-      "You may wish to set up your own data file to allow pupils to investigate all the formatting tools available."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "J5JnwlkIezt5xotJCZBOglm02EZnvYJ5t0201Rg5IH00IAg",
@@ -25737,15 +25017,6 @@
        "word": "Sector",
        "definition": "A sector is the region formed between two radii and their connecting arc."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The frequencies on the frequency table are the angles you plot onto the pie chart.",
-       "response": "Challenge the misconception by using an example with frequencies that clearly add to more or less than 360 e.g. {90, 90, 180, 90, 60)"
-      }
-     ],
-     "teacherTips": [
-      "Omit the practice on cycle 1 if students are already confident with pie charts using pre-made sectors. This lesson can be taught over 2 lessons to give students time to practice construction of pie charts and include data gathering investigations."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -26065,15 +25336,6 @@
        "word": "Sector",
        "definition": "A sector is the region formed between two radii and their connecting arc."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "1) = not necessary to put into function, 2) students type in number to calculate, not click the cell",
-       "response": "1) the = at the start tells the spreadsheet to start a calculation, 2) clicking the cell means if input data chances, outputs auto-update"
-      }
-     ],
-     "teacherTips": [
-      "Students cannot edit the Google Sheets document directly. They must make their own copy first by going to File -> Make a copy. Demonstrate locations of icons and syntax of spreadsheet functions live before giving students the practice task."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -26445,15 +25707,6 @@
        "definition": "Degrees are the most common unit of measurement for angle. One whole turn is equal to 360 degrees, written 360°."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Two sectors on two different pie charts that have the same angle represent the same frequency.",
-       "response": "90° of a pie chart of 4 data points represents less frequency (frequency of 1) than 90° of a pie chart of 200 data points (frequency of 50)."
-      }
-     ],
-     "teacherTips": [
-      "Pie charts represent proportion, not frequency. This is shown through first comparing two pie charts which represent vastly different frequencies: one large, one small. Is three quarters of a small dataset larger than one quarter of a large dataset?"
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "13m02Xq8pdZ4y801VKeig1xJWBcoUL3dssVpwVVKVea5M",
@@ -26768,15 +26021,6 @@
        "definition": "Bivariate data has two variables, where each data point for one variable has a corresponding data point for the other variable."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Task B Q2 - Pupils may choose to go up in 100s on the vertical axis.",
-       "response": "Highlight that all of their data points will be in the bottom half of the graph and suggest going up in 50s."
-      }
-     ],
-     "teacherTips": [
-      "Explain that scatter graphs could be plotted using either points or crosses. Ones made on computers tend to use points. When plotting by hand, pupils may find it easier to plot crosses so they can be seen easily."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "JUI278m3P8falay4Sw7Vn02QNEDigNfEvqLiOim3HZF00",
@@ -27031,15 +26275,6 @@
        "word": "Scatter graph",
        "definition": "A visual representation for bivariate data. It can be useful when determining the nature of the relationship between the two variables"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may struggle to assign the correct variable to the y-axis when graphing on a spreadsheet.",
-       "response": "Explain that the word \"series\" is used to mean the y-axis in this software."
-      }
-     ],
-     "teacherTips": [
-      "Pupils will need access to a computer and download copies of the data files for the lesson. The explanation slides may need to be adapted to suit which ever spreadsheet software pupils have access to (e.g. Excel)."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -27343,15 +26578,6 @@
        "definition": "Extrapolation is the process of estimating unknown values that are outside the range of existing data."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may assume that all there is always a connection between variables in scatter graphs.",
-       "response": "Emphasise examples showing no/weak connections, but explain that the tasks use data containing stronger connections for purpose of practice."
-      }
-     ],
-     "teacherTips": [
-      "Correlation and lines of best fit are covered in a later unit. This lesson focuses more broadly on seeing general trends and connections between variables based on the shape of scatter graphs."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "yr3SrfGFNSUZAc4j1bCFhDlAA02K1bKq2x1ydAadh2wI",
@@ -27636,15 +26862,6 @@
        "word": "Scatter graph",
        "definition": "A scatter graph is a visual representation for bivariate data. It can help determine the nature of the relationship between the variables."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may think that data is only presented using the types of graphs that they learn in school.",
-       "response": "Data can presented visually in anyway that helps people to understand it. Explore other types of graphs and infographics used in the media."
-      }
-     ],
-     "teacherTips": [
-      "More large data sets can be found online. Pupils can be encouraged to explore these. The MEI CODAP project allows pupils to analyse different large data sets."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -27952,15 +27169,6 @@
        "definition": "a summary measure that attempts to describe a whole set of data with a single value that represents the middle of its distribution"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may ignore a data point of zero in their calculation of the mean.",
-       "response": "Data points of zero will not add to the total but does impact the number of values, so the mean will be incorrect with its omission."
-      }
-     ],
-     "teacherTips": [
-      "With a group of students, you could give them all a random number of counters and then ask them to exchange them so that they have the same number each. Ask them to explain their methods."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "J7vD38AopiSuk3TBiDLPZ9xlUJkVPbGlO9VJwZTIeEo",
@@ -28198,15 +27406,6 @@
        "word": "Measure of central tendency",
        "definition": "A summary measure that attempts to describe a whole set of data with a single value that represents the middle of the distribution."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may divide by how many groups/bars there are, instead of the total frequency.",
-       "response": "By reminding students frequently that averages need to give a 'typical' value of the data set, ask them to sense check their mean value."
-      }
-     ],
-     "teacherTips": [
-      "Pupils should be encouraged to articulate what each part of the table or chart is representing in the context of the data."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -28472,15 +27671,6 @@
        "definition": "the central (middle) piece of data when the data is in numerical order. A measure of central tendency representing the average of the values"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may confuse the position of the median with the median's actual value.",
-       "response": "Choose data where the position number would not be a reasonable median value and ensure pupils sense check their answers every time."
-      }
-     ],
-     "teacherTips": [
-      "Have the pupils line up in height order, then sit them down one by one, until the median is located. Part way through you could ask who is the middle? What position are they in the line? This can help with the misconception as well."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "tdk2Zz4ZXhcRbmvNMONm9gFBjZI7Od9wcc005aRVFAIQ",
@@ -28733,15 +27923,6 @@
        "definition": "Data are a collection of information"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may choose the middle bar on the bar chart or the middle value on the x-axis as their median.",
-       "response": "Pull off the data from the bar chart or line graph to show where the median value is."
-      }
-     ],
-     "teacherTips": [
-      "Try to discourage the writing of the list each time by using large data sets once students are more fluent with the task."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "00TyPolH2ao007fQB3GpTbAQYroRH6tBQclxkyKPbau1E",
@@ -28972,15 +28153,6 @@
        "word": "Trimodal",
        "definition": "Trimodal data has three modes"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may not understand what feature of a data set they're trying to find when identifying a mode",
-       "response": "Phrase the question as 'What is the modal colour?' for instance, rather than just 'What is the mode?'"
-      }
-     ],
-     "teacherTips": [
-      "Emphasise to pupils that the mode is the only measure of central tendency that can be used with qualitative data."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -29250,15 +28422,6 @@
        "word": "Mode",
        "definition": "The mode is the most frequent value. It is a measure of central tendency representing the average of the values."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may mistakenly choose the bars which have the same heights to be the mode.",
-       "response": "By reminding the pupils of the definition of the mode and asking the question in the context of the data, this should support students."
-      }
-     ],
-     "teacherTips": [
-      "To highlight that the mode is more meaningful for larger data sets, ask a small sample of students to write down a number between 1 and 20. Then increase the sample size by a little and keep repeating this."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -29532,15 +28695,6 @@
        "definition": "The spread/dispersion of data values describes how far apart the pieces of data are."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may often write the range as '3 to 10' or '10 - 3' rather than a single value.",
-       "response": "Remind pupils that the range is a single value which describes how far apart the extreme values are."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could be challenged to make their own data sets that have particular averages and a certain range."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "Rsprbi3dPswI4zZcpGg7WdgmyHBiAsM5hMtyMnAthr4",
@@ -29765,15 +28919,6 @@
        "word": "Measure of central tendency",
        "definition": "A summary that attempts to describe a whole set of data with a single value that represents the middle of the distribution."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The mean is the most meaningful average.",
-       "response": "Looking at bimodal data, trimodal data or data with extreme outliers. Context may be relevant."
-      }
-     ],
-     "teacherTips": [
-      "Consider using interactive and spreadsheet software to extend ideas into larger data sets and to model different situations. Looking at how the different averages fall compared to a dot plot or bar chart."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -30134,15 +29279,6 @@
        "word": "Mode",
        "definition": "The mode is the most frequent value in a dataset."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Averages (mean, median, mode) will always change if a data point needs to be added, removed, edited.",
-       "response": "The mean, median, or mode will remain invariant if a data point is added with the same value as that average."
-      }
-     ],
-     "teacherTips": [
-      "In the world of statistics, data that has been collected cannot just be modified to change its summaries. The only time a dataset can be changed is if new data is collected, data becomes outdated, or recording errors are found."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -30544,15 +29680,6 @@
        "definition": "Describes how far apart pieces of data in a dataset are."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "\"Adding or removing a data point from a dataset will always change the value of the range\"",
-       "response": "The range only changes if: the data point added becomes a new max or min value, or the data point removed is the current max or min value."
-      }
-     ],
-     "teacherTips": [
-      "If an outlier is part of a dataset due to an error in data collection and recording, then it can be removed and the range recalculated. However, correctly recorded outliers are still valuable data points to a dataset, and should be kept."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "ZSwi7NF3PKjHN5WgZCjce3oic7sZDhVj2E00UByuTAC00",
@@ -30876,15 +30003,6 @@
        "word": "Bar chart",
        "definition": "A bar chart (bar graph) is a graph consisting of bars visually representing the frequency of objects or groups."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pie charts but not bar charts can show what proportion of a dataset a particular subgroup represents",
-       "response": "You can figure out proportion from a bar chart by comparing the frequency of one subgroup to the total frequency, by adding heights of bars."
-      }
-     ],
-     "teacherTips": [
-      "Encourage students to consider when they can gain broad or specific insights from the different statistical representations.  Discuss scenarios where making calculations may not be necessary to answer a question."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -31212,15 +30330,6 @@
        "word": "Dispersion",
        "definition": "The spread/dispersion of data values describes how far apart the pieces of data are."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "If two datasets have the same mean, then the distribution of data points will look similar.",
-       "response": "Even with the same mean, two datasets could have vastly different ranges. One dataset could be bimodal, whilst the other could be unimodal."
-      }
-     ],
-     "teacherTips": [
-      "Caution on the multi-use of the term \"average\". It is used: as an umbrella term for the mean, median, and mode; as well as to describe one average (most commonly the mean average); and as a general term to informally describe central tendency."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -31586,15 +30695,6 @@
        "definition": "The spread/dispersion of data values describes how far apart the pieces of data are."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "The mean and median will always be close to the most frequent values (or peaks) in a dataset.",
-       "response": "The mean and median may be at the lower or lowest frequency parts of a distribution. This is especially likely if the data is bimodal."
-      }
-     ],
-     "teacherTips": [
-      "Sketching graphs can be a quick way of visualising the distribution of a dataset without accurately producing a graph. However, the x-axis must still be scaled correctly, otherwise distributions will be inaccurately skewed."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "wmDTl5p14WVLfR7SUTtqSHCa701yBnmm8uZ168mbL3ns",
@@ -31903,15 +31003,6 @@
        "definition": "Correlation describes the extent to which the relationship is close to a linear relationship."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Correlation always means that one of the variables is affecting the other variable.",
-       "response": "Correlation only suggests variables may be related somehow. Show examples where variables correlate because they both depend on population."
-      }
-     ],
-     "teacherTips": [
-      "In the first learning cycle, ask students to consider other things in a town/city that may change depending on the size of the population.  Imagine whether these things might have a positive or negative correlation and why."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "02jV7RJmobwfe4WQL2NQzvstnQuR003D8p8zdyrF01gSW8",
@@ -32180,15 +31271,6 @@
        "word": "Sample",
        "definition": "A sample is a subset of the population"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The word 'population' always refers to the entire population of a country or the world.",
-       "response": "The population in a given context is defined by the entire set of people/creatures/items that are being considered."
-      }
-     ],
-     "teacherTips": [
-      "To distinguish between different populations, ask \"What is the population of this class? Estimate the population of the year group. Estimate the population of the school. Estimate the population of the town. Estimate the population of the country.\"."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -32492,15 +31574,6 @@
        "definition": "a summary measure that attempts to describe a whole set of data with a single value that represents the middle or centre of its distribution"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Either the mean, median or mode could be used as an average in any situation.",
-       "response": "The choice of average can depend on the type of data. For example, in a list of colours, you can find the mode but not the mean."
-      }
-     ],
-     "teacherTips": [
-      "Look up the class's data from a recent test or competition. Display the mean median and mode and ask \"which average would you prefer me to use for this class?\" Tell pupils to imagine the numbers are race times instead. Ask \"would your choice change?\""
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "4I9ZofWWBLvhJHrAt00IzywIB34IlKZaG21STD1a02IKs",
@@ -32790,15 +31863,6 @@
        "word": "pie chart",
        "definition": "A bar chart (bar graph) is a graph consisting of bars visually representing the frequency of objects or groups"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "You always need to start the axis of a scatter graph at (0,0).",
-       "response": "The axis of a scatter graph should use a scale that makes the points as clear to see as possible, without distorting the shape of the data."
-      }
-     ],
-     "teacherTips": [
-      "Load up a spreadsheet or Desmos and plot a scatter graph for a set of bivariate data which has correlation. Change the settings on the axis to different scales and ask pupils whether the correlation is more or less clear to see each time."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -33125,15 +32189,6 @@
        "definition": "A statistical summary sums up the features of a data set"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "The findings for a data investigation using a sample can always be generalised to the population.",
-       "response": "The generalisability of results can depend on how representative the sample is of the population which it is being compared to."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils to consider different scenarios where the results of a data investigation may differ depending the age of the sample - E.g., hours of sleep per night, number of cartoons watched per  day, method of travelling to school/work."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "xPlmQMc6ynZdkNdwRpRtqiWeEkpml3vi00alH2rj92600",
@@ -33429,15 +32484,6 @@
        "word": "range",
        "definition": "The range is a measure of spread. It is found by finding the difference between the highest and lowest values"
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Reporting two averages when asked to make two comparisons between sets of data.",
-       "response": "Mean, media and mode essentially measure the same thing: central tendency. So use one of the comparisons to comment on the spread of data."
-      }
-     ],
-     "teacherTips": [
-      "Ask pupils to sketch possible dotplots for a dataset when they are given an average and the range. E.g. 10 people throw darts at a target; the mean score was 30 points and the range was 8 points."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -33736,15 +32782,6 @@
        "definition": "a shape created using two or more basic shapes"
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Summing all of the given lengths and only the given lengths to find the perimeter.",
-       "response": "With each example discuss which lengths are part of the perimeter, which lengths are not and whether any lengths are equal to others."
-      }
-     ],
-     "teacherTips": [
-      "A pupils to consider other concrete examples of perimeter outside of the classroom (e.g. running a lap around the edge of a sports field)."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "D5FPILuznBAyqyt9c641t8kKP57lWQRjZp9GKHznIlA",
@@ -34021,15 +33058,6 @@
        "word": "Composite rectilinear shape",
        "definition": "A composite rectilinear shape is a composite shape made from rectangles."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may find the area by multiplying lengths which are not perpendicular.",
-       "response": "Area is measured in square units. The base and height of a square are perpendicular. We multiply perpendicular lengths to make square units."
-      }
-     ],
-     "teacherTips": [
-      "The shapes in Task B are drawn to scale so that there is the option to explore the problem by cutting out the shapes, overlaying them on the trapezium and manipulating shapes to find alternative solutions."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -34325,15 +33353,6 @@
        "definition": "The circumference of a circle is the perimeter of the circle."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may think that the π symbol represents a variable, similar to letters such as r and d.",
-       "response": "Reiterate the difference between variables and constants. Explain that while the radius may differ between circles, π is always the same."
-      }
-     ],
-     "teacherTips": [
-      "Pupils can re-enact the practical demonstration wrapping string around a cylindrical object, cutting it to the length of the circumference and then checking if the string is just over three times the diameter for their object too."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "OF66g3aQg4Ce1BRTO8jVdzI7QH02AiQRt8jWkYopZTCU",
@@ -34577,15 +33596,6 @@
        "word": "Diameter",
        "definition": "The diameter of a circle is any line segment that starts and ends on the edge of the circle and passes through the centre."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "When writing answers in terms of π, pupils may think that π is the units.",
-       "response": "π is a constant and makes up part of the numerical component of the answer. Units (such as square metres) still need to be stated."
-      }
-     ],
-     "teacherTips": [
-      "Remind pupils to not round any numbers until they reach a final solution and how to recall previous answers on a scientific calculator by using the 'Ans' button."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -34843,15 +33853,6 @@
        "word": "Diameter",
        "definition": "The diameter of a circle is any line segment that starts and ends on the edge of the circle and passes through the centre."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may confuse the formula for area with the 2πr version of the formula for circumference.",
-       "response": "Area is a 2-dimensional space so its formula requires the multiplication of two lengths. This happens when we square the radius."
-      }
-     ],
-     "teacherTips": [
-      "In Task A, encourage pupils to compare their answers for questions 1 and 2 to see if their ranges are similar. If pupils are familiar with converting answers to decimals, they could also compare these with question 1 (a) and (b) in Task B."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -35160,15 +34161,6 @@
        "definition": "The diameter of a circle is any line segment that starts and ends on the edge of the circle and passes through the centre."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When calculating the diameter, pupils may use rounded numbers to perform subsequent calculations.",
-       "response": "Repeat one of the demonstrations of finding the diameter but round each decimal as they appear and compare the accuracy of the final answer."
-      }
-     ],
-     "teacherTips": [
-      "Regularly remind pupils that the radius and diameter can be measured in any direction. This will be particularly helpful in Task A."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "PdJao6whYg1JCdJ5KtP01bN00XJ8iOsHnjh00KfbBChbzg",
@@ -35429,15 +34421,6 @@
        "word": "sector",
        "definition": "A sector is the region formed between two radii and their connecting arc."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "To find the area of a quarter-circle divide the radius by 4 to use as part of the calculation.",
-       "response": "You must divide the area by 4, not the radius. The radius gets squared when calculating area so the division of r would be applied twice."
-      }
-     ],
-     "teacherTips": [
-      "Encourage students to sketch the component parts of each composite shape. This is especially helpful in visualising the shape of both the negative and positive space in a composite shape with a component part removed from the object."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -35772,15 +34755,6 @@
        "definition": "An arc is part of a curve. When describing an arc of a circle, it is part of the circle's circumference."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Shapes with the same area also have the same perimeter.",
-       "response": "Demonstrate that component parts being rearranged has no effect on its area, but may affect its perimeter."
-      }
-     ],
-     "teacherTips": [
-      "Doubling the angle of the sector does not double its perimeter. For example, a semicircle does not have double the perimeter of a quarter-circle with the same radius, as the lengths of the two radii bounding the arc have not doubled."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "900E8UibXAKODI01KMlU2002hiG37PUQT02ma2cS5xFjJ8Y",
@@ -36089,15 +35063,6 @@
        "definition": "The radius is any line segment that joins the centre of a circle to its edge."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "If I want to find the radius of a semicircle from its area, I halve the area first.",
-       "response": "You must double the area. This calculates the area of a full circle, whose radius can be found by first dividing by π, then square rooting."
-      }
-     ],
-     "teacherTips": [
-      "Finding the radius of more general sectors will be covered in subsequent units; this lesson will only cover the most common unitary sectors whose full circle can be calculated intuitively, with the one exception of the three-quarter-circle."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "pwxzjH2B2G1jdLCDIYvAEROSMxUMPUeNRf991d76oAA",
@@ -36389,15 +35354,6 @@
        "word": "Net",
        "definition": "The net of a 3D object is a 2D representation of its surfaces that can be folded up into the 3D object."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Any arrangement of 6 square-faces will result in the net of a cube.",
-       "response": "Some arrangements of 6 squares will result in some of them overlapping when the shape is folded into 3D, resulting in an incomplete cube."
-      }
-     ],
-     "teacherTips": [
-      "The practice task A has additional material that involves pupils cutting out potential nets of cubes and exploring which arrangements successfully become cubes. Where possible, bigger printing of the nets will make folding easier."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -36719,15 +35675,6 @@
        "word": "Cross-section",
        "definition": "A cross section is a 2D face made from cutting straight through any plane of a 3D object."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "I can tell a 3D shape is a prism because the 2D faces on both ends are congruent.",
-       "response": "The cross-sectional face must be the same throughout, not just at the two ends of the shape. Also, the two end faces must be parallel."
-      }
-     ],
-     "teacherTips": [
-      "The non-cross-sectional faces of a prism can be any type of parallelogram, thus all prisms are oblique. If these parallelograms are rectangles, then the prism is a special case of an oblique prism: the right prism."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -37113,15 +36060,6 @@
        "definition": "The surface area is the total area of all the surfaces of a closed 3D shape. The surfaces include all faces and any curved surfaces."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may try to avoid sketching of nets or faces and in turn miss information.",
-       "response": "Reassure pupils that a sketch does not need to be perfect and just needs to convey the key information."
-      }
-     ],
-     "teacherTips": [
-      "If you have access to physical models of prisms and nets, they can support pupils who may struggle with visualising the unfolding. Having nets to demonstrate the folding and unfolding is helpful."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "o3tjOWSNW5XcKlpe4700SJQDFgAfqK00lQrYlFnTiox02M",
@@ -37355,15 +36293,6 @@
        "word": "Cylinder",
        "definition": "a 3D shape with a base that is a circle and a parallel opposite face that is identical. Cross sections parallel to the base are uniform."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may overlook whether they have been given the diameter or radius of the circles.",
-       "response": "Encourage pupils to always write down the radius before any calculation of the surface area is started."
-      }
-     ],
-     "teacherTips": [
-      "Use examples where the cylinder is orientated in various ways to highlight that the words height/length/depth can be used interchangeably depending on the context."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -37628,15 +36557,6 @@
        "definition": "the amount of space occupied by a closed 3D shape."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may multiply all lengths on the diagram rather than find the area of the cross-section.",
-       "response": "Draw the cross-sectional polygon out, find the area and then multiply by the length of the prism."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could be challenged to draw a prism with a given volume and then another pupil could check it by calculating the volume."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "W2zR7iaRH02UwdQ7nrl01zLd1T3jgCYGaqlCTSxIcnJio",
@@ -37897,15 +36817,6 @@
        "word": "Cylinder",
        "definition": "3D shape with a base that is a circle and a parallel opposite face that is identical and uniform cross-section."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may multiply the length and radius before squaring.",
-       "response": "Remind students of the order of operations and link to the volume of a prism formula: finding the area of the cross-section first."
-      }
-     ],
-     "teacherTips": [
-      "Comparing volumes of physical cylindrical vessels using liquid can lead to surprising results. Have pupils predict the order, before revealing."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -38193,15 +37104,6 @@
        "definition": "the amount of space occupied by a closed 3D shape."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may struggle to decide whether the question is needing length, area or volume.",
-       "response": "Support could be given by providing the units for the answer or pupils may be encouraged to think of contexts for each before hand."
-      }
-     ],
-     "teacherTips": [
-      "Encourage the pupils to think about what they can do with the given information, rather than what they should do, this way they can make a start with the problem."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "wqOWHlt02qZCvBCpvL5SlvEJZO7ctMUX02fais5tgZzQA",
@@ -38468,15 +37370,6 @@
        "word": "Conjugate angles",
        "definition": "Conjugate angles are a pair of angles that sum to 360°."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "In order for two angles to be supplementary, they must both lie about a point on a straight line.",
-       "response": "For two angles to be supplementary, they must sum to 180°. They do not also need to both lie on a straight line."
-      }
-     ],
-     "teacherTips": [
-      "Some students may mistakenly equate drawing a larger angle marker (an arc with a greater radius) with a larger angle. It is important to present angles in different ways: large angles labelled with small angle markers, and vice versa."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -38823,15 +37716,6 @@
        "word": "Conjugate angles",
        "definition": "Conjugate angles are a pair of angles that sum to 360°."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Angles on a straight line sum to 180°",
-       "response": "Angles on a straight line only sum to 180° if all of those angles share a common vertex. Show two angles \"on a line\" at different points."
-      }
-     ],
-     "teacherTips": [
-      "When applying angle facts to reason the value of unknown angles, all diagrams must be assumed as \"not drawn to scale\". Finding the size of an angle using a protractor is not a valid method."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -39182,15 +38066,6 @@
        "definition": "A right-angled triangle has exactly one 90° interior angle."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "The horizontal side length of an isosceles triangle is always the base side.",
-       "response": "The base side of an isosceles triangle can have any orientation. It is important to look at the hash marks, angle markers, or measurements."
-      }
-     ],
-     "teacherTips": [
-      "It's important to encourage students to be attentive and critical of the information given to them. Interior angles in a triangle sum to 180° and so other angle facts need to be used first if exterior or conjugate angles are given instead."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "exhYKDHE56lb68Id1Cj8fBNrN4GKb6NVl5vV4MjCLR00",
@@ -39539,15 +38414,6 @@
        "word": "Line segment",
        "definition": "A line segment is a part of a line with a fixed start point and a distinct fixed end point."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "I can draw a 7 cm line with my ruler.",
-       "response": "A line is a linear path that continues forever in both directions. We can draw line segments with a ruler, which have distinct endpoints."
-      }
-     ],
-     "teacherTips": [
-      "Capital letters identify points, whilst lower case letters identify angles. Where possible, when both points and angles are labelled on a diagram, avoid use of letters whose capital and lowercase representations look similar."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -39943,15 +38809,6 @@
        "definition": "A transversal is any line that intersects two or more lines at distinct (different) points (line, line segment or ray)."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Transversals must intersect a pair of parallel lines.",
-       "response": "Transversals can intersect any set of lines or line segments, no matter whether any of those lines or line segments are parallel or not."
-      }
-     ],
-     "teacherTips": [
-      "It is important to emphasise the quality of a student's explanation when justifying the size of an angle. \"Corresponding angles are equal\" can be more accurately worded as, \"corresponding angles on a pair of parallel lines are equal\"."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "zhizkWl1iV2qw2bVC1lLSN3Utc9UhRzyXuJdszKpGLU",
@@ -40299,15 +39156,6 @@
        "definition": "A pair of angles both between or both outside two line segments that are on opposite sides of the transversal that cuts them."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Referring to alternate angles as 'Z' angles because of the arrangement of the lines.",
-       "response": "Modelling the justification correctly through every example and using exterior alternate angles to highlight the limitations of 'Z' angles."
-      }
-     ],
-     "teacherTips": [
-      "If available, use mini-whiteboards and ask the students to draw a diagram that shows \"exterior alternate angles\", \"interior alternate angles\", \"equal interior alternate angles\" etc."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "YdUuikNCXB00DWqJVgurCEsNgEtOqc02901XQU0000QN3PYM",
@@ -40593,15 +39441,6 @@
        "word": "Co-interior",
        "definition": "Co-interior angles are on the same side of the transversal line and in between the two other lines."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may believe that the co-interior angles are equal, like alternate and corresponding angles.",
-       "response": "Have pupils draw a pair of parallel lines and a transversal line themselves, identify the co-interior angles, are they equal?"
-      }
-     ],
-     "teacherTips": [
-      "It can be helpful to show the pupils multiple diagrams with co-interior, alternate and corresponding angles identified and have the pupils decide which of the three is being shown at that point."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -40912,15 +39751,6 @@
        "definition": "Vertical angles are pairs of opposite angles formed when two lines intersect at a point. They are equal."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may struggle with the justifications rather than getting to the answer.",
-       "response": "Keep asking pupils \"why?\" and encourage them to ask themselves, whenever they are working out an angle."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could make their own parallel line problem up for peers to complete. They can think about how many angles are necessary to give and the most efficient route to the answer."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "801JYDEkmS7uj6VcN5XoSpUeTFnykoa88qx00OA2OZSZo",
@@ -41202,15 +40032,6 @@
        "definition": "Co-interior angles are on the same side of the transversal line and in between the two other lines."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may struggle with mathematical proof, especially using other knowledge within it.",
-       "response": "Explain to pupils that there are many different styles of mathematical proof but all are showing that a particular fact holds true for all."
-      }
-     ],
-     "teacherTips": [
-      "Have the pupils take part in the demonstration, by drawing a triangle, colouring the three angles and then tearing them off and arranging them at a point on a line. Discuss how they have not shown it works for all triangles, so it isn't a proof."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "A43VzUXu3y9HDmzq3nfIeQNeeS4YCI3eQ02FWlFKSoxU",
@@ -41490,15 +40311,6 @@
        "word": "Sum",
        "definition": "the total when numbers are added together."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Assuming triangles are certain types because of how they look.",
-       "response": "Unless there is notation or it has stated the type of triangle you cannot assume."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could create their own problems for peers. They may wish to look at combining triangles to make the problems more challenging."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -41833,15 +40645,6 @@
        "definition": "The sum is the total when numbers are added together."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When splitting a polygon into triangles, pupils may draw line segments that cross inside the shape.",
-       "response": "By choosing a single common vertex for all the triangles, the line segments will not cross inside the shape."
-      }
-     ],
-     "teacherTips": [
-      "There are often many different ways of approaching a question. Encourage pupils to use words to explain their steps. Checking the angles all add up at the end can be a useful self-checking technique once all angles in a polygon are found."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "pkD6iz9Vxsx9OueIshsNUIzS008xsL2j02Qmf8pohJ02sc",
@@ -42109,15 +40912,6 @@
        "definition": "The sum is the total when numbers are added together."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Interior angles always sum to 180 times the number of component triangles it is split into.",
-       "response": "If line segments drawn make new vertices in the polygon, its angles won't contribute to the sum of interior angles in the initial polygon."
-      }
-     ],
-     "teacherTips": [
-      "Following Task A, pupils could explore their own methods for splitting up a polygon into triangles and calculating the sum of interior angles."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "UoyoN7cQ00UGfGniERZnM8MMcW3ZNHb5KP00VeEdxT5bQ",
@@ -42359,15 +41153,6 @@
        "word": "Supplementary angle",
        "definition": "a pair of angles that sum to 180°."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "The exterior angle is the entire reflex angle that is on the outside of each vertex of a shape.",
-       "response": "Ask a pupil to stand and walk around the room to trace a shape. The angle that the pupil turns at each vertex is an exterior angle."
-      }
-     ],
-     "teacherTips": [
-      "Some slides contain links to GeoGebra activities which are similar to those on the slides. If pupils have access to web browsers, they could attempt the activities themselves before working through the slides as a class."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -42622,15 +41407,6 @@
        "word": "Exterior angle",
        "definition": "An exterior angle is an angle on the outside of a polygon between an extension of an edge and its adjacent edge."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may solve angle problems by using methods which are less efficient than others.",
-       "response": "While less efficient methods are fine, encourage pupils to review their work each time they solve a problem to consider alternative methods."
-      }
-     ],
-     "teacherTips": [
-      "One of the slides contains a link to a GeoGebra activity similar to what Sofia uses. If pupils have access to web browsers, they could use it to perform a similar investigation by attempting to draw regular polygons using different exterior angles."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -42918,15 +41694,6 @@
        "word": "Exterior angle",
        "definition": "An exterior angle is an angle on the outside of a polygon between an extension of an edge and its adjacent edge."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may work out missing angles without writing out their justifications.",
-       "response": "Each time a number which is not on the original diagram is used or found, an explanation should be given for where it has come from."
-      }
-     ],
-     "teacherTips": [
-      "Many of the problems can be solved using multiple methods. Once a pupil has completed a problem, encourage them to consider how they might solve it in a different way or to compare their working with somebody else who has done it differently."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -43263,15 +42030,6 @@
        "definition": "An exterior angle is an angle on the outside of a polygon between an extension of an edge and its adjacent edge."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils might not know how to start an angle problem if they focus too much on the final solution.",
-       "response": "You can start an angle problem by working out any angle on the diagram. The more angles you work out, the easier the final solution becomes."
-      }
-     ],
-     "teacherTips": [
-      "If pupils have tracing paper, they could use it to help them solve problems with intersecting polygons by tracing each polygon onto a different sheet. They could also use the tracings to explore what other problems can be made by intersecting polygons."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "rtePYRjIt7qnBgUDGStLC9SAp6gh4KSuZdtEcTCEt3o",
@@ -43570,15 +42328,6 @@
        "definition": "A pair of compasses is a tool which can be used to draw circles and arcs. A pair of compasses is sometimes referred to just as a compass."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "When drawing circles, pupils may find that the start and end of their arcs do not join together.",
-       "response": "This can be caused by the pair of compasses opening or closing mid-drawing. Hold it with one hand and rest the pencil gently on the page."
-      }
-     ],
-     "teacherTips": [
-      "For this lesson, pupils will need a pair of compasses, pencil, ruler and several sheets of plain paper."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "x4ZANUajuXetlw39J3yB26pq601QeCi00L5YRbg68hyqg",
@@ -43849,15 +42598,6 @@
        "word": "Compass",
        "definition": "A pair of compasses is a tool which can be used to draw circles and arcs. A pair of compasses is sometimes referred to just as a compass."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may find it difficult to decide where to mark the centre point of each circle during Task A.",
-       "response": "Pupils could start the task by drawing a pair of circles and labelling it with the question that presents the matching description."
-      }
-     ],
-     "teacherTips": [
-      "For this lesson, pupils will need a pair of compasses, pencil, ruler and several sheets of plain paper."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -44144,15 +42884,6 @@
        "word": "Equidistant",
        "definition": "Points A and B are equidistant from a third point C if the distance AC is equal to the distance BC."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "During tasks, pupils may use a ruler to draw or check whether points are equidistant from a centre.",
-       "response": "While the tasks could be completed with a ruler, it may be quicker, easier and more accurate to use a pair of compasses."
-      }
-     ],
-     "teacherTips": [
-      "The teacher could sit or stand in the middle of a large empty space and ask all pupils to position themselves equidistantly to the teacher. What shape have the pupils formed?"
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -44477,15 +43208,6 @@
        "definition": "The radius is any line segment that joins the centre of a circle to any point on its circumference."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may avoid using the pair of compasses and opt for a ruler instead.",
-       "response": "Emphasise the efficiency and accuracy of using compasses instead of a ruler in the construction of their triangles."
-      }
-     ],
-     "teacherTips": [
-      "Random number generators, dice or playing cards can be used to select three edge lengths for pupils to construct. Pupils can consider if a triangle can be constructed before attempting to."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "mDwGjG4GZBJPxPnfX3DeVmlC3vEc00ZsA1GUgwLpr8400",
@@ -44792,15 +43514,6 @@
        "word": "Rhombi",
        "definition": "The plural of rhombus can be referred to as rhombi."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may avoid using the pair of compasses and opt for a ruler instead.",
-       "response": "Emphasise the efficiency and accuracy of using compasses instead of a ruler in the construction of their triangles."
-      }
-     ],
-     "teacherTips": [
-      "Pupils could be provided with copies of each type of triangle and then manipulate them to create the different quadrilaterals."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -45129,15 +43842,6 @@
        "definition": "The altitude of a triangle is a line segment from a vertex of a triangle to the opposite edge. It is perpendicular to that edge."
       }
      ],
-     "misconceptions": [
-      {
-       "misconception": "Pupils may struggle with a diagonal of a shape being vertical or horizontal.",
-       "response": "By reminding pupils of the definition, ask them to check if it fits and the shape could be rotated as well."
-      }
-     ],
-     "teacherTips": [
-      "You can set up pair or group work to explore the question 'Is a square a rhombus?' Pupils will need to use good mathematical vocabulary and reasoning to explain their argument. Then you could have them consider 'is a rhombus a square?'."
-     ],
      "equipment": [],
      "contentGuidance": null,
      "video": "3sxiAwPVdSlvrKKl5ASfU6W00dTRkEWyYG8rCpvijSnQ",
@@ -45452,15 +44156,6 @@
        "word": "Congruent",
        "definition": "If one shape can fit exactly on top of another using rotation, reflection or translation, then the shapes are congruent."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "I can use a protractor to measure an angle, then half that angle to bisect it.",
-       "response": "Constructions, such as bisecting an angle, are methods of creating & modifying shapes & angles in ways that don't require measurement tools."
-      }
-     ],
-     "teacherTips": [
-      "When bisecting a reflex angle, a student can bisect the conjugate angle, and extend the line of bisection through to the reflex part of the diagram."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -45785,15 +44480,6 @@
        "word": "Rhombus",
        "definition": "A rhombus is a parallelogram where all sides are the same length."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "I can use a ruler to measure the midpoint of a line segment, and a protractor to find 90°.",
-       "response": "Constructions, such as perpendicular bisectors, are methods of creating & modifying shapes & angles in ways that don't require measurements."
-      }
-     ],
-     "teacherTips": [
-      "When checking that the radius of each circle or arc constructed is equal (and in cases where its length is important), it might help to get students to draw a reference line that can be used to readjust the compass width after each arc is drawn."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -46134,15 +44820,6 @@
        "word": "Rhombus",
        "definition": "A rhombus is a parallelogram where all sides are the same length."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "You can't accurately draw the perpendicular to a point on a line segment close to its endpoint.",
-       "response": "The perpendicular to a line segment through any point can be found; some line segments just require extending in length first."
-      }
-     ],
-     "teacherTips": [
-      "Whilst circles of any radius can be used to modify the length of a line segment, the bigger the circle, the smaller the influence of any imprecision in the construction process."
      ],
      "equipment": [],
      "contentGuidance": null,
@@ -46487,15 +45164,6 @@
        "word": "Rhombus",
        "definition": "A rhombus is a parallelogram where all sides are the same length."
       }
-     ],
-     "misconceptions": [
-      {
-       "misconception": "You always need to draw circles that are the same size to construct any polygon.",
-       "response": "Some polygons, such as kites, require you to construct two circles of different size, as long as they still intersect at two points."
-      }
-     ],
-     "teacherTips": [
-      "Whilst students are exploring possible shapes that can be found on constructions, providing the \"six-petal flower construction\" additional material  gives multiple copies of premade constructions for students to draw over."
      ],
      "equipment": [],
      "contentGuidance": null,

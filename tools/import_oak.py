@@ -1,4 +1,10 @@
-"""Scrape the Oak National Academy Year 8 maths curriculum into curriculum.json."""
+"""Import the Oak National Academy Year 8 maths curriculum into curriculum.json.
+
+Deliberately narrow: this keeps the curriculum spine (units, lessons, outcomes,
+key learning points, keywords) and the quizzes, and leaves the rest of Oak's
+teacher-facing material where it belongs -- on Oak's own lesson pages, which
+every generated page links to.
+"""
 import hashlib
 import json
 import os
@@ -153,19 +159,6 @@ def scrape_lesson(unit_slug, lesson_slug):
             for k in obj.get("lessonKeywords") or []
             if k.get("keyword")
         ],
-        "misconceptions": [
-            {
-                "misconception": m.get("misconception"),
-                "response": m.get("response"),
-            }
-            for m in obj.get("misconceptionsAndCommonMistakes") or []
-            if m.get("misconception")
-        ],
-        "teacherTips": [
-            t.get("teacherTip")
-            for t in obj.get("teacherTips") or []
-            if t.get("teacherTip")
-        ],
         "equipment": [
             e.get("equipment")
             for e in obj.get("lessonEquipmentAndResources") or []
@@ -199,8 +192,6 @@ def scrape_unit(index, slug):
                 "outcome": stub.get("pupilLessonOutcome") or "",
                 "keyLearningPoints": [],
                 "keywords": [],
-                "misconceptions": [],
-                "teacherTips": [],
                 "equipment": [],
                 "starterQuiz": [],
                 "exitQuiz": [],

@@ -1,0 +1,58 @@
+{
+ "_readme": "Our resources. Edit by hand or use tools/add_resource.py. Keys: 'general' (shown on the Resources page), 'units' (keyed by unit slug) and 'lessons' (keyed by 'unit-slug/lesson-slug'). Each entry takes title, url, kind (link|html|pdf|video|worksheet|sheet|notebook|book), optional note, and optional group ('links' for a reference we use, 'ours' for something we made or keep). group defaults to 'ours' for a local path under assets/resources/ and 'links' for an external URL.",
+ "general": [
+  {
+   "title": "BBC Bitesize — KS3 Maths",
+   "url": "https://www.bbc.co.uk/bitesize/subjects/zqhs34j",
+   "kind": "link",
+   "note": "Short explainers and quick tests across the whole key stage"
+  },
+  {
+   "title": "Corbettmaths — topic contents",
+   "url": "https://corbettmaths.com/contents/",
+   "kind": "link",
+   "note": "Videos, worksheets and 5-a-day practice, indexed by topic"
+  },
+  {
+   "title": "Dr Frost Maths",
+   "url": "https://www.drfrost.org/",
+   "kind": "link",
+   "note": "Free practice platform with worked solutions"
+  },
+  {
+   "title": "NRICH",
+   "url": "https://nrich.maths.org/",
+   "kind": "link",
+   "note": "Rich problems and investigations for when a topic needs stretching"
+  },
+  {
+   "title": "Maths Genie",
+   "url": "https://mathsgenie.co.uk/gcse/maths",
+   "kind": "link",
+   "note": "Exam-style questions and mark schemes by grade"
+  },
+  {
+   "title": "Desmos graphing calculator",
+   "url": "https://www.desmos.com/calculator",
+   "kind": "link",
+   "note": "For plotting linear equations and checking graph work"
+  },
+  {
+   "title": "GeoGebra geometry",
+   "url": "https://www.geogebra.org/geometry",
+   "kind": "link",
+   "note": "Constructions and polygon work without a compass and paper"
+  }
+ ],
+ "units": {
+  "graphical-representations-of-linear-equations": [
+   {
+    "title": "Desmos — plot a linear equation",
+    "url": "https://www.desmos.com/calculator",
+    "kind": "link",
+    "note": "Check gradient and intercept work by plotting it"
+   }
+  ]
+ },
+ "lessons": {}
+}
