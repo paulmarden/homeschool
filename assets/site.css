@@ -1,0 +1,202 @@
+/* Year 8 Study Hub — site layer.
+   Everything here is built on the Modernist tokens in ds/styles.css; no raw
+   hex, font name or radius is introduced. The class names and the 2px-divider
+   grid come straight from the Homeschool Resources wireframe. */
+
+body { background: var(--color-bg); }
+
+.page { max-width: 1280px; margin: 0 auto; }
+
+.wrap { padding: 64px; }
+
+/* — header — */
+.nav { padding: var(--space-3) 64px; }
+.nav-brand a { color: inherit; text-decoration: none; }
+
+.crumb {
+  font-family: var(--font-body); font-size: 13px; color: var(--color-neutral-700);
+  padding: 16px 64px; border-bottom: 2px solid var(--color-divider);
+}
+.crumb a { color: var(--color-neutral-700); text-decoration: none; }
+.crumb a:hover { color: var(--color-accent-700); }
+
+/* — shared page furniture — */
+.kicker {
+  font-family: var(--font-body); font-size: 13px; text-transform: uppercase;
+  letter-spacing: .06em; color: var(--color-accent-700); font-weight: 700;
+  margin: 0 0 12px;
+}
+.lede {
+  font-family: var(--font-body); font-size: 15px; color: var(--color-neutral-700);
+  margin: 0 0 40px; max-width: 640px;
+}
+.pagehead {
+  display: flex; justify-content: space-between; align-items: flex-start;
+  gap: 24px; margin-bottom: 8px;
+}
+.sectiontitle {
+  font-family: var(--font-heading); font-size: 14px; text-transform: uppercase;
+  letter-spacing: .04em; margin: 0 0 20px;
+}
+
+/* — the modular grids: cells separated by 2px of divider, never by gaps — */
+.grid6 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; background: var(--color-divider); }
+.grid6 .card { background: var(--color-bg); box-shadow: none; padding: 32px; }
+
+.unitlist { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--color-divider); }
+.unitlist .card { background: var(--color-bg); box-shadow: none; padding: 32px; }
+
+a.card { text-decoration: none; color: inherit; }
+a.card:hover .card-title { color: var(--color-accent-700); }
+.card.is-pending { color: var(--color-neutral-600); }
+.card.is-pending .card-kicker { color: var(--color-neutral-500); }
+
+/* — lesson rows on a unit page — */
+.modrow {
+  display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 16px;
+  padding: 20px 0; border-bottom: 2px solid var(--color-divider);
+  text-decoration: none; color: inherit;
+}
+.modrow:last-of-type { border-bottom: none; }
+.modrow:hover .mt { color: var(--color-accent-700); }
+.modnum {
+  font-family: var(--font-heading); font-size: 13px; font-weight: 700;
+  color: var(--color-neutral-600); min-width: 28px;
+}
+.mt { font-family: var(--font-heading); font-size: 18px; font-weight: 700; }
+.mm { font-family: var(--font-body); font-size: 13px; color: var(--color-neutral-700); }
+
+/* — two-column content blocks — */
+.cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--color-divider); margin-top: 32px; }
+.cols-1 { grid-template-columns: 1fr; }
+.col { background: var(--color-bg); padding: 32px; }
+.coltitle {
+  font-family: var(--font-heading); font-size: 14px; text-transform: uppercase;
+  letter-spacing: .04em; font-weight: 700; margin: 0 0 20px;
+  padding-bottom: 12px; border-bottom: 2px solid var(--color-divider);
+}
+.resrow {
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid var(--color-divider);
+}
+.resrow:last-child { border-bottom: none; }
+.rt { font-family: var(--font-body); font-size: 14px; font-weight: 600; }
+.rd { font-family: var(--font-body); font-size: 13px; color: var(--color-neutral-700); }
+
+.numlist { margin: 0; padding: 0; list-style: none; counter-reset: klp; }
+.numlist li {
+  counter-increment: klp; position: relative; padding: 14px 0 14px 34px;
+  border-bottom: 1px solid var(--color-divider); font-size: 14px;
+}
+.numlist li:last-child { border-bottom: none; }
+.numlist li::before {
+  content: counter(klp); position: absolute; left: 0; top: 14px;
+  font-family: var(--font-heading); font-weight: 700; font-size: 13px;
+  color: var(--color-accent-700);
+}
+
+/* — quizzes — */
+.quiz { margin-top: 2px; background: var(--color-bg); padding: 32px; }
+.quizhead {
+  display: flex; justify-content: space-between; align-items: baseline;
+  gap: 16px; margin: 0 0 20px; padding-bottom: 12px;
+  border-bottom: 2px solid var(--color-divider);
+}
+.quiztitle {
+  font-family: var(--font-heading); font-size: 14px; text-transform: uppercase;
+  letter-spacing: .04em; font-weight: 700; margin: 0;
+}
+.quizscore { font-size: 13px; color: var(--color-neutral-700); }
+
+.q { padding: 24px 0; border-bottom: 1px solid var(--color-divider); }
+.q:last-of-type { border-bottom: none; }
+.qstem { display: flex; gap: 12px; font-size: 15px; font-weight: 600; margin-bottom: 14px; }
+.qnum { font-family: var(--font-heading); color: var(--color-neutral-600); font-size: 13px; padding-top: 2px; }
+.qimg { margin: 12px 0; }
+.qimg img { border: 1px solid var(--color-divider); max-width: 420px; }
+
+/* the gap in a fill-in-the-blank stem */
+.blank {
+  display: inline-block; min-width: 72px; height: 1em;
+  margin: 0 4px; vertical-align: -2px;
+  border-bottom: 2px solid var(--color-accent-700);
+}
+
+.opts { display: flex; flex-direction: column; gap: 2px; margin: 0 0 12px; }
+.opt {
+  display: flex; align-items: flex-start; gap: 10px; cursor: pointer;
+  padding: 10px 12px; font-size: 14px;
+  border: 1px solid var(--color-divider); background: var(--color-bg);
+}
+.opt:hover { background: color-mix(in srgb, var(--color-text) 7%, transparent); }
+.opt input { position: absolute; opacity: 0; width: 0; height: 0; pointer-events: none; }
+.opt .box {
+  width: 16px; height: 16px; flex: none; margin-top: 2px;
+  border: 1.5px solid var(--color-divider);
+}
+/* Round for single-answer, square for select-all — the same signal the design
+   system's own .radio .dot uses, and the one exception to its zero radius. */
+.opt input[type="radio"] + .box { border-radius: 50%; }
+.opt input:checked + .box { border-color: var(--color-accent); background: var(--color-accent); box-shadow: inset 0 0 0 3px var(--color-bg); }
+.opt:has(input:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+.opt.is-right { border-color: var(--color-accent-700); background: var(--color-accent-100); }
+.opt.is-wrong { border-color: var(--color-neutral-600); background: var(--color-neutral-200); text-decoration: line-through; }
+.opt.is-missed { border-color: var(--color-accent-700); border-style: dashed; }
+
+.qrow { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; }
+.qrow .input { max-width: 280px; }
+.qrow .input.is-right { border-color: var(--color-accent-700); background: var(--color-accent-100); }
+.qrow .input.is-wrong { border-color: var(--color-neutral-600); }
+.matchrow { display: grid; grid-template-columns: 1fr 200px; gap: 12px; align-items: center; padding: 8px 0; }
+.matchrow .ml { font-size: 14px; }
+select.input { max-width: 100%; }
+
+.qactions { display: flex; gap: var(--space-2); align-items: center; flex-wrap: wrap; }
+.qfeedback { font-size: 13px; margin-top: 12px; padding: 12px; background: var(--color-neutral-100); }
+.qfeedback .lbl {
+  display: block; font-family: var(--font-heading); font-size: 11px;
+  text-transform: uppercase; letter-spacing: .08em; color: var(--color-neutral-700);
+  margin-bottom: 4px;
+}
+.qfeedback + .qfeedback { margin-top: 2px; }
+details.qhint { font-size: 13px; }
+details.qhint summary { cursor: pointer; color: var(--color-accent-700); font-weight: 600; }
+details.qhint summary::marker { color: var(--color-neutral-600); }
+details.qhint[open] summary { margin-bottom: 8px; }
+
+/* — prev / next — */
+.pager { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; background: var(--color-divider); margin-top: 32px; }
+.pager a, .pager span { background: var(--color-bg); padding: 24px 32px; text-decoration: none; color: inherit; }
+.pager .lbl {
+  display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .08em;
+  color: var(--color-neutral-600); margin-bottom: 6px;
+}
+.pager .ttl { font-family: var(--font-heading); font-weight: 700; font-size: 16px; }
+.pager a:hover .ttl { color: var(--color-accent-700); }
+.pager .next { text-align: right; }
+
+/* — footer — */
+.foot {
+  padding: 32px 64px; border-top: 2px solid var(--color-divider);
+  font-size: 13px; color: var(--color-neutral-700);
+}
+.foot a { color: var(--color-accent-700); }
+.foot p { max-width: 720px; }
+
+.factrow { display: flex; gap: 32px; flex-wrap: wrap; margin: 0 0 40px; }
+.fact .n { font-family: var(--font-heading); font-size: 32px; font-weight: 800; line-height: 1; }
+.fact .l { font-size: 12px; text-transform: uppercase; letter-spacing: .06em; color: var(--color-neutral-700); margin-top: 6px; }
+
+@media (max-width: 1000px) {
+  .grid6 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 760px) {
+  .wrap { padding: 32px 20px; }
+  .nav, .crumb, .foot { padding-left: 20px; padding-right: 20px; }
+  .grid6, .unitlist, .cols, .pager { grid-template-columns: 1fr; }
+  .grid6 .card, .unitlist .card, .col, .quiz { padding: 24px 20px; }
+  .pagehead { flex-direction: column; }
+  .pager .next { text-align: left; }
+  .matchrow { grid-template-columns: 1fr; }
+  h1 { font-size: 30px; }
+}
