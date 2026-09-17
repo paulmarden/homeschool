@@ -1,0 +1,824 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rounding Studio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Rubik:wght@500;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;600&display=swap">
+<style>
+:root{
+  --bg:#EEF1F6; --card:#FFFFFF; --card2:#F6F8FB; --ink:#172033; --mute:#5C6678; --line:#D9DEE8;
+  --accent:#1F6FEB; --accent-soft:#E3EDFD; --accent-ink:#FFFFFF;
+  --gold:#B87A0C; --gold-soft:#FBF1DC; --ok:#1E8E5A; --ok-soft:#DFF4E8; --bad:#C93A3A; --bad-soft:#FBE3E3;
+  --code-bg:#0F1420; --code-ink:#E6EDF7; --code-cm:#7C8AA5; --code-kw:#8AB4FF; --code-str:#9CDF8A; --code-num:#F2C46D;
+  --shadow:0 1px 2px rgba(23,32,51,.06),0 8px 24px -12px rgba(23,32,51,.18);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F131B; --card:#171C27; --card2:#1E2432; --ink:#E7ECF5; --mute:#98A2B6; --line:#2A3140;
+    --accent:#5B96FF; --accent-soft:#1A2A48; --accent-ink:#0B1220;
+    --gold:#E0A63A; --gold-soft:#332A15; --ok:#3FBF83; --ok-soft:#153427; --bad:#F06A6A; --bad-soft:#3A1C1C;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F131B; --card:#171C27; --card2:#1E2432; --ink:#E7ECF5; --mute:#98A2B6; --line:#2A3140;
+  --accent:#5B96FF; --accent-soft:#1A2A48; --accent-ink:#0B1220;
+  --gold:#E0A63A; --gold-soft:#332A15; --ok:#3FBF83; --ok-soft:#153427; --bad:#F06A6A; --bad-soft:#3A1C1C;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px -12px rgba(0,0,0,.6);
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:"Nunito Sans",system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.55;margin:0}
+.wrap{max-width:900px;margin:0 auto;padding-inline:16px;padding-block:0 64px}
+h1,h2,h3,h4{font-family:Rubik,"Nunito Sans",system-ui,sans-serif;text-wrap:balance;margin:0;line-height:1.15}
+p{margin:0 0 .75em}
+a{color:var(--accent)}
+code,pre{font-family:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace}
+code{background:var(--card2);border:1px solid var(--line);border-radius:4px;padding:.05em .35em;font-size:.9em}
+.num{font-variant-numeric:tabular-nums}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+
+/* Top bar */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--card);border-bottom:1px solid var(--line);}
+.top .in{max-width:900px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:10px;font-family:Rubik;font-weight:800;font-size:1.15rem;letter-spacing:-.01em}
+.logo .cube{width:26px;height:26px;border-radius:6px;background:var(--accent);position:relative;transform:rotate(12deg)}
+.logo .cube::after{content:"";position:absolute;inset:6px;border-radius:3px;background:var(--card)}
+.top .fill{flex:1}
+.cloud{font-size:.8rem;color:var(--mute);display:flex;align-items:center;gap:6px}
+.cloud i{width:8px;height:8px;border-radius:50%;background:var(--mute);display:inline-block}
+.cloud.on i{background:var(--ok)}
+.overall{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--mute)}
+.bar{width:120px;height:8px;background:var(--line);border-radius:99px;overflow:hidden}
+.bar b{display:block;height:100%;background:var(--accent);width:0;transition:width .3s}
+
+/* Hero / HQ */
+.hq{padding-block:28px 8px}
+.eyebrow{font-family:Rubik;font-weight:700;text-transform:uppercase;letter-spacing:.12em;font-size:.72rem;color:var(--accent)}
+.hq h1{font-size:clamp(1.9rem,5vw,2.6rem);letter-spacing:-.02em;margin:.2em 0 .35em}
+.lede{max-width:62ch;font-size:1.05rem;color:var(--mute)}
+.grid16{display:grid;grid-template-columns:repeat(8,1fr);gap:6px;margin:18px 0 6px}
+@media (max-width:520px){.grid16{grid-template-columns:repeat(4,1fr)}}
+.tile{aspect-ratio:1;border-radius:8px;border:1px solid var(--line);background:var(--card);display:flex;flex-direction:column;align-items:center;justify-content:center;font-family:Rubik;font-weight:700;font-size:.85rem;color:var(--mute);text-decoration:none;position:relative}
+.tile small{font-size:.6rem;font-weight:500;letter-spacing:.04em}
+.tile.started{border-color:var(--accent);color:var(--accent)}
+.tile.done{background:var(--ok);border-color:var(--ok);color:#fff}
+.legend{font-size:.8rem;color:var(--mute);display:flex;gap:14px;flex-wrap:wrap}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:2px;border:1px solid var(--line);vertical-align:-1px;margin-right:4px;background:var(--card)}
+.legend i.s{border-color:var(--accent)}.legend i.d{background:var(--ok);border-color:var(--ok)}
+
+/* Data card */
+.data{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:18px 0;box-shadow:var(--shadow)}
+.data h2{font-size:1.05rem;margin-bottom:6px}
+.data p{color:var(--mute);font-size:.92rem}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px 18px;margin:0;padding:0;list-style:none;font-size:.92rem}
+.facts li{display:flex;justify-content:space-between;gap:8px;border-bottom:1px dashed var(--line);padding:5px 0}
+.facts b{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:.88rem;text-align:right}
+
+/* Missions */
+.missions{display:flex;flex-direction:column;gap:12px;margin-top:20px}
+details.mission{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+details.mission[open]{border-color:var(--accent)}
+details.mission.done summary .mno{background:var(--ok);color:#fff}
+summary{list-style:none;display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 16px;cursor:pointer}
+summary::-webkit-details-marker{display:none}
+.mno{font-family:Rubik;font-weight:800;font-size:.95rem;background:var(--accent-soft);color:var(--accent);border-radius:8px;width:44px;height:44px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+summary h2{font-size:1.1rem}
+summary .sub{font-size:.85rem;color:var(--mute);margin-top:2px}
+.chev{width:22px;height:22px;color:var(--mute);transition:transform .2s}
+details[open] .chev{transform:rotate(180deg)}
+.mbody{padding:4px 16px 20px;border-top:1px solid var(--line)}
+.stage{margin-top:18px}
+.stage h3{font-size:.78rem;font-family:Rubik;text-transform:uppercase;letter-spacing:.12em;color:var(--mute);display:flex;align-items:center;gap:8px;margin-bottom:8px}
+.stage h3::after{content:"";flex:1;height:1px;background:var(--line)}
+.brief{font-size:1rem;max-width:66ch}
+.oak{display:inline-flex;align-items:center;gap:8px;background:var(--card2);border:1px solid var(--line);border-radius:8px;padding:6px 10px;font-size:.88rem;text-decoration:none;color:var(--ink);margin:6px 0 2px}
+.oak span{color:var(--accent);font-weight:700}
+.oak em{color:var(--mute);font-style:normal}
+ul.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+ul.tasks li{display:flex;gap:10px;align-items:flex-start}
+ul.tasks input{width:20px;height:20px;margin:2px 0 0;accent-color:var(--accent);flex-shrink:0}
+ul.tasks label{cursor:pointer}
+.hint{font-size:.9rem;color:var(--mute);border-left:3px solid var(--gold);padding:4px 10px;margin:8px 0 0;background:var(--gold-soft);border-radius:0 6px 6px 0}
+
+/* Drill */
+.drill{background:var(--card2);border:1px solid var(--line);border-radius:10px;padding:14px}
+.drill .head{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:8px}
+.drill .head .goal{font-size:.85rem;color:var(--mute)}
+.chips{display:flex;gap:6px}
+.chip{font-size:.75rem;font-family:Rubik;font-weight:700;border-radius:99px;padding:3px 9px;background:var(--card);border:1px solid var(--line);color:var(--mute)}
+.chip.hot{border-color:var(--gold);color:var(--gold)}
+.q{font-size:1.05rem;margin:6px 0 10px;line-height:1.5}
+.q b{font-family:"JetBrains Mono",monospace;font-weight:600;font-size:1.02em}
+.ans{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.ans input{font:inherit;font-family:"JetBrains Mono",monospace;font-size:1rem;padding:8px 10px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--ink);width:150px;max-width:100%}
+.ans .lab{color:var(--mute);font-size:.9rem}
+.opt{display:block;width:100%;text-align:left;background:var(--card);border:1px solid var(--line);color:var(--ink);padding:9px 12px;border-radius:8px;margin-bottom:6px}
+.opt:hover{border-color:var(--accent)}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.opt[disabled]{cursor:default}
+.fb{margin-top:10px;font-size:.95rem;padding:8px 12px;border-radius:8px;display:none}
+.fb.ok{display:block;background:var(--ok-soft);color:var(--ink);border-left:3px solid var(--ok)}
+.fb.no{display:block;background:var(--bad-soft);color:var(--ink);border-left:3px solid var(--bad)}
+.btns{display:flex;gap:8px;margin-top:10px;flex-wrap:wrap}
+.btn{border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:8px;font-weight:700}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn:disabled{opacity:.45;cursor:default}
+
+/* Code */
+.codewrap{position:relative;margin:6px 0 8px}
+pre{background:var(--code-bg);color:var(--code-ink);border-radius:10px;padding:14px 16px;overflow-x:auto;font-size:.84rem;line-height:1.5;margin:0;tab-size:4}
+pre .c{color:var(--code-cm)} pre .k{color:var(--code-kw)} pre .s{color:var(--code-str)} pre .n{color:var(--code-num)}
+.copy{position:absolute;top:8px;right:8px;font-size:.75rem;font-family:Rubik;font-weight:700;background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.25);border-radius:6px;padding:4px 8px}
+.copy:hover{background:rgba(255,255,255,.22)}
+.build p{font-size:.95rem}
+.build ol{margin:4px 0 8px;padding-left:22px;font-size:.95rem}
+
+/* Evidence */
+.evidence{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:start}
+@media (max-width:600px){.evidence{grid-template-columns:1fr}}
+.conf{display:flex;gap:6px;flex-wrap:wrap}
+.conf button{width:42px;height:42px;border-radius:8px;border:1px solid var(--line);background:var(--card);font-size:1.2rem}
+.conf button.sel{border-color:var(--accent);background:var(--accent-soft)}
+.conf-lab{font-size:.8rem;color:var(--mute);margin-bottom:6px}
+
+/* Handler notes */
+.notes{margin-top:34px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.notes h2{font-size:1.15rem;margin-bottom:8px}
+.notes ul{padding-left:20px;margin:0}
+.notes li{margin-bottom:6px;font-size:.95rem}
+.small{font-size:.8rem;color:var(--mute)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="top"><div class="in">
+  <div class="logo"><span class="cube"></span>Rounding Studio</div>
+  <div class="fill"></div>
+  <div class="overall"><span id="ovtxt" class="num">0 / 16 shipped</span><div class="bar"><b id="ovbar"></b></div></div>
+  <div class="cloud" id="cloud" title="Progress sync"><i></i><span>saved on this device</span></div>
+</div></div>
+
+<div class="wrap">
+  <section class="hq">
+    <div class="eyebrow">Year 8 Maths · Unit 1 · Estimation and rounding</div>
+    <h1>Sixteen dev missions. One studio. Your numbers.</h1>
+    <p class="lede">You're lead developer at Rounding Studio. Every mission is a real job a Roblox developer does with numbers — showing player counts, paying out Robux, timing physics, checking a script's output. Each one lines up with one Oak lesson. Do the mission, run the drill, ship the build, sign it off.</p>
+    <div class="grid16" id="grid16"></div>
+    <div class="legend"><span><i></i>not started</span><span><i class="s"></i>in progress</span><span><i class="d"></i>shipped</span></div>
+  </section>
+
+  <section class="data">
+    <h2>Studio data card</h2>
+    <p>Numbers the missions use. Some change over time — Mission 02 is where you check the live ones and correct this card.</p>
+    <ul class="facts">
+      <li><span>1 stud</span><b>≈ 0.28 m</b></li>
+      <li><span>Default WalkSpeed</span><b>16 studs / s</b></li>
+      <li><span>Default gravity</span><b>196.2 studs / s²</b></li>
+      <li><span>Creator's share of a sale</span><b>70 %</b></li>
+      <li><span>DevEx rate (check)</span><b>$0.0038 / Robux</b></li>
+      <li><span>Robux packs (check)</span><b>400 / 800 / 1.7K / 4.5K / 10K</b></li>
+      <li><span>Pack prices (check)</span><b>£4.99 / 9.99 / 19.99 / 49.99 / 99.99</b></li>
+      <li><span>Player display</span><b>12.3K · 1.2M · 4.5B</b></li>
+    </ul>
+  </section>
+
+  <div class="missions" id="missions"></div>
+
+  <section class="notes">
+    <h2>Handler notes (for Dad)</h2>
+    <ul>
+      <li><b>Order matters.</b> Missions follow Oak's sequence exactly; each Oak lesson is the "spec" and the mission is the job. Watch or read the Oak lesson first, then do the mission — the drill assumes the lesson's method.</li>
+      <li><b>Shipping a mission</b> = evidence boxes ticked + a confidence rating. The Oak exit quiz is the formal check; a score under 4/6 means do the drill to a streak of 8 and retry the quiz next day, not the same day.</li>
+      <li><b>The drills auto-mark</b> and accept numerically equal answers (2.5 for 2.50), but the model answer always shows the correct number of places — worth a glance when it differs.</li>
+      <li><b>Studio builds</b> need Roblox Studio on a PC/Mac. Paste the code into a Script in ServerScriptService, press Play, and read the Output window (View → Output). Nothing needs publishing.</li>
+      <li><b>Field missions</b> use the real Roblox website or app. Screenshots go in the case file as evidence.</li>
+      <li><b>Progress syncs</b> to this page for anyone signed in to the same Claude workspace; otherwise it's saved in the browser. The green dot in the top bar shows which.</li>
+    </ul>
+  </section>
+</div>
+
+<script>
+/* ---------------- Number helpers (exact decimals as integer + scale) ---------------- */
+const ri=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
+const pick=a=>a[ri(0,a.length-1)];
+const P=n=>Math.pow(10,n);
+const mk=(n,k)=>({n,k});
+const val=d=>d.n/P(d.k);
+function grp(s){return s.replace(/\B(?=(\d{3})+(?!\d))/g,',')}
+function fmt(d){let s=String(Math.abs(d.n)).padStart(d.k+1,'0');const neg=d.n<0?'−':'';if(d.k===0)return neg+grp(s);return neg+grp(s.slice(0,-d.k))+'.'+s.slice(-d.k)}
+function fmtTrim(d){let s=fmt(d);if(s.includes('.'))s=s.replace(/0+$/,'').replace(/\.$/,'');return s}
+function roundDec(d,dp){ // half away from zero; dp may be negative
+  if(dp>=d.k)return mk(d.n*P(dp-d.k),dp);
+  const div=P(d.k-dp),a=Math.abs(d.n);let q=Math.floor(a/div);const r=a-q*div;if(r*2>=div)q++;
+  q*=Math.sign(d.n)||1;return dp<0?mk(q*P(-dp),0):mk(q,dp);}
+function truncDec(d,dp){if(dp>=d.k)return mk(d.n*P(dp-d.k),dp);const div=P(d.k-dp);const q=Math.trunc(d.n/div);return dp<0?mk(q*P(-dp),0):mk(q,dp);}
+function sfDp(d,sf){const a=Math.abs(d.n);const digits=String(a).length;const e=digits-1-d.k;return sf-1-e;} // decimal places that give sf sig figs
+function roundSf(d,sf){return roundDec(d,sfDp(d,sf))}
+function decOf(x,k){return mk(Math.round(x*P(k)),k)}
+function parseNum(s){s=String(s).trim().replace(/[,£$\s]/g,'').replace('−','-');if(s===''||isNaN(Number(s)))return null;return Number(s)}
+function near(a,b){return Math.abs(a-b)<=1e-9*Math.max(1,Math.abs(b))}
+function band1sf(d1,p){ // integer band that rounds (1 s.f.) to d1×10^p
+  const c=d1*P(p);const lo=c-P(p)/2,hi=c+P(p)/2-1;return ri(Math.ceil(lo),Math.floor(hi));}
+function sfLabel(n){return n+' s.f.'}
+function dpLabel(n){return n===0?'the nearest whole number.':n+' d.p.'}
+
+/* ---------------- Drill generators ---------------- */
+const NUMQ=(q,ans,expl,trim)=>({type:'num',q,ans,expl,trim});
+const RANGEQ=(q,lo,hi,expl,incl)=>({type:'range',q,lo,hi,expl,incl});
+const MCQ=(q,opts,right,expl)=>({type:'mcq',q,opts,right,expl});
+
+const G={
+ m1(){
+  const t=pick(['h','t','w','1','2']);let d,ans,q;
+  if(t==='h'){d=mk(ri(1000,99999),0);ans=mk(roundDec(d,-2).n,0);q=`Your game had <b>${fmt(d)}</b> visits today. Round it to the nearest 100.`}
+  else if(t==='t'){d=mk(ri(100,9999),0);ans=roundDec(d,-1);q=`Server 3 has <b>${fmt(d)}</b> players in the queue. Round to the nearest 10.`}
+  else if(t==='w'){d=mk(ri(1000,99999),2);ans=roundDec(d,0);q=`A lap of your obby took <b>${fmt(d)}</b> seconds. Round to the nearest whole second.`}
+  else if(t==='1'){d=mk(ri(1000,99999),3);ans=roundDec(d,1);q=`A part is <b>${fmt(d)}</b> studs long. Round to 1 d.p.`}
+  else{d=mk(ri(1000,999999),pick([3,4]));ans=roundDec(d,2);q=`A payout came to <b>$${fmt(d)}</b>. Round to 2 d.p.`}
+  return NUMQ(q,ans,`Look at the digit after the one you're keeping: 5 or more rounds up.`)},
+ m2(){
+  const t=pick(['K','K','M','ten','hund']);
+  if(t==='K'){const base=ri(101,999)*100;const disp=(base/1000).toFixed(1)+'K';
+   return RANGEQ(`The game page shows <b>${disp}</b> players (rounded to the nearest 100). What's the <em>smallest</em> and the <em>largest</em> number of players actually online?`,base-50,base+49,`${disp} means ${grp(String(base))} to the nearest 100, so anything from ${grp(String(base-50))} up to ${grp(String(base+49))} would display the same.`,true)}
+  if(t==='M'){const base=ri(11,99)*100000;const disp=(base/1e6).toFixed(1)+'M';
+   return RANGEQ(`Visits show as <b>${disp}</b> (rounded to the nearest 100,000). Smallest and largest possible real visit counts?`,base-50000,base+49999,`${disp} = ${grp(String(base))} to the nearest 100,000: from ${grp(String(base-50000))} to ${grp(String(base+49999))}.`,true)}
+  if(t==='ten'){const base=ri(4,99)*10;return RANGEQ(`A leaderboard says a player has <b>${base}</b> wins, rounded to the nearest 10. Smallest and largest real totals?`,base-5,base+4,`Anything from ${base-5} to ${base+4} rounds to ${base}.`,true)}
+  const base=ri(11,99)*100;return RANGEQ(`A group has "<b>${grp(String(base))} members</b>" (nearest 100). Smallest and largest real membership?`,base-50,base+49,`From ${grp(String(base-50))} to ${grp(String(base+49))}.`,true)},
+ m3(){
+  const t=pick(['wait','devex','studs']);
+  if(t==='wait'){const d=mk(ri(10000,999999),6);return NUMQ(`<code>task.wait()</code> measured <b>${fmt(d)}</b> seconds. Round to 3 d.p.`,roundDec(d,3),`Keep three digits after the point; the 4th decides.`)}
+  if(t==='devex'){const r=ri(51,999);const d=mk(r*38,4);return NUMQ(`<b>${r}</b> Robux × $0.0038 = <b>$${fmt(d)}</b>. Round to 3 d.p.`,roundDec(d,3),`Exact value ${fmt(d)}; look at the 4th decimal place.`)}
+  const s=mk(ri(1000,9999),2);const d=mk(s.n*28,4);return NUMQ(`A ramp is <b>${fmt(s)}</b> studs. At 0.28 m per stud that's <b>${fmt(d)} m</b>. Round to 3 d.p.`,roundDec(d,3),`Look at the 4th decimal place of ${fmt(d)}.`)},
+ m4(){
+  const dp=ri(1,5);const k=dp+ri(1,3);const d=mk(ri(P(k-1),P(k+ri(0,2))-1),k);
+  return NUMQ(`Round <b>${fmt(d)}</b> to ${dp} d.p.`,roundDec(d,dp),`Count ${dp} places after the point, then check the next digit.`)},
+ m5(){
+  const d=mk(ri(1000,999999999),0);return NUMQ(`A game has <b>${fmt(d)}</b> total visits. Write the headline figure: round to 1 s.f.`,roundSf(d,1),`The first digit is the only significant one; everything after it becomes zeros.`)},
+ m6(){
+  const sf=pick([2,3]);const d=mk(ri(1000,999999999),0);return NUMQ(`<b>${fmt(d)}</b> members. Round to ${sfLabel(sf)}`,roundSf(d,sf),`Keep the first ${sf} digits (rounded), pad with zeros to keep the size.`)},
+ m7(){
+  const t=pick(['small','pi','mid']);let d,sf;
+  if(t==='small'){d=mk(ri(10000,99999),7);sf=pick([2,3]);return NUMQ(`A payout rate is <b>${fmt(d)}</b> dollars per Robux. Round to ${sfLabel(sf)}`,roundSf(d,sf),`Leading zeros are not significant — start counting at the first non-zero digit.`)}
+  if(t==='pi'){d=mk(ri(100000,999999),5);sf=pick([2,3]);return NUMQ(`Physics engine value <b>${fmt(d)}</b>. Round to ${sfLabel(sf)}`,roundSf(d,sf),`Start counting significant figures from the first non-zero digit.`)}
+  d=mk(ri(1000,9999),4);sf=pick([1,2]);return NUMQ(`Kill/death ratio <b>${fmt(d)}</b>. Round to ${sfLabel(sf)}`,roundSf(d,sf),`The first significant figure is the first non-zero digit.`)},
+ m8(){
+  const S=[
+   ['Your ping readout is jumping around <b>47.3826 ms</b>. What should the HUD display?',['47.3826 ms','47.38 ms','47 ms','0 ms'],2,'Ping changes every frame; whole milliseconds is all anyone reads. 47.38 flickers, 47.3826 is noise.'],
+   ['Average session length across 8,431 players is <b>23.71284 minutes</b>. Pick the stat-card figure.',['23.71284 min','24 min','20 min','23.7128 min'],1,'Whole minutes is enough for a headline stat; 20 min throws away nearly 4 minutes of real information.'],
+   ['A measuring tool reports a wall as <b>1247.3812 studs</b>. Parts in Studio snap to whole studs. Tell the builder:',['1247.3812 studs','1247 studs','1000 studs','1200 studs'],1,'The builder can only place whole studs, so 1247 is the useful figure. 1 s.f. loses 247 studs.'],
+   ['91,384 likes out of 98,201 votes = <b>93.0580…%</b>. The rating badge should show:',['93.0580%','93%','90%','100%'],1,'Rating badges show whole percentages. 90% is a different (worse) rating; 100% is wrong.'],
+   ['DevEx: 137,842 Robux × $0.0038 = <b>$523.7996</b>. Write it on the invoice as:',['$523.7996','$523.80','$500','$523.8'],1,'Money is written to the penny — 2 d.p. $523.8 is the same value but not how money is written.'],
+   ['<b>1,238,441</b> people are playing right now. The front-page counter shows:',['1,238,441','1.2M','1M','1,238,000'],1,'The exact figure changes every second. 1.2M is stable and readable; 1M hides 200,000 players.'],
+   ['A speedrun finished in <b>73.48291 s</b>. The leaderboard shows:',['73.48291 s','73.48 s','73 s','70 s'],1,'Speedrun timers use hundredths so close runs can still be separated. Whole seconds would create ties.'],
+   ['After tuning, a value comes out as <b>16.000000001</b>. In the WalkSpeed script write:',['16.000000001','16.0000','16','20'],2,'That tail is floating-point noise (see Mission 13). The intended value is exactly 16.']
+  ];const s=pick(S);return MCQ(s[0],s[1],s[2],s[3])},
+ m9(){
+  const t=pick(['mul','mul','div','add','devex']);
+  if(t==='mul'){const a1=ri(2,9),pa=ri(1,2),b1=ri(2,9),pb=ri(1,3);const a=band1sf(a1,pa),b=band1sf(b1,pb);const est=a1*P(pa)*b1*P(pb);
+   return NUMQ(`Each server holds <b>${a}</b> players and <b>${grp(String(b))}</b> servers are running. Round each number to 1 s.f. and estimate the players online.`,mk(est,0),`${a} ≈ ${a1*P(pa)}, ${grp(String(b))} ≈ ${grp(String(b1*P(pb)))}; ${a1*P(pa)} × ${grp(String(b1*P(pb)))} = ${grp(String(est))}.`)}
+  if(t==='div'){const b1=pick([2,3,4,5]),pb=ri(0,1),m=ri(2,9)*P(ri(1,2));const a1v=b1*m;const a=ri(Math.ceil(a1v-P(String(a1v).length-1)/2),Math.floor(a1v+P(String(a1v).length-1)/2-1));const b=band1sf(b1,pb);
+   return NUMQ(`<b>${grp(String(a))}</b> Robux is shared equally between <b>${b}</b> team members. Round each to 1 s.f. and estimate each share.`,mk(m,0),`${grp(String(a))} ≈ ${grp(String(a1v))}, ${b} ≈ ${b1*P(pb)}; ${grp(String(a1v))} ÷ ${b1*P(pb)} = ${grp(String(m))}.`)}
+  if(t==='add'){const xs=[0,0,0].map(()=>{const d1=ri(1,9),p=ri(2,3);return [band1sf(d1,p),d1*P(p)]});const est=xs.reduce((s,x)=>s+x[1],0);
+   return NUMQ(`Visits over three days: <b>${xs.map(x=>grp(String(x[0]))).join('</b>, <b>')}</b>. Round each to 1 s.f. and estimate the total.`,mk(est,0),`${xs.map(x=>grp(String(x[1]))).join(' + ')} = ${grp(String(est))}.`)}
+  const r1=ri(2,9),pr=ri(2,4);const r=band1sf(r1,pr);const ans=mk(r1*P(pr)*4,3);
+  return NUMQ(`DevEx pays $0.0038 per Robux. Estimate the cash for <b>${grp(String(r))}</b> Robux by rounding both numbers to 1 s.f.`,ans,`0.0038 ≈ 0.004 and ${grp(String(r))} ≈ ${grp(String(r1*P(pr)))}; 0.004 × ${grp(String(r1*P(pr)))} = ${fmtTrim(ans)}.`,true)},
+ m10(){
+  const t=pick(['mul','mul','div','add']);let a,b,tru,sym;
+  if(t==='mul'){a=ri(11,99);b=ri(101,999);tru=a*b;sym='×'}
+  else if(t==='div'){b=ri(3,49);const q=ri(12,99);a=b*q;tru=q;sym='÷'}
+  else{a=ri(1100,9900);b=ri(110,990);tru=a+b;sym='+'}
+  const bug=Math.random()<0.5;let shown=tru;
+  if(bug){shown=pick([tru*10,Math.round(tru/10),tru*100]);if(shown===0)shown=tru*10}
+  const q=`Your script printed: <b>${grp(String(a))} ${sym} ${grp(String(b))} = ${grp(String(shown))}</b>. Estimate it in your head. Is that plausible, or a bug?`;
+  return MCQ(q,['Plausible','Bug!'],bug?1:0,bug?`Estimate: roughly ${grp(String(tru))}. The printed answer is about ${shown>tru?'10× too big':'10× too small'} — a bug.`:`Estimate lands near ${grp(String(tru))}, so the output is the right size (it's actually exact).`)},
+ m11(){
+  const t=pick(['dp','dp','level','neg']);
+  if(t==='dp'){const dp=ri(0,3);const d=mk(ri(P(dp+1),P(dp+4)-1),dp+ri(1,3));return NUMQ(`Truncate <b>${fmt(d)}</b> to ${dpLabel(dp)}`,truncDec(d,dp),`Truncating just cuts the extra digits off — no rounding up, ever.`)}
+  if(t==='level'){const xp=ri(100,9999);return NUMQ(`Level = XP ÷ 100, truncated. A player has <b>${grp(String(xp))}</b> XP. What level are they?`,mk(Math.floor(xp/100),0),`${grp(String(xp))} ÷ 100 = ${xp/100}; cut the decimals and they're level ${Math.floor(xp/100)}. They never round up to the next level.`)}
+  const d=mk(-ri(1000,9999),3);const dp=ri(0,1);return NUMQ(`A part's Y position is <b>${fmt(d)}</b> studs (below the baseplate). Truncate to ${dpLabel(dp)}`,truncDec(d,dp),`Truncating cuts digits off, so the answer is closer to zero than the original. (Luau's <code>math.floor</code> would go the other way for negatives — see the build.)`)},
+ m12(){
+  const op=pick(['×','+','−','÷']);let a,b,da,db;
+  do{a=ri(11,99)}while(a%10===0||a%10===5);do{b=ri(11,99)}while(b%10===0||b%10===5||b===a);
+  const ra=Math.round(a/10)*10,rb=Math.round(b/10)*10;da=ra>a?'up':'down';db=rb>b?'up':'down';
+  let ans;
+  if(op==='×'||op==='+'){ans=(da==='up'&&db==='up')?0:(da==='down'&&db==='down')?1:2}
+  else{ans=(da==='up'&&db==='down')?0:(da==='down'&&db==='up')?1:2}
+  const why={'×':'Both up → over. Both down → under. One each way → can\'t tell.','+':'Both up → over. Both down → under. One each way → can\'t tell.','−':'First up and second down → over. First down and second up → under. Both the same way → can\'t tell.','÷':'Top up and bottom down → over. Top down and bottom up → under. Both the same way → can\'t tell.'}[op];
+  return MCQ(`To estimate <b>${a} ${op} ${b}</b> you round ${a} <em>${da}</em> to ${ra} and ${b} <em>${db}</em> to ${rb}. Compared with the exact answer, the estimate is…`,['An overestimate','An underestimate','Can\'t tell without calculating'],ans,why)},
+ m13(){
+  const t=pick(['sale','sale','parts']);
+  if(t==='sale'){let p;do{p=ri(15,499)}while(p%10===0);const exact=mk(7*p,1);const fl=Math.floor(7*p/10);const lossPer=mk(7*p-10*fl,1);const N=pick([100,500,1000,2000]);const ans=mk(lossPer.n*N,1);
+   return NUMQ(`A game pass costs <b>${p}</b> Robux; you receive 70% = <b>${fmt(exact)}</b> Robux per sale, but Robux are paid as whole numbers, rounded <em>down</em> to ${fl}. After <b>${grp(String(N))}</b> sales, how many Robux have been lost compared with the exact total?`,ans,`Each sale loses ${fmtTrim(lossPer)} Robux; ${fmtTrim(lossPer)} × ${grp(String(N))} = ${fmtTrim(ans)}. Small rounding errors compound.`,true)}
+  const x=mk(ri(101,999)*5+pick([0,0,25,75]),2);const n=ri(6,24);const r=roundDec(x,0);const err=mk(Math.abs(r.n*100-x.n),2);const ans=mk(err.n*n,2);
+  return NUMQ(`Each of <b>${n}</b> identical parts is <b>${fmt(x)}</b> studs long. A builder rounds each to the nearest whole stud <em>before</em> adding. How far out is the total length, in studs?`,ans,`Each part is out by ${fmtTrim(err)}; ${fmtTrim(err)} × ${n} = ${fmtTrim(ans)} studs. Round once at the end, not every time.`,true)},
+ m14(){
+  const t=pick(['ten','hund','dp1','dp2','sf','K']);
+  if(t==='ten'){const v=ri(4,99)*10;return RANGEQ(`<b>${v}</b> wins, rounded to the nearest 10. Write the error interval for the true value x.`,v-5,v+5,`${v-5} ≤ x < ${v+5}. The lower bound is included, the upper bound is not.`)}
+  if(t==='hund'){const v=ri(11,99)*100;return RANGEQ(`A server ran for <b>${grp(String(v))}</b> seconds, to the nearest 100. Error interval?`,v-50,v+50,`${grp(String(v-50))} ≤ x < ${grp(String(v+50))}.`)}
+  if(t==='dp1'){const d=mk(ri(11,999),1);const lo=mk(d.n*10-5,2),hi=mk(d.n*10+5,2);return RANGEQ(`A jump height is <b>${fmt(d)}</b> studs to 1 d.p. Error interval?`,val(lo),val(hi),`${fmt(lo)} ≤ x < ${fmt(hi)} — half of 0.1 either side.`)}
+  if(t==='dp2'){const d=mk(ri(101,9999),2);const lo=mk(d.n*10-5,3),hi=mk(d.n*10+5,3);return RANGEQ(`A payout of <b>$${fmt(d)}</b> is correct to 2 d.p. Error interval?`,val(lo),val(hi),`${fmt(lo)} ≤ x < ${fmt(hi)} — half of 0.01 either side.`)}
+  if(t==='sf'){const d1=ri(11,99),p=ri(2,4);const v=d1*P(p);const h=P(p)/2;return RANGEQ(`<b>${grp(String(v))}</b> members, given to 2 s.f. Error interval?`,v-h,v+h,`Rounded to the nearest ${grp(String(P(p)))}: ${grp(String(v-h))} ≤ x < ${grp(String(v+h))}.`)}
+  const base=ri(101,999)*100;const disp=(base/1000).toFixed(1)+'K';return RANGEQ(`The counter shows <b>${disp}</b> players (nearest 100). Error interval for the real count?`,base-50,base+50,`${disp} = ${grp(String(base))}: ${grp(String(base-50))} ≤ x < ${grp(String(base+50))}.`)},
+ m15(){
+  const op=pick(['×','×','+','−']);const t=pick(['ten','dp1']);let a,b,h,k;
+  if(t==='ten'){a=mk(ri(3,30)*10,0);b=mk(ri(3,30)*10,0);h=mk(5,0);k=0}else{a=mk(ri(21,199),1);b=mk(ri(21,199),1);h=mk(5,2);k=2}
+  const A=a.n*P(k-a.k),B=b.n*P(k-b.k),H=h.n; // all at scale k
+  let lo,hi,q,expl;const acc=t==='ten'?'to the nearest 10 studs':'to 1 d.p.';
+  if(op==='×'){lo=mk((A-H)*(B-H),2*k);hi=mk((A+H)*(B+H),2*k);q=`A map is <b>${fmt(a)}</b> studs by <b>${fmt(b)}</b> studs, each measured ${acc}. Error interval for the area?`;expl=`Smallest: ${fmtTrim(mk(A-H,k))} × ${fmtTrim(mk(B-H,k))} = ${fmtTrim(lo)}. Largest: ${fmtTrim(mk(A+H,k))} × ${fmtTrim(mk(B+H,k))} = ${fmtTrim(hi)}.`}
+  else if(op==='+'){lo=mk(A+B-2*H,k);hi=mk(A+B+2*H,k);q=`Two obby sections are <b>${fmt(a)}</b> and <b>${fmt(b)}</b> studs long, each ${acc}. Error interval for the total length?`;expl=`Smallest: ${fmtTrim(mk(A-H,k))} + ${fmtTrim(mk(B-H,k))} = ${fmtTrim(lo)}. Largest: ${fmtTrim(mk(A+H,k))} + ${fmtTrim(mk(B+H,k))} = ${fmtTrim(hi)}.`}
+  else{if(A<B){[a,b]=[b,a]}const A2=Math.max(A,B),B2=Math.min(A,B);lo=mk(A2-H-(B2+H),k);hi=mk(A2+H-(B2-H),k);q=`A wall is <b>${fmt(a)}</b> studs and a door is <b>${fmt(b)}</b> studs, each ${acc}. Error interval for the gap left (wall − door)?`;expl=`Smallest gap: smallest wall − largest door = ${fmtTrim(mk(A2-H,k))} − ${fmtTrim(mk(B2+H,k))} = ${fmtTrim(lo)}. Largest gap: ${fmtTrim(mk(A2+H,k))} − ${fmtTrim(mk(B2-H,k))} = ${fmtTrim(hi)}.`}
+  return RANGEQ(q,val(lo),val(hi),expl)},
+ m16(){const k='m'+ri(1,15);const qq=G[k]();qq.q=`<span class="small">From Mission ${k.slice(1).padStart(2,'0')}</span><br>`+qq.q;return qq}
+};
+
+/* ---------------- Mission content ---------------- */
+const OAK='https://www.thenational.academy/teachers/programmes/maths-secondary-ks3/units/estimation-and-rounding/lessons/';
+const M=[
+{id:1,title:'Leaderboard clean-up',oak:'checking-understanding-of-rounding',oakTitle:'Checking understanding of rounding',
+ brief:'Your leaderboard is printing raw numbers — 1247 visits, 3.71829 seconds, $4.2871. Players hate it. Job one: round every stat to the place value the screen actually needs.',
+ field:['Open any Roblox game page. Write down five numbers you can see (players, visits, likes, a price). For each, round it to the nearest 10, 100 and 1000.','Time three laps of an obby (or a walk across a baseplate) with a stopwatch. Round each to the nearest second and to 1 d.p.','Explain to Dad, out loud, why 3.65 rounds to 3.7 and not 3.6.'],
+ build:{intro:'Luau has no "round to nearest 10" built in. Build it. Paste into a Script in ServerScriptService, press Play, and read the Output window.',
+ code:`-- Rounding to the nearest whole number
+local function roundWhole(x)
+	return math.floor(x + 0.5)
+end
+print(roundWhole(3.2), roundWhole(3.5), roundWhole(3.7)) --> 3 4 4
+
+-- Rounding to the nearest 10, 100, 1000 ...
+local function roundToNearest(x, step)
+	return math.floor(x / step + 0.5) * step
+end
+print(roundToNearest(1247, 10))   --> 1250
+print(roundToNearest(1247, 100))  --> 1200
+print(roundToNearest(1247, 1000)) --> 1000
+
+-- Luau also has math.round (halves go away from zero)
+print(math.round(2.5), math.round(-2.5)) --> 3 -3`,
+ tasks:['Predict every output before you press Play. Tick each one you got right.','Add a line that rounds 1,250 to the nearest 100. Is the answer what Oak says it should be?','Change roundWhole so it rounds to 1 d.p. instead (hint: what if you multiply by 10 first?).']},
+ evidence:['Five rounded website numbers in the case file','Stopwatch times, rounded two ways','Studio output screenshot with your predictions marked','Oak exit quiz done — score noted']},
+{id:2,title:'The rounded counter',oak:'securing-understanding-of-rounding',oakTitle:'Securing understanding of rounding',
+ brief:'Roblox never shows you the real number. "12.3K playing" could be 12,251 or 12,349. This mission is about reading rounded numbers backwards: what could the real value have been?',
+ field:['Open the Roblox home page. Find three games showing rounded player counts like 12.3K or 1.2M. For each, write the smallest and largest number of players that would show the same display.','Check the data card: look up the current Robux pack prices and the DevEx rate. Correct the card if they\'ve changed. Which of those numbers are exact and which are rounded?','Find a number on Roblox that is definitely NOT rounded (hint: your own Robux balance, or a game pass price). How do you know?'],
+ build:{intro:'This is roughly how the site shortens big numbers. Use it to test your answers — and watch for a surprise.',
+ code:`local function shortCount(n)
+	if n >= 1e9 then
+		return string.format("%.1fB", n / 1e9)
+	elseif n >= 1e6 then
+		return string.format("%.1fM", n / 1e6)
+	elseif n >= 1e3 then
+		return string.format("%.1fK", n / 1e3)
+	end
+	return tostring(n)
+end
+
+print(shortCount(12251))  --> 12.3K
+print(shortCount(12349))  --> 12.3K
+print(shortCount(12350))  --> ??? predict, then run
+print(shortCount(1238441)) --> 1.2M`,
+ tasks:['Find the smallest and largest n that print "12.3K". Prove it by testing the numbers either side.','12350 should round up to 12.4K. Does it? Write down what you saw — Mission 13 explains it.','Change "%.1f" to "%.0f". What does 12,349 show now, and what range of numbers would show the same?']},
+ evidence:['Three games with min/max real values','Data card checked and corrected','The 12350 surprise written down','Oak exit quiz done — score noted']},
+{id:3,title:'Physics tuning',oak:'rounding-to-three-decimal-places',oakTitle:'Rounding to three decimal places',
+ brief:'Roblox measures time in fractions of a second and pays creators fractions of a cent. Three decimal places is the working precision for both. Round like an engineer.',
+ field:['Convert five part lengths in studs to metres (× 0.28) and give each to 3 d.p.','Pick five Robux amounts from 50 to 999. Convert each to dollars at $0.0038 per Robux, to 3 d.p.','Which of your answers changed when you rounded, and which were already short enough?'],
+ build:{intro:'Measure how long task.wait really waits — it is never exactly what you asked for.',
+ code:`local function roundDp(x, dp)
+	local m = 10 ^ dp
+	return math.floor(x * m + 0.5) / m
+end
+
+for i = 1, 5 do
+	local t0 = os.clock()
+	task.wait(0.5)
+	local elapsed = os.clock() - t0
+	print(elapsed, "->", roundDp(elapsed, 3), string.format("%.3f", elapsed))
+end`,
+ tasks:['Run it. Write down the five raw times and your own 3 d.p. rounding of each, then compare with the script.','Do the two rounded columns ever disagree? (They can — think about what "%.3f" does with trailing zeros.)','Change 0.5 to 0.1. Is the wait more or less accurate, as a fraction of what you asked for?']},
+ evidence:['Ten conversions to 3 d.p.','Five measured wait times, rounded by hand and by script','Oak exit quiz done — score noted']},
+{id:4,title:'The precision slider',oak:'rounding-to-any-number-of-decimal-places',oakTitle:'Rounding to any number of decimal places',
+ brief:'A settings menu needs a precision slider: 0 to 5 decimal places, chosen by the player. Your rounding has to work for any number of places, not just the ones you\'ve practised.',
+ field:['Take one long number (e.g. 3.14159265) and round it to 0, 1, 2, 3, 4 and 5 d.p. Write all six in a column. What pattern do you notice about when the digit changes?','Find a number where rounding to 2 d.p. and 3 d.p. gives the same digits — explain why.','Give Dad a number and a d.p. to round it to; mark his answer.'],
+ build:{intro:'Turn roundDp into a slider: a loop that prints the same number at every precision.',
+ code:`local function roundDp(x, dp)
+	local m = 10 ^ dp
+	return math.floor(x * m + 0.5) / m
+end
+
+local x = 3.14159265
+for dp = 0, 5 do
+	print(dp, "d.p.", string.format("%." .. dp .. "f", roundDp(x, dp)))
+end
+
+-- Try a value that ends in a 5 at some position
+local y = 2.4975
+for dp = 0, 3 do
+	print(dp, "d.p.", string.format("%." .. dp .. "f", roundDp(y, dp)))
+end`,
+ tasks:['Predict all ten lines before running.','Add a number of your own with at least 6 decimal places.','Bonus: what happens if dp is negative? Try roundDp(1247, -2).']},
+ evidence:['Six-row precision column','Marked question for Dad','Studio predictions vs output','Oak exit quiz done — score noted']},
+{id:5,title:'Headline numbers',oak:'rounding-integers-to-one-significant-figure',oakTitle:'Rounding integers to one significant figure',
+ brief:'Nobody says "Roblox had 97,844,000 daily players". They say "nearly 100 million". Headline numbers keep one digit that matters and let the size do the talking.',
+ field:['Find the total visits for five popular games. Write each as a 1 s.f. headline ("about 40 billion").','Rank the five games by their headline numbers. Did any two games get the same headline? What does that tell you about 1 s.f.?','Estimate how many studs long your bedroom would be (≈ 0.28 m per stud). Give it to 1 s.f.'],
+ build:{intro:'Significant figures need a bit of maths: work out how many digits the number has first.',
+ code:`local function roundSf(x, sf)
+	if x == 0 then return 0 end
+	local digits = math.floor(math.log10(math.abs(x))) + 1 -- digits before the point
+	local m = 10 ^ (sf - digits)
+	return math.floor(x * m + 0.5) / m
+end
+
+print(roundSf(38472109, 1)) --> 40000000
+print(roundSf(97844000, 1)) --> 100000000
+print(roundSf(1247, 1))     --> 1000
+print(roundSf(1500, 1))     --> 2000`,
+ tasks:['Check each output by hand.','Add the five visit counts from the field mission and let the script headline them.','Why does the function need "digits"? Explain in one sentence to Dad.']},
+ evidence:['Five headline numbers','Bedroom-in-studs estimate','Oak exit quiz done — score noted']},
+{id:6,title:'Stat card, two and three figures',oak:'rounding-integers-to-significant-figures',oakTitle:'Rounding integers to significant figures',
+ brief:'The stat card on your game page has room for three digits. Not three decimal places — three digits that matter. That is what significant figures are for.',
+ field:['Take the five visit counts from Mission 05 and give each to 2 s.f. and 3 s.f. Now can you rank them?','Look at how Roblox displays big numbers (12.3K, 1.2M). How many significant figures is that? When does it drop to two?','Find a number where rounding to 2 s.f. changes the number of digits (e.g. 997 → 1000).'],
+ build:{intro:'Same function, more figures — and a version that returns text with the right zeros.',
+ code:`local function roundSf(x, sf)
+	if x == 0 then return 0 end
+	local digits = math.floor(math.log10(math.abs(x))) + 1
+	local m = 10 ^ (sf - digits)
+	return math.floor(x * m + 0.5) / m
+end
+
+local visits = { 38472109, 4571233, 997, 123456789 }
+for _, v in ipairs(visits) do
+	print(v, "2sf:", roundSf(v, 2), "3sf:", roundSf(v, 3))
+end`,
+ tasks:['Predict the eight outputs first.','Add 997 to 2 s.f. by hand, then check the script agrees.','Replace the table with your own five games\' visit counts.']},
+ evidence:['Ten roundings (2 and 3 s.f.)','The digit-count-changes example','Oak exit quiz done — score noted']},
+{id:7,title:'Small numbers, big deal',oak:'rounding-decimals-to-significant-figures',oakTitle:'Rounding decimals to significant figures',
+ brief:'$0.0038 per Robux. 0.28 m per stud. A K/D ratio of 0.8471. Decimals hide their significant figures behind zeros. Find them.',
+ field:['Write down five decimals from the data card or your own game stats. Underline the first significant figure in each.','Round each to 1 s.f. and to 2 s.f.','Convert 1 stud to feet (0.28 m × 3.2808) and give the answer to 2 s.f. and 3 s.f.'],
+ build:{intro:'The same roundSf works for decimals — log10 of a small number is negative, and that is what makes it work.',
+ code:`local function roundSf(x, sf)
+	if x == 0 then return 0 end
+	local digits = math.floor(math.log10(math.abs(x))) + 1
+	local m = 10 ^ (sf - digits)
+	return math.floor(x * m + 0.5) / m
+end
+
+print(math.log10(0.0038421))   --> about -2.4, so "digits" is -2
+print(roundSf(0.0038421, 2))   --> 0.0038
+print(roundSf(0.28 * 3.2808, 3))
+print(roundSf(0.8471, 1))
+print(roundSf(3.14159, 3))`,
+ tasks:['Work out by hand what "digits" is for 0.0038421, 0.28 and 3.14159.','Predict the last four outputs, then run.','Print a decimal to 2 s.f. with string.format("%.2g", x). Does it agree with roundSf?']},
+ evidence:['Five decimals with first s.f. underlined and rounded','Studs-to-feet conversion','Oak exit quiz done — score noted']},
+{id:8,title:'What goes on the HUD?',oak:'degrees-of-accuracy',oakTitle:'Degrees of accuracy',
+ brief:'A number can be too precise. Ping to four decimal places is noise; a rating to zero decimal places is fine; money to three is wrong. Choosing the accuracy is a design decision, and it\'s yours.',
+ field:['Screenshot a Roblox HUD or game page. For every number on it, write what accuracy it uses (whole, 1 d.p., 2 s.f. …) and why that\'s sensible.','Find one number on Roblox that you think is shown to the WRONG accuracy. Argue your case to Dad.','Design a stat card for your own game: five stats, each with a chosen accuracy and a one-line reason.'],
+ build:{intro:'A TextLabel that shows the same raw values at sensible accuracies. Put a ScreenGui with a TextLabel in StarterGui, then this in a LocalScript inside the label.',
+ code:`local label = script.Parent
+
+local ping = 47.3826           -- ms
+local rating = 91384 / 98201   -- fraction
+local payout = 137842 * 0.0038 -- dollars
+local runTime = 73.48291       -- seconds
+
+label.Text = string.format(
+	"Ping %d ms  |  Rating %.0f%%  |  $%.2f  |  Run %.2f s",
+	math.round(ping), rating * 100, payout, runTime
+)
+print(label.Text)`,
+ tasks:['Predict the exact text before you run it.','Change one format so it is too precise, and one so it is too crude. Screenshot both for the case file.','Add a fifth stat of your own with a chosen accuracy.']},
+ evidence:['Annotated HUD screenshot','Your own stat-card design','Oak exit quiz done — score noted']},
+{id:9,title:'Dev budget on a napkin',oak:'estimating-numerical-calculations',oakTitle:'Estimating numerical calculations',
+ brief:'Before any calculator: about how much? 38 players per server × 412 servers — a developer says "40 × 400, about 16,000" in two seconds. Round everything to 1 s.f. and go.',
+ field:['Estimate: the cost of buying 1,700 Robux four times (use the data card prices). Then work it out exactly and compare.','Estimate how many seconds it takes to walk across a 2,300-stud map at 16 studs/s. Then check with a calculator.','Estimate the DevEx cash for a game that earned 78,400 Robux. Then calculate exactly.'],
+ build:{intro:'A script that estimates the way you do — round to 1 s.f., multiply — and shows how close the estimate lands.',
+ code:`local function roundSf(x, sf)
+	if x == 0 then return 0 end
+	local digits = math.floor(math.log10(math.abs(x))) + 1
+	local m = 10 ^ (sf - digits)
+	return math.floor(x * m + 0.5) / m
+end
+
+local function estimateProduct(a, b)
+	return roundSf(a, 1) * roundSf(b, 1)
+end
+
+local pairs_ = { {38, 412}, {2300, 1/16}, {78400, 0.0038}, {49, 51} }
+for _, p in ipairs(pairs_) do
+	local exact = p[1] * p[2]
+	local est = estimateProduct(p[1], p[2])
+	print(p[1], "x", p[2], "exact", exact, "estimate", est, "ratio", roundSf(exact / est, 2))
+end`,
+ tasks:['Predict each estimate by hand first.','Which pair has the worst ratio? Why does 49 × 51 estimate so badly?','Add three multiplications from your own game (prices, players, studs).']},
+ evidence:['Three napkin estimates with exact answers beside them','The 49 × 51 explanation','Oak exit quiz done — score noted']},
+{id:10,title:'Bug hunt',oak:'checking-by-estimating',oakTitle:'Checking by estimating',
+ brief:'A script prints "38 × 412 = 156,560". A developer who can estimate spots the missing decimal point instantly. This mission trains that reflex — and you\'ll write a script that has it too.',
+ field:['Ask Dad to write ten multiplication answers, some deliberately 10× wrong. Sort them into "plausible" and "bug" by estimating only — no calculator. Then check.','Look at a game\'s visits and its likes. Estimate the likes-per-visit rate. Is it plausible, or does one number look broken?','Find a Robux price and its cash price. Estimate the cash per Robux. Is it near the data card figure?'],
+ build:{intro:'A sanity check: if the exact answer isn\'t within a factor of 2 of the estimate, warn.',
+ code:`local function roundSf(x, sf)
+	if x == 0 then return 0 end
+	local digits = math.floor(math.log10(math.abs(x))) + 1
+	local m = 10 ^ (sf - digits)
+	return math.floor(x * m + 0.5) / m
+end
+
+local function checkProduct(a, b, claimed)
+	local est = roundSf(a, 1) * roundSf(b, 1)
+	local ratio = claimed / est
+	if ratio > 2 or ratio < 0.5 then
+		warn(("BUG? %d x %d = %d  (estimate %d)"):format(a, b, claimed, est))
+	else
+		print(("ok    %d x %d = %d  (estimate %d)"):format(a, b, claimed, est))
+	end
+end
+
+checkProduct(38, 412, 15656)
+checkProduct(38, 412, 156560)
+checkProduct(23, 87, 2001)
+checkProduct(23, 87, 201)`,
+ tasks:['Predict which lines warn.','Feed it Dad\'s ten answers from the field mission. Does it agree with you?','Why "factor of 2" and not "exactly equal"? Write one sentence.']},
+ evidence:['Ten sorted answers, marked','Likes-per-visit plausibility note','Oak exit quiz done — score noted']},
+{id:11,title:'The floor function',oak:'truncating',oakTitle:'Truncating',
+ brief:'Level = XP ÷ 100, cut off. 1,289 XP is level 12 — never 13, however close. Games truncate all the time. So does Luau: math.floor. But floor and truncate are not the same thing for negative numbers…',
+ field:['Truncate five decimals to 0, 1 and 2 d.p. Next to each, write the rounded version. When are they different?','A player has 4,399 XP; levels are every 100 XP. What level? How much XP to the next level? Explain why rounding would be unfair here.','Find one place where Roblox truncates rather than rounds (hint: Robux after the 30% fee, or ages, or levels).'],
+ build:{intro:'Three ways to cut digits off — and the trap with negative numbers.',
+ code:`local function truncateDp(x, dp)
+	local m = 10 ^ dp
+	local whole = math.modf(x * m)  -- integer part, towards zero
+	return whole / m
+end
+
+print(truncateDp(3.789, 2))   --> 3.78
+print(truncateDp(3.789, 0))   --> 3
+print(truncateDp(-3.789, 0))  --> -3
+print(math.floor(-3.789))     --> -4   floor is NOT truncation for negatives
+
+-- Levels never round up
+local xp = 1289
+print("level", math.floor(xp / 100), "to next", 100 - xp % 100)
+
+-- A trap for Mission 13:
+print(truncateDp(0.57, 2))    --> predict, then run`,
+ tasks:['Predict every line, especially the last one.','Change xp to 4399 and check it against your field answer.','Write a truncateDp that works for negatives using math.floor and math.ceil instead of math.modf.']},
+ evidence:['Five truncations vs roundings','Level calculation with explanation','The 0.57 result written down','Oak exit quiz done — score noted']},
+{id:12,title:'Will it fit?',oak:'overestimating-vs-underestimating',oakTitle:'Overestimating vs underestimating',
+ brief:'You have 1,700 Robux and want 4 items. Round the prices up and it fits, you\'re safe. Round them down and it fits, you might still be short. Knowing which way your estimate leans is the whole skill.',
+ field:['Pick four items on the Roblox marketplace. Estimate the total by rounding every price UP, then by rounding every price DOWN. Which estimate would you trust before buying?','A map is 47 studs by 82 studs. Estimate the area by rounding both up, both down, and one each way. Which estimates are definitely over, definitely under, and which can\'t you be sure about?','Explain to Dad why truncating always gives an underestimate when you multiply positive numbers.'],
+ build:{intro:'Round up, round down, and compare with the exact answer — for ×, +, − and ÷.',
+ code:`local function up(x, step) return math.ceil(x / step) * step end
+local function down(x, step) return math.floor(x / step) * step end
+
+local a, b = 47, 82
+print("exact  ", a * b)
+print("both up", up(a,10) * up(b,10))       -- overestimate
+print("both dn", down(a,10) * down(b,10))   -- underestimate
+print("a up,b dn", up(a,10) * down(b,10))   -- can't tell in general
+
+print("divide exact", a / b)
+print("a up, b down", up(a,10) / down(b,10))  -- over or under?
+print("a down, b up", down(a,10) / up(b,10))  -- over or under?`,
+ tasks:['Predict whether each estimate is over or under before running.','Write the same test for a − b. Which combination guarantees an overestimate?','Test the "can\'t tell" case with three different pairs of numbers. Does it ever come out over AND under?']},
+ evidence:['Marketplace estimate both ways','47 × 82 four-way estimate table','Oak exit quiz done — score noted']},
+{id:13,title:'0.1 + 0.2 ≠ 0.3',oak:'rounding-errors',oakTitle:'Rounding errors',
+ brief:'Computers store decimals in binary, and 0.1 isn\'t exact in binary — so every calculation carries a tiny rounding error. Add enough of them together and a leaderboard goes wrong. Time to explain the surprises from Missions 02 and 11.',
+ field:['On a calculator: 1 ÷ 3, write the display, × 3. Is it 1? Now 2 ÷ 3 × 3. Explain what the calculator did.','A game pass costs 149 Robux. You get 70% = 104.3, paid as 104. Work out how much is lost over 1,000 sales. Then over 10,000.','Go back to your Mission 02 and Mission 11 surprises. Explain each in one sentence now that you know about binary rounding.'],
+ build:{intro:'See the error with your own eyes, then watch it compound.',
+ code:`print(0.1 + 0.2 == 0.3)                    --> false
+print(string.format("%.17g", 0.1 + 0.2))   --> 0.30000000000000004
+
+local total = 0
+for i = 1, 10 do
+	total += 0.1
+end
+print(total == 1, string.format("%.17g", total))
+
+-- Compounding: round every sale, or round once at the end?
+local price, sales = 149, 1000
+local perSaleExact = price * 0.7
+local perSaleRounded = math.floor(perSaleExact)
+print("exact total  ", perSaleExact * sales)
+print("rounded total", perSaleRounded * sales)
+print("lost         ", perSaleExact * sales - perSaleRounded * sales)
+
+-- Why 12350 showed as 12.3K in Mission 02:
+print(string.format("%.17g", 12350 / 1000))`,
+ tasks:['Predict the loop result, then run.','Change sales to 10,000 and to 1,000,000. Is the loss proportional?','Fix the 0.1 loop so the comparison works (hint: compare math.abs(total - 1) < 1e-9, or count in whole tenths).']},
+ evidence:['Calculator 1 ÷ 3 × 3 note','Lost Robux over 1,000 and 10,000 sales','Explanations of both earlier surprises','Oak exit quiz done — score noted']},
+{id:14,title:'Error bars',oak:'inequality-notation-to-express-error',oakTitle:'Inequality notation to express error',
+ brief:'"12.3K players" really means 12,250 ≤ players < 12,350. That one line, with its ≤ on the left and < on the right, is how a developer writes down exactly how wrong a rounded number might be.',
+ field:['For five rounded numbers on Roblox (player counts, visit counts, a percentage), write the error interval as lower ≤ x < upper.','Explain why the upper bound uses < and not ≤. Test it: would 12,350 display as 12.3K or 12.4K?','A part is "3.2 studs to 1 d.p.". Write the interval, then sketch it on a number line.'],
+ build:{intro:'Turn a rounded value and its accuracy into bounds — then test a value against them.',
+ code:`local function bounds(rounded, step)
+	return rounded - step / 2, rounded + step / 2   -- lower <= x < upper
+end
+
+local lo, hi = bounds(12300, 100)
+print(lo, hi)   --> 12250 12350
+
+local function inInterval(x, lo, hi)
+	return x >= lo and x < hi
+end
+print(inInterval(12250, lo, hi), inInterval(12349, lo, hi), inInterval(12350, lo, hi))
+
+print(bounds(3.2, 0.1))
+print(bounds(45000, 1000))   -- "45,000 to 2 s.f."`,
+ tasks:['Predict the three true/false values.','Add bounds for each of your five field-mission numbers.','What "step" would you pass for "correct to 2 s.f."? Does it depend on the number?']},
+ evidence:['Five error intervals','Number-line sketch','Oak exit quiz done — score noted']},
+{id:15,title:'Worst case, best case',oak:'using-inequality-notation-for-errors-in-calculations',oakTitle:'Using inequality notation for errors in calculations',
+ brief:'A map measured as 120 × 80 studs "to the nearest 10" could have an area anywhere from 8,625 to 10,625 studs². When rounded numbers go into a calculation, the error goes in with them — and grows.',
+ field:['Measure your room in studs (0.28 m each) to the nearest 10 studs, both ways. Write the interval for the area.','Two obby sections are 340 and 180 studs to the nearest 10. Write intervals for the total length and for the difference.','Explain to Dad why the smallest possible difference uses the smallest first number and the LARGEST second number.'],
+ build:{intro:'Bounds go in, bounds come out.',
+ code:`local function bounds(rounded, step)
+	return rounded - step / 2, rounded + step / 2
+end
+
+local wLo, wHi = bounds(120, 10)
+local hLo, hHi = bounds(80, 10)
+
+print("area  ", wLo * hLo, "<= A <", wHi * hHi)     -- 8625 .. 10625
+print("total ", wLo + hLo, "<= T <", wHi + hHi)
+print("diff  ", wLo - hHi, "<= D <", wHi - hLo)     -- smallest minus largest
+
+-- How much wider is the area interval than the width interval?
+print("width interval", wHi - wLo, "area interval", wHi * hHi - wLo * hLo)`,
+ tasks:['Predict all the bounds by hand before running.','Change the step to 1 (measured to the nearest stud). How much does the area interval shrink?','Add a division: bounds for "Robux per player" if 4,500 Robux (nearest 100) is shared between 30 players (nearest 10).']},
+ evidence:['Room area interval','Obby total and difference intervals','Division bounds from the build','Oak exit quiz done — score noted']},
+{id:16,title:'Launch-day report',oak:'problem-solving-with-estimation-and-rounding',oakTitle:'Problem solving with estimation and rounding',
+ brief:'Capstone. Pick one real Roblox game and write its one-page launch-day report: headline numbers, sensible accuracies, error intervals, a revenue estimate, and one bug you found by estimating. Everything from the last fifteen missions, in one document you\'d be proud to show a real studio.',
+ field:['Choose a game. Record its displayed players, visits, likes and rating, with the time you looked.','Write each as a headline (1 s.f.), a stat-card figure (3 s.f.) and an error interval.','Estimate: if 1% of today\'s players bought a 149-Robux game pass, roughly how many Robux and how many dollars is that? State whether your estimate is over or under, and why.','Include one deliberate "bug" number in the report for Dad to find by estimating. Mark the answer on the back.','Present the report to Dad in under five minutes. He asks two questions; you answer them.'],
+ build:{intro:'The Stat Board: a live server script that reports player counts three ways. Every function here is one you built earlier — you\'re assembling, not learning.',
+ code:`-- ServerScriptService > Script
+local Players = game:GetService("Players")
+
+local function roundSf(x, sf)
+	if x == 0 then return 0 end
+	local digits = math.floor(math.log10(math.abs(x))) + 1
+	local m = 10 ^ (sf - digits)
+	return math.floor(x * m + 0.5) / m
+end
+
+local function shortCount(n)
+	if n >= 1e6 then return string.format("%.1fM", n / 1e6) end
+	if n >= 1e3 then return string.format("%.1fK", n / 1e3) end
+	return tostring(n)
+end
+
+local function bounds(rounded, step)
+	return rounded - step / 2, rounded + step / 2
+end
+
+local function report()
+	local n = #Players:GetPlayers()
+	local headline = roundSf(n, 1)
+	local lo, hi = bounds(headline, 10 ^ (#tostring(headline) - 1))
+	print(("Online: %d | shown as %s | headline %d | interval %d <= n < %d")
+		:format(n, shortCount(n), headline, lo, hi))
+end
+
+Players.PlayerAdded:Connect(report)
+Players.PlayerRemoving:Connect(function() task.wait() report() end)
+report()`,
+ tasks:['Run it in Play mode. Then use Test → Clients and Servers with 2 or 3 players and watch the report change.','The interval uses the headline\'s own place value as the step. Check by hand that it\'s right for n = 1, 7, 12 and 340.','Pick one thing to improve (a TextLabel on a SurfaceGui? A second stat?) and ship it.']},
+ evidence:['One-page launch-day report','Dad\'s two questions and your answers','Stat Board running with 2+ test players (screenshot)','Oak exit quiz done — score noted']}
+];
+M[15].drillNote='Mixed practice from every earlier mission.';
+
+/* ---------------- State ---------------- */
+const KEY='rounding-studio-v1';
+let state=loadLocal();
+function loadLocal(){try{const s=localStorage.getItem(KEY);if(s){const o=JSON.parse(s);if(o&&o.m)return o}}catch(e){}return {m:{},updated:0}}
+function saveLocal(){try{localStorage.setItem(KEY,JSON.stringify(state))}catch(e){}}
+function ms(id){if(!state.m[id])state.m[id]={f:{},t:{},e:{},conf:0,best:0,total:0};return state.m[id]}
+function touch(){state.updated=Date.now();saveLocal();scheduleCloud();renderProgress()}
+
+/* cloud sync via db capability (org-internal); localStorage is the fallback */
+let docRef=null,cloudTimer=null,writing=false,pendingWrite=false;
+async function initCloud(){
+  if(!window.claude||typeof window.claude.use!=='function')return;
+  let db=null;try{db=await window.claude.use('db')}catch(e){db=null}
+  if(!db)return;
+  try{docRef=db.doc('progress/amelia')}catch(e){return}
+  docRef.onSnapshot(snap=>{
+    setCloud(true);
+    if(!snap.exists||snap.metadata.hasPendingWrites)return;
+    const d=snap.data();if(!d||!d.m)return;
+    if((d.updated||0)>(state.updated||0)){state=JSON.parse(JSON.stringify(d));saveLocal();renderProgress();syncInputs()}
+    else if((d.updated||0)<(state.updated||0)){scheduleCloud()}
+  },err=>{setCloud(false);docRef=null});
+}
+function setCloud(on){const c=document.getElementById('cloud');c.classList.toggle('on',on);c.querySelector('span').textContent=on?'progress synced':'saved on this device'}
+function scheduleCloud(){if(!docRef)return;clearTimeout(cloudTimer);cloudTimer=setTimeout(pushCloud,900)}
+async function pushCloud(){if(!docRef)return;if(writing){pendingWrite=true;return}writing=true;try{await docRef.set(JSON.parse(JSON.stringify(state)))}catch(e){}writing=false;if(pendingWrite){pendingWrite=false;pushCloud()}}
+
+/* ---------------- Rendering ---------------- */
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function hl(code){ // light Luau highlighting
+  return esc(code).split('\n').map(line=>{
+    const ci=line.indexOf('--');let body=line,cm='';
+    if(ci>=0){body=line.slice(0,ci);cm=`<span class="c">${line.slice(ci)}</span>`}
+    body=body.replace(/("[^"]*")/g,'<span class="s">$1</span>')
+      .replace(/\b(local|function|end|if|then|elseif|else|for|do|in|return|and|or|not|while)\b/g,'<span class="k">$1</span>')
+      .replace(/\b(\d+\.?\d*(?:e\d+)?)\b/g,'<span class="n">$1</span>');
+    return body+cm}).join('\n');
+}
+function missionDone(id){const s=ms(id);const m=M[id-1];return m.evidence.every((_,i)=>s.e[i])&&s.conf>0}
+function missionStarted(id){const s=ms(id);return Object.values(s.f).some(Boolean)||Object.values(s.t).some(Boolean)||Object.values(s.e).some(Boolean)||s.conf>0||s.total>0}
+function renderProgress(){
+  const g=document.getElementById('grid16');g.innerHTML='';let done=0;
+  M.forEach(m=>{const d=missionDone(m.id),st=missionStarted(m.id);if(d)done++;
+    const a=document.createElement('a');a.href='#m'+m.id;a.className='tile'+(d?' done':st?' started':'');a.innerHTML=`${String(m.id).padStart(2,'0')}<small>${d?'shipped':st?'in&nbsp;progress':''}</small>`;a.title=m.title;g.appendChild(a);
+    const det=document.getElementById('m'+m.id);if(det)det.classList.toggle('done',d);
+  });
+  document.getElementById('ovtxt').textContent=`${done} / 16 shipped`;
+  document.getElementById('ovbar').style.width=(done/16*100)+'%';
+}
+function syncInputs(){
+  M.forEach(m=>{const s=ms(m.id);
+    document.querySelectorAll(`#m${m.id} input[data-kind]`).forEach(inp=>{inp.checked=!!s[inp.dataset.kind][inp.dataset.i]});
+    document.querySelectorAll(`#m${m.id} .conf button`).forEach(b=>b.classList.toggle('sel',Number(b.dataset.v)===s.conf));
+    const best=document.getElementById(`best-${m.id}`);if(best)best.textContent='best streak '+s.best;
+  });
+}
+function renderMissions(){
+  const root=document.getElementById('missions');
+  M.forEach(m=>{
+    const det=document.createElement('details');det.className='mission';det.id='m'+m.id;
+    const list=(arr,kind)=>`<ul class="tasks">${arr.map((t,i)=>`<li><input type="checkbox" id="${kind}-${m.id}-${i}" data-kind="${kind}" data-i="${i}"><label for="${kind}-${m.id}-${i}">${t}</label></li>`).join('')}</ul>`;
+    det.innerHTML=`
+      <summary><div class="mno">${String(m.id).padStart(2,'0')}</div><div><h2>${m.title}</h2><div class="sub">Oak lesson ${m.id}: ${m.oakTitle}</div></div>
+        <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></summary>
+      <div class="mbody">
+        <div class="stage"><h3>Brief</h3><p class="brief">${m.brief}</p>
+          <a class="oak" href="${OAK}${m.oak}" target="_blank" rel="noopener"><span>Spec</span> Oak lesson ${m.id} — ${m.oakTitle} <em>↗</em></a></div>
+        <div class="stage"><h3>Field mission</h3>${list(m.field,'f')}</div>
+        <div class="stage"><h3>Drill</h3>
+          <div class="drill" id="drill-${m.id}">
+            <div class="head"><div class="goal">${m.drillNote||'Get a streak of 8 to pass the drill.'}</div><div class="chips"><span class="chip" id="streak-${m.id}">streak 0</span><span class="chip" id="best-${m.id}">best streak 0</span></div></div>
+            <div class="q" id="q-${m.id}"></div><div class="ans" id="ans-${m.id}"></div><div class="fb" id="fb-${m.id}"></div>
+            <div class="btns"><button class="btn primary" id="check-${m.id}">Check</button><button class="btn" id="next-${m.id}">Next question</button></div>
+          </div></div>
+        <div class="stage build"><h3>Studio build</h3><p>${m.build.intro}</p>
+          <div class="codewrap"><button class="copy" data-copy="${m.id}">Copy</button><pre id="code-${m.id}">${hl(m.build.code)}</pre></div>
+          ${list(m.build.tasks,'t')}</div>
+        <div class="stage"><h3>Evidence &amp; sign-off</h3>
+          <div class="evidence">${list(m.evidence,'e')}
+            <div><div class="conf-lab">How confident are you?</div><div class="conf">${['😬','🙂','😎','🏆'].map((e,i)=>`<button data-v="${i+1}" title="${['Still shaky','Getting there','Confident','Could teach it'][i]}">${e}</button>`).join('')}</div></div>
+          </div></div>
+      </div>`;
+    root.appendChild(det);
+    det.querySelectorAll('input[data-kind]').forEach(inp=>inp.addEventListener('change',()=>{ms(m.id)[inp.dataset.kind][inp.dataset.i]=inp.checked;touch()}));
+    det.querySelectorAll('.conf button').forEach(b=>b.addEventListener('click',()=>{const s=ms(m.id);s.conf=s.conf===Number(b.dataset.v)?0:Number(b.dataset.v);touch();syncInputs()}));
+    det.querySelector('[data-copy]').addEventListener('click',async e=>{const btn=e.currentTarget;try{await navigator.clipboard.writeText(m.build.code);btn.textContent='Copied'}catch(err){const r=document.createRange();r.selectNodeContents(document.getElementById('code-'+m.id));const sel=getSelection();sel.removeAllRanges();sel.addRange(r);btn.textContent='Selected — press Ctrl/Cmd+C'}setTimeout(()=>btn.textContent='Copy',2000)});
+    setupDrill(m.id);
+  });
+}
+
+/* ---------------- Drill engine ---------------- */
+const drills={};
+function setupDrill(id){
+  const d={id,streak:0,cur:null,answered:false};drills[id]=d;
+  document.getElementById('check-'+id).addEventListener('click',()=>checkDrill(id));
+  document.getElementById('next-'+id).addEventListener('click',()=>newQ(id));
+  newQ(id);
+}
+function newQ(id){
+  const d=drills[id];d.cur=G['m'+id]();d.answered=false;
+  document.getElementById('q-'+id).innerHTML=d.cur.q;
+  const ans=document.getElementById('ans-'+id);ans.innerHTML='';
+  const fb=document.getElementById('fb-'+id);fb.className='fb';fb.textContent='';
+  const check=document.getElementById('check-'+id);
+  if(d.cur.type==='num'){ans.innerHTML=`<input type="text" inputmode="decimal" id="in-${id}" aria-label="Your answer" autocomplete="off">`;check.hidden=false;
+    ans.querySelector('input').addEventListener('keydown',e=>{if(e.key==='Enter'){d.answered?newQ(id):checkDrill(id)}})}
+  else if(d.cur.type==='range'){ans.innerHTML=`<input type="text" inputmode="decimal" id="lo-${id}" aria-label="Lower bound" autocomplete="off"><span class="lab">${d.cur.incl?'to':'≤ x <'}</span><input type="text" inputmode="decimal" id="hi-${id}" aria-label="Upper bound" autocomplete="off">`;check.hidden=false;
+    ans.querySelectorAll('input').forEach(i=>i.addEventListener('keydown',e=>{if(e.key==='Enter'){d.answered?newQ(id):checkDrill(id)}}))}
+  else{check.hidden=true;const order=d.cur.opts.map((o,i)=>i).sort(()=>Math.random()-0.5);
+    ans.innerHTML=order.map(i=>`<button class="opt" data-i="${i}">${d.cur.opts[i]}</button>`).join('');
+    ans.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{if(d.answered)return;const i=Number(b.dataset.i);const ok=i===d.cur.right;ans.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(Number(x.dataset.i)===d.cur.right)x.classList.add('right')});if(!ok)b.classList.add('wrong');finish(id,ok,d.cur.opts[d.cur.right])}))}
+  const first=ans.querySelector('input');if(first&&document.activeElement&&document.activeElement.closest('#drill-'+id))first.focus();
+}
+function checkDrill(id){
+  const d=drills[id];if(d.answered)return;const c=d.cur;let ok=false,model='';
+  if(c.type==='num'){const u=parseNum(document.getElementById('in-'+id).value);if(u===null){shake(id,'Type a number first.');return}ok=near(u,val(c.ans));model=c.trim?fmtTrim(c.ans):fmt(c.ans)}
+  else{const lo=parseNum(document.getElementById('lo-'+id).value),hi=parseNum(document.getElementById('hi-'+id).value);if(lo===null||hi===null){shake(id,'Fill in both bounds.');return}
+    ok=near(lo,c.lo)&&near(hi,c.hi);const f=x=>grp(String(Math.round(x*1e6)/1e6));model=c.incl?`${f(c.lo)} to ${f(c.hi)}`:`${f(c.lo)} ≤ x < ${f(c.hi)}`}
+  finish(id,ok,model);
+}
+function shake(id,msg){const fb=document.getElementById('fb-'+id);fb.className='fb no';fb.textContent=msg}
+function finish(id,ok,model){
+  const d=drills[id];d.answered=true;const s=ms(id);const fb=document.getElementById('fb-'+id);
+  if(ok){d.streak++;s.total=(s.total||0)+1;if(d.streak>s.best)s.best=d.streak;fb.className='fb ok';fb.innerHTML=`<b>Correct.</b> ${model} — ${d.cur.expl}`}
+  else{d.streak=0;fb.className='fb no';fb.innerHTML=`<b>Not this time.</b> Answer: ${model}. ${d.cur.expl}`}
+  document.getElementById('streak-'+id).textContent='streak '+d.streak;
+  const bestEl=document.getElementById('best-'+id);bestEl.textContent='best streak '+s.best;bestEl.classList.toggle('hot',s.best>=8);
+  touch();
+  const inp=document.querySelector('#ans-'+id+' input');if(inp)inp.blur();
+}
+
+renderMissions();syncInputs();renderProgress();initCloud();
+if(location.hash){const el=document.querySelector(location.hash);if(el&&el.tagName==='DETAILS')el.open=true}
+document.getElementById('grid16').addEventListener('click',e=>{const a=e.target.closest('a');if(!a)return;const el=document.querySelector(a.getAttribute('href'));if(el)el.open=true});
+</script>
+</body>
+</html>

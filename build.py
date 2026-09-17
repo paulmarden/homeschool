@@ -149,11 +149,51 @@ def page(depth, title, body, current="", description="", scripts=()):
     )
 
 
+MANIFEST = ".build-manifest"
+
+# Every path this build produces under site/, recorded so the next build can
+# tell its own output apart from anything a human dropped in there.
+WRITTEN = set()
+
+
 def write(relpath, content):
     path = os.path.join(OUT, relpath)
     os.makedirs(os.path.dirname(path), exist_ok=True)
     with open(path, "w", encoding="utf-8") as fh:
         fh.write(content)
+    WRITTEN.add(relpath.replace(os.sep, "/"))
+
+
+def existing_files():
+    out = set()
+    for base, _dirs, files in os.walk(OUT):
+        for f in files:
+            rel = os.path.relpath(os.path.join(base, f), OUT)
+            out.add(rel.replace(os.sep, "/"))
+    return out
+
+
+def strays():
+    """Files under site/ that the previous build did not create.
+
+    site/ is disposable -- every build wipes it -- so a file saved in there by
+    hand is lost on the next run. Rather than delete someone's work silently,
+    bail out and say where it should live instead."""
+    manifest_path = os.path.join(OUT, MANIFEST)
+    if not os.path.isdir(OUT) or not os.path.exists(manifest_path):
+        return set()  # nothing to compare against; assume a clean slate
+    with open(manifest_path, encoding="utf-8") as fh:
+        known = {line.strip() for line in fh if line.strip()}
+    known.add(MANIFEST)
+    return existing_files() - known
+
+
+def record_assets():
+    base = os.path.join(OUT, "assets")
+    for root, _dirs, files in os.walk(base):
+        for f in files:
+            rel = os.path.relpath(os.path.join(root, f), OUT)
+            WRITTEN.add(rel.replace(os.sep, "/"))
 
 
 # ── quiz rendering ────────────────────────────────────────────────────────────
@@ -726,10 +766,28 @@ def main():
             LOCAL_IMAGES.update(json.load(fh))
         print("using %d vendored quiz images" % len(LOCAL_IMAGES))
 
+    loose = strays()
+    if loose and "--force" not in sys.argv:
+        print("Refusing to rebuild: site/ holds %d file%s this build did not "
+              "create." % (len(loose), "" if len(loose) == 1 else "s"))
+        for rel in sorted(loose)[:20]:
+            print("    site/%s" % rel)
+        if len(loose) > 20:
+            print("    ... and %d more" % (len(loose) - 20))
+        print("\nsite/ is generated -- every build wipes it, so files saved there "
+              "by hand are lost.\nPut resources in assets/resources/ instead, then "
+              "register one with:\n"
+              "    python tools/add_resource.py --unit UNIT --title \"...\" \\\n"
+              "        --url assets/resources/FILE --kind html\n"
+              "\nMove those files somewhere safe, then rebuild. "
+              "`python build.py --force` wipes them.")
+        return 1
+
     if os.path.isdir(OUT):
         shutil.rmtree(OUT)
     os.makedirs(OUT)
     shutil.copytree(ASSETS, os.path.join(OUT, "assets"))
+    record_assets()
 
     build_home(data)
     build_subject(data)
@@ -745,8 +803,12 @@ def main():
                          ls[i + 1] if i + 1 < len(ls) else None)
             n += 1
 
+    with open(os.path.join(OUT, MANIFEST), "w", encoding="utf-8") as fh:
+        fh.write("\n".join(sorted(WRITTEN)) + "\n")
+
     print("built %d units, %d lessons -> %s" % (len(data["units"]), n, OUT))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    sys.exit(main())

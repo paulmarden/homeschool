@@ -62,8 +62,11 @@ python tools/add_resource.py --general --title "…" --url "https://…"
 python tools/add_resource.py --list
 ```
 
-Then `python build.py`. Files go in `assets/resources/`; `--url` can also be an
-external link. `kind` is one of `link, html, pdf, video, worksheet, sheet,
+Then `python build.py`. Files go in **`assets/resources/`** — never in `site/`,
+which is generated output that every build wipes (`build.py` refuses to run if
+it finds files it did not create, rather than deleting them). Write the `--url`
+as `assets/resources/FILE`, with no leading slash; the build works out the right
+relative path for each page. `--url` can also be an external link. `kind` is one of `link, html, pdf, video, worksheet, sheet,
 notebook, book` and drives the tag; entries split into **Relevant links**
 (references we use) and **Our resources** (things we made or keep), which you
 can force with `--group`.
@@ -100,7 +103,8 @@ tools/
   add_resource.py      register a resource without hand-editing JSON
   fetch_images.py      optional: vendor quiz images for offline use
   check_links.py       verifies every internal link resolves
-site/                  generated output — safe to delete and rebuild
+site/                  generated output — wiped and rebuilt every run;
+                       never save anything here by hand
 ```
 
 `site/` is committed so the site can be served or published without running the

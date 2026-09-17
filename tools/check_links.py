@@ -25,8 +25,13 @@ def main():
             body = fh.read()
         anchors = set(IDS.findall(body))
         for ref in REF.findall(body):
-            if ref.startswith(("http://", "https://", "mailto:", "data:")):
+            if ref.startswith(("http://", "https://", "mailto:", "data:",
+                               "javascript:", "blob:")):
                 external.add(ref.split("?")[0])
+                continue
+            # Hrefs a page builds at runtime -- JS template literals, framework
+            # interpolation -- are not ours to resolve.
+            if "${" in ref or "{{" in ref or "<%" in ref:
                 continue
             target, frag = urldefrag(ref)
             if not target:

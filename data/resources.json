@@ -52,6 +52,13 @@
     "kind": "link",
     "note": "Check gradient and intercept work by plotting it"
    }
+  ],
+  "estimation-and-rounding": [
+   {
+    "title": "Rounding Studio (Roblox missions)",
+    "url": "assets/resources/Rounding-Studio.html",
+    "kind": "html"
+   }
   ]
  },
  "lessons": {}
