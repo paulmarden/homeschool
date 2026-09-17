@@ -198,7 +198,7 @@ def record_assets():
 
 # ── quiz rendering ────────────────────────────────────────────────────────────
 
-def render_question(q, idx, depth=3):
+def render_question(q, idx, quiz_id, depth=3):
     """Static, answerable-on-paper markup. quiz.js layers live marking on top."""
     parts = ['<div class="q" data-qtype="%s">' % esc(q["type"])]
     parts.append('<div class="qstem"><span class="qnum">%d</span>'
@@ -218,9 +218,9 @@ def render_question(q, idx, depth=3):
         for oi, o in enumerate(opts):
             parts.append(
                 '<label class="opt" data-correct="%s">'
-                '<input type="%s" name="q%d_%s" value="%d">'
+                '<input type="%s" name="%s-q%d" value="%d">'
                 '<span class="box"></span><span class="txt">%s</span></label>'
-                % ("1" if o["correct"] else "0", kind, idx, id(q) % 99991, oi,
+                % ("1" if o["correct"] else "0", kind, esc(quiz_id), idx, oi,
                    esc(o["text"])))
         parts.append('</div>')
         if multi:
@@ -288,7 +288,8 @@ def render_quiz(title, questions, quiz_id, lesson_key):
     """A quiz lives in a <dialog>; the page shows only a button that opens it."""
     if not questions:
         return "", ""
-    qs = "".join(render_question(q, i + 1) for i, q in enumerate(questions))
+    qs = "".join(render_question(q, i + 1, quiz_id)
+                 for i, q in enumerate(questions))
     dialog = (
         '<dialog class="qdialog" id="%s-dialog" data-quiz="%s" '
         'data-lesson="%s" data-total="%d">'
