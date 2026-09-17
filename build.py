@@ -328,11 +328,12 @@ def resource_columns(items, depth, empty_hint=""):
             body = '<p class="rd resempty">%s</p>' % hint
         return '<div class="col"><div class="coltitle">%s</div>%s</div>' % (title, body)
 
+    # Ours leads: what we keep is the point of the site, references are backup.
     return (
         '<div class="cols">%s%s</div>'
-        % (col("Relevant links", links,
+        % (col("Our resources", ours,
                empty_hint or "Nothing here yet."),
-           col("Our resources", ours,
+           col("Relevant links", links,
                empty_hint or "Nothing here yet."))
     )
 
