@@ -96,11 +96,12 @@ assets/
   site.css             site layer, built only on Modernist tokens
   quiz.js              quiz modals + live marking (progressive enhancement)
   progress.js          exit quiz scores in localStorage
-  resources/           our own files, copied into the built site
+  resources/           our own files, by subject/year/unit
 tools/
   import_oak.py        re-imports the curriculum from thenational.academy
   flight.py            parser for Next.js RSC payloads
-  add_resource.py      register a resource without hand-editing JSON
+  add_resource.py      file a resource into its unit folder and register it
+  init_resource_dirs.py  create the subject/year/unit resource folders
   fetch_images.py      optional: vendor quiz images for offline use
   check_links.py       verifies every internal link resolves
 site/                  generated output — wiped and rebuilt every run;

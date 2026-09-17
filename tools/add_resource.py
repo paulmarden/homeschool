@@ -1,9 +1,13 @@
 #!/usr/bin/env python3
 """Add a resource to data/resources.json without hand-editing JSON.
 
+Files live under assets/resources/<subject>/year-<n>/<unit>/, one folder per
+unit holding that unit's resources and those of all its lessons. Pass --file
+and the file is moved into the right folder for you:
+
   python tools/add_resource.py --lesson sequences/finding-the-nth-term \
-      --title "nth term worksheet" --url assets/resources/nth-term.pdf \
-      --kind worksheet --note "Printable, with space for working"
+      --file ~/Downloads/nth-term.pdf \
+      --title "nth term worksheet" --note "Printable, with space for working"
 
   python tools/add_resource.py --unit constructions \
       --title "Compass and straight edge basics" \
@@ -13,11 +17,17 @@
 
   python tools/add_resource.py --list
   python tools/add_resource.py --list --lesson sequences/finding-the-nth-term
+
+--url still works for an external link, or for a file already sitting in the
+right folder (a bare filename is resolved against that folder).
 """
 import argparse
 import json
 import os
+import shutil
 import sys
+
+import init_resource_dirs as dirs
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CURRICULUM = os.path.join(ROOT, "data", "curriculum.json")
@@ -74,8 +84,13 @@ def main():
     target.add_argument("--general", action="store_true",
                         help="attach to the Resources page, not a unit or lesson")
     ap.add_argument("--title")
-    ap.add_argument("--url", help="an external URL, or a path like "
-                                  "assets/resources/thing.pdf")
+    ap.add_argument("--url", help="an external URL, or a path under "
+                                  "assets/resources/ (a bare filename is "
+                                  "resolved against this target's folder)")
+    ap.add_argument("--file", help="a file to move into this target's resource "
+                                   "folder and register")
+    ap.add_argument("--copy", action="store_true",
+                    help="with --file, copy instead of moving")
     ap.add_argument("--kind", choices=KINDS, default=None,
                     help="default: link for a URL, worksheet/pdf inferred from a "
                          "local file extension")
@@ -92,26 +107,55 @@ def main():
         show(res, where)
         return 0
 
-    if not args.title or not args.url:
-        ap.error("--title and --url are required (or use --list)")
+    if not args.title or not (args.url or args.file):
+        ap.error("--title and one of --url / --file are required (or use --list)")
+    if args.url and args.file:
+        ap.error("pass --url or --file, not both")
 
+    curriculum = load(CURRICULUM)
     units, lessons = known_keys()
     if args.lesson:
         if args.lesson not in lessons:
             sys.exit("unknown lesson %r -- expected UNIT-SLUG/LESSON-SLUG" % args.lesson)
         bucket = res.setdefault("lessons", {}).setdefault(args.lesson, [])
         where = "lesson %s" % args.lesson
+        folder = dirs.unit_dir(curriculum, args.lesson.split("/", 1)[0])
     elif args.unit:
         if args.unit not in units:
             sys.exit("unknown unit %r -- one of: %s"
                      % (args.unit, ", ".join(sorted(units))))
         bucket = res.setdefault("units", {}).setdefault(args.unit, [])
         where = "unit %s" % args.unit
+        folder = dirs.unit_dir(curriculum, args.unit)
     elif args.general:
         bucket = res.setdefault("general", [])
         where = "general"
+        folder = dirs.general_dir()
     else:
         ap.error("pick a target: --lesson, --unit or --general")
+
+    # --file: put it in this target's folder and use that as the url.
+    if args.file:
+        src = os.path.abspath(os.path.expanduser(args.file))
+        if not os.path.isfile(src):
+            sys.exit("no such file: %s" % args.file)
+        dest_dir = os.path.join(ROOT, folder.replace("/", os.sep))
+        os.makedirs(dest_dir, exist_ok=True)
+        name = os.path.basename(src)
+        dest = os.path.join(dest_dir, name)
+        if os.path.exists(dest) and not os.path.samefile(src, dest):
+            sys.exit("%s/%s already exists -- rename it or remove the old one"
+                     % (folder, name))
+        if not os.path.exists(dest):
+            (shutil.copy2 if args.copy else shutil.move)(src, dest)
+            print("%s %s -> %s/" % ("copied" if args.copy else "moved", name, folder))
+        keep = os.path.join(dest_dir, ".gitkeep")
+        if os.path.exists(keep):
+            os.remove(keep)
+        args.url = "%s/%s" % (folder, name)
+    elif "://" not in args.url and "/" not in args.url:
+        # a bare filename belongs in this target's folder
+        args.url = "%s/%s" % (folder, args.url)
 
     external = "://" in args.url
     kind = args.kind
@@ -132,10 +176,17 @@ def main():
         sys.exit("that url is already on %s" % where)
 
     if not external:
+        if args.url.startswith("/"):
+            sys.exit("a rooted url (%s) cannot be resolved -- write it relative, "
+                     "as %s/<file>" % (args.url, folder))
         local = os.path.join(ROOT, args.url.replace("/", os.sep))
         if not os.path.exists(local):
             print("note: %s does not exist yet -- drop the file there before "
                   "building" % args.url)
+        elif not args.url.startswith(folder + "/"):
+            print("note: %s sits outside this target's folder (%s/). It will "
+                  "still work, but resources are easier to find when they live "
+                  "with their unit." % (args.url, folder))
 
     bucket.append(entry)
     save(res)
